@@ -1,0 +1,159 @@
+@import './config';
+
+@font-face {
+    font-family: Proxima;
+    src: url(../fonts/proxima-regular.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Proxima;
+    src: url(../fonts/proxima-semibold.otf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Proxima;
+    src: url(../fonts/proxima-bold.otf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: DidactGothic;
+    src: url(../fonts/DidactGothic-Regular.ttf);
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5)!important;
+    span {
+        color: rgba(255, 255, 255, 0.8)!important;
+    }
+}
+
+
+body#login_page {
+    background: url('../img/login_bg.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+
+    font-family: Proxima!important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #c2c9d2;
+}
+  
+
+a:link {
+    text-decoration: none!important;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-semibold {
+    font-weight: 600!important;
+}
+
+.text-bold {
+    font-weight: 700!important;
+}
+
+.text-white {
+    color: white!important;
+}
+
+.text-brand {
+    color: $brand-color!important;
+}
+
+.text-red-soft {
+    color: $red-soft!important;
+}
+
+.text-purple {
+    color: $purple-color!important;
+}
+
+.logo {
+    width: 250px;
+}
+
+p {
+    margin: 0;
+}
+
+#login-container {
+    height: 100vh;
+}
+
+#app-form {
+    background: url('../img/bg_login_form.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 21rem;
+    // height: 21rem;
+
+    border-radius: 1rem;
+
+    a {
+        font-size: .9rem;
+    }
+
+    
+    
+}
+
+#app-text {
+    color: white;
+    font-weight: 600;
+
+    font-size: 1.1em;
+}
+
+.form-input {
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+
+    width: 17rem;
+    height: 40px;
+
+    color: white;
+    border-radius: 6px;
+
+    margin-bottom: .3em;
+    text-align: center;
+
+    &::placeholder {
+        text-align: center;
+        color: white;
+        opacity: .5;
+    }
+}
+
+.form-submit {
+    width: 17rem;
+    height: 40px;
+    border: 0;
+    color: #743AE8;
+    background-color: white;
+    border-radius: 6px;
+}
+
+@media (min-width: 576px) { 
+    .logo {
+        width: 350px;
+    }
+}
