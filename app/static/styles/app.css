@@ -427,3 +427,10 @@ body.dashboard {
     height: 100%;
   }
 }
+@media (max-width: 991.98px) {
+@media -sass-debug-info{filename{}line{font-family:\00003436}}
+  .nav-item {
+    margin-top: unset;
+    padding-top: unset;
+  }
+}

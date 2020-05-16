@@ -418,7 +418,7 @@ body.dashboard {
   }
 }
 
-// Small devices (landscape phones, less than 768px)
+// Small devices (landscape phones, more than 768px)
 @media (min-width: 767.98px) {
   .modal {
     position: fixed;
@@ -428,5 +428,13 @@ body.dashboard {
     z-index: 1;
     width: 100%;
     height: 100%;
+  }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+  .nav-item {
+    margin-top: unset;
+    padding-top: unset;
   }
 }
