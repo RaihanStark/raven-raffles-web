@@ -131,3 +131,11 @@ class UserModelTestCase(unittest.TestCase):
     def test_anonymous(self):
         u = AnonymousUser()
         self.assertFalse(u.can(Permission.GENERAL))
+
+    def test_valid_verify_key(self):
+        u = User(key="RAVEN-89VM2F38JCEZ6L8KKADA121638")
+        self.assertTrue(u.verify_key())
+
+    def test_invalid_verify_key(self):
+        u = User(key="invalid-key")
+        self.assertFalse(u.verify_key())

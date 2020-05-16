@@ -23,7 +23,9 @@ def index_for_role(role):
     return url_for(role.index)
 
 def is_license_valid(key):
-    print(key)
+    """
+    Checking License Key from External API
+    """
     r = requests.post('https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device',json={"serialkey": key})
     return r.json()['success']
 

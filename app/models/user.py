@@ -4,6 +4,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from app.utils import is_license_valid
 from .. import db, login_manager
 
 
@@ -64,9 +65,6 @@ class User(UserMixin, db.Model):
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
 
-    def full_name(self):
-        return '%s %s' % (self.first_name, self.last_name)
-
     def can(self, permissions):
         return self.role is not None and \
             (self.role.permissions & permissions) == permissions
@@ -84,6 +82,9 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def verify_key(self):
+        return is_license_valid(self.key)
 
     def generate_confirmation_token(self, expiration=604800):
         """Generate a confirmation token to email a new user."""

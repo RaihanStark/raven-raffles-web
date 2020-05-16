@@ -5,6 +5,7 @@ from flask import (
     render_template,
     request,
     url_for,
+    Markup
 )
 from flask_login import (
     current_user,
@@ -73,7 +74,8 @@ def register():
         #     confirm_link=confirm_link)
         # flash('A confirmation link has been sent to {}.'.format(user.email),
         #       'warning')
-        return redirect(url_for('main.index'))
+        flash(Markup('Registration Completed<br> Please sign in by clicking <a href="'+url_for('account.login')+'">here</a>'))
+        return redirect(url_for('account.register'))
     return render_template('account/register.html', form=form)
 
 

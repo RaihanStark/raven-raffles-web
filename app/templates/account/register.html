@@ -14,7 +14,7 @@ import 'macros/check_password.html' as check %} {% block content %}
   {% with messages = get_flashed_messages() %} {% if messages %}
   <div class="msg">
     {% for message in messages %}
-    <li>{{ message }}</li>
+    {{ message }}
     {% endfor %}
   </div>
   {% endif %} {% endwith %}

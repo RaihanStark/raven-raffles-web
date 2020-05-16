@@ -24,7 +24,7 @@ block content %}
       placeholder="Password") }} {{ form.submit(value="login",
       class_="form-submit text-bold") }}
     </form>
-    <a class="text-white mt-3" href="/register.html"
+    <a class="text-white mt-3" href="{{url_for('account.register')}}"
       >Don't have an account? <span class="text-bold">Sign Up</span></a
     >
     <a class="text-white text-bold mb-3" href="/forgot-password.html"
