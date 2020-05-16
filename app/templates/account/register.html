@@ -13,9 +13,7 @@ import 'macros/check_password.html' as check %} {% block content %}
   </div>
   {% with messages = get_flashed_messages() %} {% if messages %}
   <div class="msg">
-    {% for message in messages %}
-    {{ message }}
-    {% endfor %}
+    {% for message in messages %} {{ message }} {% endfor %}
   </div>
   {% endif %} {% endwith %}
 
@@ -26,25 +24,25 @@ import 'macros/check_password.html' as check %} {% block content %}
       class="d-flex flex-column align-items-center mt-3"
       method="post"
     >
-      {{ form.hidden_tag() }} 
-      {{ form.key(class_="form-input",placeholder="License Key") }} 
-      {% for error in form.key.errors %}
+      {{ form.hidden_tag() }} {{
+      form.key(class_="form-input",placeholder="License Key") }} {% for error in
+      form.key.errors %}
       <span style="color: red;" class="mb-2">[{{ error }}]</span>
-      {% endfor %} 
-      {{ form.username(class_="form-input", placeholder="Username") }}
-      {% for error in form.username.errors %}
+      {% endfor %} {{ form.username(class_="form-input", placeholder="Username")
+      }} {% for error in form.username.errors %}
       <span style="color: red;" class="mb-2">[{{ error }}]</span>
-      {% endfor %} 
-      {{ form.email(class_="form-input", placeholder="Email") }} 
-      {% for error in form.email.errors %}
+      {% endfor %} {{ form.email(class_="form-input", placeholder="Email") }} {%
+      for error in form.email.errors %}
       <span style="color: red;" class="mb-2">[{{ error }}]</span>
-      {% endfor %} 
-      {{form.password(class_="form-input", placeholder="Password") }} 
-      {{form.password2(class_="form-input", placeholder="Re-type your password")}} 
-      {% for error in form.password2.errors %}
+      {% endfor %} {{form.password(class_="form-input", placeholder="Password")
+      }} 
+      {% for error in form.password.errors %}
       <span style="color: red;" class="mb-2">[{{ error }}]</span>
-      {% endfor %} 
-      {{ form.submit(value="Sign Up", class_="form-submit text-bold") }}
+      {% endfor %} {{form.password2(class_="form-input", 
+      placeholder="Re-type your password")}} {% for error in form.password2.errors %}
+      <span style="color: red;" class="mb-2">[{{ error }}]</span>
+      {% endfor %} {{ form.submit(value="Sign Up", class_="form-submit
+      text-bold") }}
     </form>
     <a class="text-white mt-3 mb-3" href="{{url_for('account.login')}}"
       >Do you have an account? <span class="text-bold">Sign in</span></a

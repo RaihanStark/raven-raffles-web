@@ -1,17 +1,175 @@
-{% extends 'layouts/base.html' %}
-
-{% block content %}
-    <div class="ui text container">
-      <h1>Hello {% if not (current_user.is_authenticated) %} world {% else %} {{ current_user.full_name() }} {% endif %},</h1>
-
-        <p>This is <a href="http://hack4impact.org">Hack4Impact</a>'s web application template. We'll use this as a
-        foundation for each of our <a href="http://flask.pocoo.org">Flask</a> projects. The goal is to reduce the work
-        necessary to get a new project off the ground, by providing boilerplate code (such as account management
-        facilities), as well as uncontroversial and extensible defaults. We have integrated an
-        <a href="http://sass-lang.com">SCSS</a>-based asset pipeline based around a (fantastic!) framework
-        called <a href="http://semantic-ui.com">Semantic UI</a>. Much of this code is appropriated from the examples
-        in Miguel Grinberg's book, <a href="http://flaskbook.com"><em>Flask Web Development</em></a>.</p>
-
-        <p>{{ lipsum(6) }}</p>
+{% extends 'layouts/base_dashboard.html' %} {% block content %} {% include
+'partials/_navbar.html' %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card-gradient d-flex">
+        <div class="info">
+          <a class="text-bold text-white">Raffles Available </a>
+          <h1 class="text-semibold">1.204</h1>
+        </div>
+        <div class="card-image d-flex justify-content-end">
+          <img
+            src="{{url_for('static', filename='images/check-circle.png')}}"
+            class="check-icon align-self-center"
+          />
+        </div>
+      </div>
     </div>
+    <div class="col-md-3">
+      <div class="card-gradient mt-3 mt-md-0 d-flex">
+        <div class="info">
+          <a class="text-bold text-white">Raffles Submitted</a>
+          <h1 class="text-semibold">5.344</h1>
+        </div>
+        <div class="card-image d-flex justify-content-end">
+          <img
+            src="{{url_for('static', filename='images/arrow-circle.png')}}"
+            class="check-icon align-self-center"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div
+        class="card-gradient mt-3 pb-1 mt-md-0 d-flex flex-column"
+        style="height: 100%;"
+      >
+        <div class="info">
+          <a class="text-bold text-white mb-1">Account Information</a>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="profiles-info d-flex justify-content-between">
+              <a class="profile-label">Profiles</a>
+              <a class="text-white"
+                >Profile 4 <i class="fas fa-check ml-2"></i
+              ></a>
+            </div>
+            <div class="profiles-info d-flex justify-content-between">
+              <a class="profile-label">Proxies</a>
+              <a class="text-white"
+                >US Residental <i class="fas fa-check ml-2"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="profiles-info d-flex justify-content-between">
+              <a class="profile-label">Anti Captcha Balance</a>
+              <a class="text-white">$24 <i class="fas fa-check ml-2"></i></a>
+            </div>
+            <div class="profiles-info d-flex justify-content-between">
+              <a class="profile-label">Status</a>
+              <a class="text-white"
+                >Activated <i class="fas fa-check ml-2"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card-app-gradient mt-3 mt-md-0">
+        <div class="card-app-header d-flex justify-content-between">
+          <h1 class="text-bold text-white align-self-center">Tasks</h1>
+          <a class="btn btn-white"
+            ><i class="fas fa-plus-circle fa-sm"></i> Create</a
+          >
+        </div>
+        <div class="tasks pb-1">
+          <table class="table table-borderless ml-2 table-app">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox" /></th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">SIZE</th>
+                <th scope="col">PROFILE</th>
+                <th scope="col">PROXIES</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <i class="far fa-square glow-checkbox"></i>
+                </th>
+                <td>Bandana Box Logo Tee Black</td>
+                <td>Small</td>
+                <td>Profile 1</td>
+                <td>US Residental</td>
+                <td class="app-success-color">Successful Checkout</td>
+                <td>
+                  <i class="fas fa-play fa-md mr-2"></i>
+                  <i class="fas fa-edit fa-md mr-2"></i>
+                  <i class="fas fa-copy fa-md mr-2"></i>
+                  <i class="fas fa-trash fa-md mr-2"></i>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" /></th>
+                <td>Bandana Box Logo Tee Black</td>
+                <td>Small</td>
+                <td>Profile 1</td>
+                <td>US Residental</td>
+                <td class="app-success-color">Successful Checkout</td>
+                <td>
+                  <i class="fas fa-play fa-md mr-2"></i>
+                  <i class="fas fa-edit fa-md mr-2"></i>
+                  <i class="fas fa-copy fa-md mr-2"></i>
+                  <i class="fas fa-trash fa-md mr-2"></i>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" /></th>
+                <td>Bandana Box Logo Tee Black</td>
+                <td>Small</td>
+                <td>Profile 1</td>
+                <td>US Residental</td>
+                <td class="app-success-color">Successful Checkout</td>
+                <td>
+                  <i class="fas fa-play fa-md mr-2"></i>
+                  <i class="fas fa-edit fa-md mr-2"></i>
+                  <i class="fas fa-copy fa-md mr-2"></i>
+                  <i class="fas fa-trash fa-md mr-2"></i>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" /></th>
+                <td>Bandana Box Logo Tee Black</td>
+                <td>Small</td>
+                <td>Profile 1</td>
+                <td>US Residental</td>
+                <td class="app-success-color">Successful Checkout</td>
+                <td>
+                  <i class="fas fa-play fa-md mr-2"></i>
+                  <i class="fas fa-edit fa-md mr-2"></i>
+                  <i class="fas fa-copy fa-md mr-2"></i>
+                  <i class="fas fa-trash fa-md mr-2"></i>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" /></th>
+                <td>Bandana Box Logo Tee Black</td>
+                <td>Small</td>
+                <td>Profile 1</td>
+                <td>US Residental</td>
+                <td class="app-success-color">Successful Checkout</td>
+                <td>
+                  <i class="fas fa-play fa-md mr-2"></i>
+                  <i class="fas fa-edit fa-md mr-2"></i>
+                  <i class="fas fa-copy fa-md mr-2"></i>
+                  <i class="fas fa-trash fa-md mr-2"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

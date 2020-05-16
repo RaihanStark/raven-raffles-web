@@ -1,7 +1,7 @@
 @import "./config";
 
 body.dashboard {
-  background: url("../img/dashboard_bg.png") no-repeat center center fixed;
+  background: url("../images/dashboard_bg.png") no-repeat center center fixed;
   // background-repeat: no-repeat;
   // background-size:cover;
   // height: 100%;
@@ -41,7 +41,7 @@ body.dashboard {
 }
 
 .card-gradient {
-  background-image: url("./../img/bg-checkout.png");
+  background-image: url("./../images/bg-checkout.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -103,7 +103,7 @@ body.dashboard {
 }
 
 .card-app-gradient {
-  background-image: url("./../img/bg-checkout.png");
+  background-image: url("./../images/bg-checkout.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

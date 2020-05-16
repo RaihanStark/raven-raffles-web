@@ -1,6 +1,6 @@
 from flask_assets import Bundle
 
-app_css = Bundle('style.scss', filters='scss', output='styles/app.css')
+app_css = Bundle('style.scss','dashboard.scss', filters='scss', output='styles/app.css')
 
 app_js = Bundle('app.js', filters='jsmin', output='scripts/app.js')
 

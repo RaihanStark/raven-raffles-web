@@ -138,6 +138,10 @@ p {
     color: white;
     opacity: 0.5;
   }
+
+  &.invalid {
+    border: red 1px solid;
+  }
 }
 
 .form-submit {

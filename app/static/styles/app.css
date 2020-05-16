@@ -143,8 +143,12 @@ p {
   color: white;
   opacity: 0.5;
 }
+@media -sass-debug-info{filename{}line{font-family:\00003142}}
+.form-input.invalid {
+  border: red 1px solid;
+}
 
-@media -sass-debug-info{filename{}line{font-family:\00003143}}
+@media -sass-debug-info{filename{}line{font-family:\00003147}}
 .form-submit {
   width: 17rem;
   height: 40px;
@@ -155,12 +159,12 @@ p {
 }
 
 @media (min-width: 576px) {
-@media -sass-debug-info{filename{}line{font-family:\00003153}}
+@media -sass-debug-info{filename{}line{font-family:\00003157}}
   .logo {
     width: 350px;
   }
 }
-@media -sass-debug-info{filename{}line{font-family:\00003158}}
+@media -sass-debug-info{filename{}line{font-family:\00003162}}
 .msg {
   width: 21rem;
   background-color: white;
@@ -168,4 +172,220 @@ p {
   padding: 0.5em;
   text-align: center;
   margin-bottom: 1em;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\000033}}
+body.dashboard {
+  background: url("../images/dashboard_bg.png") no-repeat center center fixed;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: Proxima !important;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\0000317}}
+.glow-checkbox::before {
+  -webkit-box-shadow: 0px 0px 31px 1px rgba(245, 0, 87, 0.4);
+  box-shadow: 0px 0px 31px 1px rgba(245, 0, 87, 0.4);
+}
+
+@media -sass-debug-info{filename{}line{font-family:\0000322}}
+.nav-item {
+  margin-top: -2em;
+  padding-left: 0;
+  padding-top: 2em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000327}}
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: 3px solid #FF60F4;
+  border-radius: 0.2em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000332}}
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: 3px solid #FF60F4;
+  border-radius: 0.2em;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\0000339}}
+.navbar-logo {
+  width: 100px;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\0000343}}
+.card-gradient {
+  background-image: url("./../images/bg-checkout.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: auto;
+  border-radius: 1em;
+  padding: 1.5em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000355}}
+.card-gradient .card-header-app {
+  font-size: 1.3rem;
+  background-color: black;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000361}}
+.card-gradient .info h1 {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000366}}
+.card-gradient .info a {
+  display: block;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000374}}
+.card-gradient .profiles-info {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+@media -sass-debug-info{filename{}line{font-family:\0000378}}
+.card-gradient .profiles-info a {
+  font-size: 0.9rem;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000382}}
+.card-gradient .profiles-info .fa-check {
+  color: #7ED321;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000386}}
+.card-gradient .profiles-info .profile-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+@media -sass-debug-info{filename{}line{font-family:\0000391}}
+.card-gradient h6 {
+  margin: 0;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000395}}
+.card-gradient .card-image {
+  width: 100%;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000398}}
+.card-gradient .card-image .check-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\00003105}}
+.card-app-gradient {
+  background-image: url("./../images/bg-checkout.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: auto;
+  border-radius: 1em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003115}}
+.card-app-gradient .card-app-header {
+  height: 4rem;
+  padding: 1rem 1.5rem;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003123}}
+.card-app-gradient .card-app-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003127}}
+.card-app-gradient .card-app-header a {
+  font-size: 0.9rem;
+  color: #743AE8;
+  font-weight: 700;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003134}}
+.card-app-gradient .darker-header {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+@media -sass-debug-info{filename{}line{font-family:\00003138}}
+.card-app-gradient .app-input-start {
+  padding-left: 1rem;
+  text-align: start;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003142}}
+.card-app-gradient .app-input-start::placeholder {
+  text-align: start;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003147}}
+.card-app-gradient .app-success-color {
+  color: #7ED321;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003151}}
+.card-app-gradient .app-label {
+  color: white;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003155}}
+.card-app-gradient .btn-white {
+  background-color: white;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003159}}
+.card-app-gradient .sidebar {
+  background-color: #4416a8;
+  border-radius: 1em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003165}}
+.card-app-gradient .sidebar .credit-card-field label {
+  display: block;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003168}}
+.card-app-gradient .sidebar .credit-card-field input {
+  width: 100%;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003172}}
+.card-app-gradient .sidebar .credit-card-field input::placeholder {
+  text-align: start;
+  padding-left: 1em;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\00003180}}
+.releases {
+  width: auto;
+  overflow-x: auto;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003184}}
+.releases .shoes img {
+  width: 200px;
+  border-radius: 0.8em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003189}}
+.releases .shoes a {
+  background-color: #310e7b;
+  width: 9em;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\00003196}}
+.action {
+  width: 100%;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003199}}
+.action label {
+  font-size: 0.7em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003202}}
+.action input {
+  width: 100%;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003206}}
+.action input::placeholder {
+  font-size: 0.8em;
+  text-align: start;
+  padding-left: 1em;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\00003214}}
+.table-app th,
+.table-app tr {
+  color: white;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003219}}
+.table-app tr {
+  margin: 1em 0;
 }

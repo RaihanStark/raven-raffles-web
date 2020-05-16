@@ -43,14 +43,16 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
+        elif len(username.data) <= 6:
+            raise ValidationError('Username must be at least 6 characters')
 
     def validate_key(self,key):
         if is_license_valid(key.data) == False or User.query.filter_by(key=key.data).first() is not None:
             raise ValidationError('Please use a different license.')
 
     def validate_password(self, password):
-        print(password.data)
-        print(self.password2)
+        if len(password.data) <= 6:
+            raise ValidationError('Password must be at least 6 characters')
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
