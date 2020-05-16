@@ -34,10 +34,9 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(
         'Password',
         validators=[
-            InputRequired(),
-            EqualTo('password2', 'Passwords must match')
+            InputRequired()
         ])
-    password2 = PasswordField('Confirm password', validators=[InputRequired()])
+    password2 = PasswordField('Confirm password', validators=[InputRequired(),EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -49,7 +48,9 @@ class RegistrationForm(FlaskForm):
         if is_license_valid(key.data) == False or User.query.filter_by(key=key.data).first() is not None:
             raise ValidationError('Please use a different license.')
 
-    
+    def validate_password(self, password):
+        print(password.data)
+        print(self.password2)
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
