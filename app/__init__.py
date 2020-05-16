@@ -1,5 +1,6 @@
 import os
 
+from flask_migrate import Migrate, MigrateCommand
 from flask import Flask
 from flask_assets import Environment
 from flask_compress import Compress
@@ -45,7 +46,7 @@ def create_app(config):
     csrf.init_app(app)
     compress.init_app(app)
     RQ(app)
-
+    migrate = Migrate(app, db)
     # Register Jinja template functions
     from .utils import register_template_utils
     register_template_utils(app)

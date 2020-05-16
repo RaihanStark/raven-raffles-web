@@ -2,7 +2,7 @@ from flask import url_for
 from wtforms.fields import Field
 from wtforms.widgets import HiddenInput
 from wtforms.compat import text_type
-
+import requests
 
 def register_template_utils(app):
     """Register Jinja 2 helpers (called from __init__.py)."""
@@ -22,6 +22,10 @@ def register_template_utils(app):
 def index_for_role(role):
     return url_for(role.index)
 
+def is_license_valid(key):
+    print(key)
+    r = requests.post('https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device',json={"serialkey": key})
+    return r.json()['success']
 
 class CustomSelectField(Field):
     widget = HiddenInput()

@@ -51,24 +51,28 @@ def register():
     """Register a new user, and send them a confirmation email."""
     form = RegistrationForm()
     if form.validate_on_submit():
+
+        # Implement Password Confirmations
         user = User(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
+            username=form.username.data,
+            key=form.key.data,
             email=form.email.data,
             password=form.password.data)
+    
         db.session.add(user)
         db.session.commit()
-        token = user.generate_confirmation_token()
-        confirm_link = url_for('account.confirm', token=token, _external=True)
-        get_queue().enqueue(
-            send_email,
-            recipient=user.email,
-            subject='Confirm Your Account',
-            template='account/email/confirm',
-            user=user,
-            confirm_link=confirm_link)
-        flash('A confirmation link has been sent to {}.'.format(user.email),
-              'warning')
+        # Email Confirmation
+        # token = user.generate_confirmation_token()
+        # confirm_link = url_for('account.confirm', token=token, _external=True)
+        # get_queue().enqueue(
+        #     send_email,
+        #     recipient=user.email,
+        #     subject='Confirm Your Account',
+        #     template='account/email/confirm',
+        #     user=user,
+        #     confirm_link=confirm_link)
+        # flash('A confirmation link has been sent to {}.'.format(user.email),
+        #       'warning')
         return redirect(url_for('main.index'))
     return render_template('account/register.html', form=form)
 

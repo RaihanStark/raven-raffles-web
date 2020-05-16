@@ -13,23 +13,20 @@ from wtforms.validators import Email, EqualTo, InputRequired, Length
 from app.models import User
 
 
+from app.utils import is_license_valid
+
 class LoginForm(FlaskForm):
-    email = EmailField(
-        'Email', validators=[InputRequired(),
-                             Length(1, 64),
-                             Email()])
+    username = StringField('Username',validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
-    remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Log in')
 
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField(
-        'First name', validators=[InputRequired(),
+    username = StringField(
+        'Username', validators=[InputRequired(),
                                   Length(1, 64)])
-    last_name = StringField(
-        'Last name', validators=[InputRequired(),
-                                 Length(1, 64)])
+    key = StringField(
+        'License Key', validators=[InputRequired()])
     email = EmailField(
         'Email', validators=[InputRequired(),
                              Length(1, 64),
@@ -43,11 +40,20 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField('Confirm password', validators=[InputRequired()])
     submit = SubmitField('Register')
 
-    def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
-            raise ValidationError('Email already registered. (Did you mean to '
-                                  '<a href="{}">log in</a> instead?)'.format(
-                                    url_for('account.login')))
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+
+    def validate_key(self,key):
+        if is_license_valid(key.data) == False or User.query.filter_by(key=key.data).first() is not None:
+            raise ValidationError('Please use a different license.')
+
+    
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
 
 
 class RequestResetPasswordForm(FlaskForm):

@@ -1,5 +1,3 @@
-{% import 'macros/nav_macros.html' as nav %}
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,11 +25,6 @@
           ]
         %}
       #}
-
-        {% block nav %}
-          {# add dropdown variable here to the render_nav method to render dropdowns #}
-          {{ nav.render_nav(current_user) }}
-        {% endblock %}
 
         {% include 'partials/_flashes.html' %}
         {# When extended, the content block contains all the html of the webpage #}

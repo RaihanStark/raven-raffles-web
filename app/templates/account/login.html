@@ -1,35 +1,35 @@
-{% extends 'layouts/base.html' %}
-{% import 'macros/form_macros.html' as f %}
+{% extends 'layouts/base.html' %} {% import 'macros/form_macros.html' as f %} {%
+block content %}
+<div
+  id="login-container"
+  class="d-flex flex-column justify-content-center align-items-center"
+>
+  <div class="logo pb-5">
+    <img
+      src="{{url_for('static', filename='images/logo.png')}}"
+      class="logo"
+      alt="logo raven raffles"
+    />
+  </div>
 
-{% block content %}
-    <div class="ui grid container">
-        <div class="eight wide computer sixteen wide mobile centered column">
-            <h2 class="ui dividing header">Log in</h2>
-
-            {% set flashes = {
-                'error':   get_flashed_messages(category_filter=['form-error']),
-                'warning': get_flashed_messages(category_filter=['form-check-email']),
-                'info':    get_flashed_messages(category_filter=['form-info']),
-                'success': get_flashed_messages(category_filter=['form-success'])
-            } %}
-
-            {{ f.begin_form(form, flashes) }}
-                {{ f.render_form_field(form.email) }}
-                {{ f.render_form_field(form.password) }}
-                <div class="ui two column grid">
-                    {{ f.render_form_field(form.remember_me, extra_classes='column') }}
-                    <div class="right aligned column">
-                        <a href="{{ url_for('account.reset_password_request') }}">Forgot password?</a>
-                    </div>
-                </div>
-
-                {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}
-                {{ f.form_message(flashes['warning'], header='Check your email.', class='warning') }}
-                {{ f.form_message(flashes['info'], header='Information', class='info') }}
-                {{ f.form_message(flashes['success'], header='Success!', class='success') }}
-
-                {{ f.render_form_field(form.submit) }}
-            {{ f.end_form(form) }}
-        </div>
-    </div>
+  <div id="app-form" class="d-flex flex-column align-items-center">
+    <p id="app-text" class="mt-3">Login To Your Account</p>
+    <form
+      action="/login"
+      method="post"
+      class="d-flex flex-column align-items-center mt-3"
+    >
+      {{ form.hidden_tag() }} {{ form.username(class_="form-input",
+      placeholder="Username") }} {{ form.password(class_="form-input",
+      placeholder="Password") }} {{ form.submit(value="login",
+      class_="form-submit text-bold") }}
+    </form>
+    <a class="text-white mt-3" href="/register.html"
+      >Don't have an account? <span class="text-bold">Sign Up</span></a
+    >
+    <a class="text-white text-bold mb-3" href="/forgot-password.html"
+      >Forgot Password</a
+    >
+  </div>
+</div>
 {% endblock %}
