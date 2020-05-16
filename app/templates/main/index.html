@@ -1,7 +1,23 @@
 {% extends 'layouts/base_dashboard.html' %} {% block content %} {% include
 'partials/_navbar.html' %}
 <div class="container mt-5">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+
   <div class="row">
+    <div class="col">
+      <div class="card-gradient">
+        <div class="info">
+          <a class="text-bold text-white">Information </a>
+        </div>
+        <p class="text-white">
+          {% for message in messages %} {{ message }} {% endfor %}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endif %} {% endwith %}
+
+  <div class="row mt-3">
     <div class="col-md-3">
       <div class="card-gradient d-flex">
         <div class="info">

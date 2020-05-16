@@ -36,7 +36,7 @@ def login():
     """Log in an existing user."""
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
-        
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -46,7 +46,7 @@ def login():
             flash('You are now logged in. Welcome back!', 'success')
             return redirect(request.args.get('next') or url_for('main.index'))
         else:
-            flash('Invalid userbane or password.', 'form-error')
+            flash('Invalid username or password.', 'form-error')
     return render_template('account/login.html', form=form)
 
 
