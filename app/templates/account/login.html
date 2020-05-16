@@ -1,5 +1,4 @@
-{% extends 'layouts/base.html' %} {% import 'macros/form_macros.html' as f %} {%
-block content %}
+{% extends 'layouts/base.html' %} {% block content %}
 <div
   id="login-container"
   class="d-flex flex-column justify-content-center align-items-center"
@@ -11,6 +10,11 @@ block content %}
       alt="logo raven raffles"
     />
   </div>
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <div class="msg">
+    {% for message in messages %} {{ message }} {% endfor %}
+  </div>
+  {% endif %} {% endwith %}
 
   <div id="app-form" class="d-flex flex-column align-items-center">
     <p id="app-text" class="mt-3">Login To Your Account</p>
@@ -21,7 +25,7 @@ block content %}
     >
       {{ form.hidden_tag() }} {{ form.username(class_="form-input",
       placeholder="Username") }} {{ form.password(class_="form-input",
-      placeholder="Password") }} {{ form.submit(value="login",
+      placeholder="Password") }} {{ form.submit(value="Log In",
       class_="form-submit text-bold") }}
     </form>
     <a class="text-white mt-3" href="{{url_for('account.register')}}"
