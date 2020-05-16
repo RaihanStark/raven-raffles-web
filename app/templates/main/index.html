@@ -70,12 +70,182 @@
     </div>
   </div>
 
+  <div
+    class="modal container fade"
+    id="taskModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="card-app-gradient mt-3 mt-md-0">
+        <div class="row no-gutters">
+          <div class="col-md-8">
+            <div
+              class="card-app-header no-header-color d-flex justify-content-between"
+            >
+              <h1 class="text-bold text-white align-self-center">
+                Create Task
+              </h1>
+            </div>
+            <div class="tasks pl-4 pb-4">
+              <h6 class="text-white mb-4">Choose a release</h6>
+              <div class="releases pb-2 d-flex">
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+                <div class="shoes mr-3 d-flex flex-column">
+                  <img
+                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    alt=""
+                  />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                  </div>
+                </div>
+              </div>
+              <div class="action pt-4 d-md-flex">
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Raffle ID</label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      placeholder="Raffle ID"
+                    />
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Variant</label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      placeholder="Variant"
+                    />
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Size</label>
+                    <input class="form-input" type="text" placeholder="US 3" />
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold"
+                      >Amount of Entries</label
+                    >
+                    <input
+                      class="form-input"
+                      type="text"
+                      placeholder="Amount of Entries"
+                    />
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Profiles</label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      placeholder="Jane Doe"
+                    />
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Account Group</label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      placeholder="Hotmails"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 sidebar">
+            <div class="credit-card-field d-flex flex-column p-4 mt-4">
+              <p class="text-white text-bold">Credit Card</p>
+
+              <label class="text-white text-bold" for="number"
+                >Credit Card Number</label
+              >
+              <input class="form-input" type="text" placeholder="Number" />
+              <div class="row no-gutters mt-1 mb-2">
+                <div class="col-md-6 pr-0 pr-md-2">
+                  <label class="text-white text-bold" for="exp">Exp Date</label>
+                  <input class="form-input" type="text" placeholder="MM/YY" />
+                </div>
+                <div class="col-md-6 pr-0 pl-md-2">
+                  <label class="text-white text-bold" for="cvv">CVV</label>
+                  <input class="form-input" type="text" placeholder="CVV" />
+                </div>
+              </div>
+
+              <a class="btn btn-white text-purple text-bold">Proceed</a>
+              <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row mt-3">
     <div class="col">
       <div class="card-app-gradient mt-3 mt-md-0">
         <div class="card-app-header d-flex justify-content-between">
           <h1 class="text-bold text-white align-self-center">Tasks</h1>
-          <a class="btn btn-white"
+          <a class="btn btn-white" data-toggle="modal" data-target="#taskModal"
             ><i class="fas fa-plus-circle fa-sm"></i> Create</a
           >
         </div>
