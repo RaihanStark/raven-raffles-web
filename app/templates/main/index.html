@@ -101,67 +101,74 @@
             <div class="tasks pl-4 pb-4">
               <h6 class="text-white mb-4">Choose a release</h6>
               <div class="releases pb-2 d-flex">
-                <div class="shoes mr-3 d-flex flex-column">
+                <div class="shoes mr-3 d-flex flex-column selected">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
-                    src="{{url_for('static', filename='images/yeezy.jpg')}}"
+                    class="lazy"
+                    data-src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
                 <div class="shoes mr-3 d-flex flex-column">
                   <img
+                    class="lazy"
                     src="{{url_for('static', filename='images/yeezy.jpg')}}"
                     alt=""
                   />
                   <div class="d-flex justify-content-center">
-                    <a class="btn text-white mt-n3">Yeezy Boost</a>
+                    <a class="btn btn-shoes text-white mt-n3">Yeezy Boost</a>
                   </div>
                 </div>
               </div>
@@ -187,7 +194,12 @@
                 <div class="d-flex flex-column">
                   <div class="pr-4">
                     <label class="text-white text-bold">Size</label>
-                    <input class="form-input" type="text" placeholder="US 3" />
+                    <select class="form-input" id="size">
+                      <option value="3">US 3</option>
+                      <option value="4">US 4</option>
+                      <option value="5">US 5</option>
+                      <option value="6">US 6</option>
+                    </select>
                   </div>
                   <div class="pr-4">
                     <label class="text-white text-bold"
@@ -203,11 +215,12 @@
                 <div class="d-flex flex-column">
                   <div class="pr-4">
                     <label class="text-white text-bold">Profiles</label>
-                    <input
-                      class="form-input"
-                      type="text"
-                      placeholder="Jane Doe"
-                    />
+                    <select class="form-input" id="profiles">
+                      <option value="3">John Doe</option>
+                      <option value="4">John Doe</option>
+                      <option value="5">John Doe</option>
+                      <option value="6">John Doe</option>
+                    </select>
                   </div>
                   <div class="pr-4">
                     <label class="text-white text-bold">Account Group</label>

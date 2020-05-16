@@ -8,6 +8,8 @@ vendor_css = Bundle('vendor/bootstrap.min.css','vendor/all.css', output='styles/
 
 vendor_js = Bundle(
     'vendor/jquery.min.js',
+    'vendor/jquery.lazy.min.js',
+    'vendor/popper.min.js',
     'vendor/bootstrap.min.js',
     filters='jsmin',
     output='scripts/vendor.js')
