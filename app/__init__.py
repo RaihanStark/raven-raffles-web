@@ -13,6 +13,9 @@ from flask_wtf import CSRFProtect
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config as Config
 
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 mail = Mail()
@@ -47,6 +50,11 @@ def create_app(config):
     compress.init_app(app)
     RQ(app)
     migrate = Migrate(app, db)
+
+    sentry_sdk.init(
+    dsn="https://641e6edbec9744c2915f27b0e5241d11@o393633.ingest.sentry.io/5242986",
+    integrations=[FlaskIntegration()])
+
     # Register Jinja template functions
     from .utils import register_template_utils
     register_template_utils(app)
