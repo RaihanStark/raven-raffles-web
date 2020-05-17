@@ -6,32 +6,24 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        {% set navigation_bar = [
+            (url_for('main.index') ,'Dashboard'),
+            (url_for('main.tasks'), 'Tasks'),
+            ('/',  'Accounts'),
+            ('/',  'Proxies'),
+            ('/',  'Profiles'),
+            (url_for('main.settings'),  'Settings'),
+            ('/',  'Documentations'),
+            (url_for('account.logout'),  'Logout')
+        ] -%}
+        {% set active_page = active_page|default('Dashboard') -%}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mt-3">
-                <li class="nav-item active">
-                    <a class="nav-link text-white mx-1" href="/dashboard.html">Dashboard</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="/tasks.html">Tasks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="#">Accounts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="/proxies.html">Proxies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="/profiles.html">Profiles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="/settings.html">Settings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="#">Documentations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-1" href="{{url_for('account.logout')}}">Logout</a>
-                </li>
+                {% for href, caption in navigation_bar %}
+                    <li  {% if caption == active_page %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                        <a class="nav-link text-white mx-1" href="{{href|e}}">{{caption|e}}</span></a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

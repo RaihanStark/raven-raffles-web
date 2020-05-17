@@ -14,6 +14,19 @@ def index():
     return render_template('main/index.html')
 
 
+@main.route('/settings')
+@login_required
+def settings():
+    return render_template('main/settings.html')
+
+@main.route('/tasks')
+@login_required
+def tasks():
+    return render_template('main/tasks.html')
+
+
+
+
 @main.route('/about')
 def about():
     editable_html_obj = EditableHTML.get_editable_html('about')
