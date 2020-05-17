@@ -408,20 +408,32 @@ body.dashboard {
 .table-app tr {
   margin: 1em 0;
 }
+@media -sass-debug-info{filename{}line{font-family:\00003421}}
+.table-app tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+@media -sass-debug-info{filename{}line{font-family:\00003424}}
+.table-app tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+@media -sass-debug-info{filename{}line{font-family:\00003429}}
+.table-app tbody .btn-tasks-icon {
+  color: #743AE8;
+}
 
 @media (min-width: 576px) {
-@media -sass-debug-info{filename{}line{font-family:\00003421}}
+@media -sass-debug-info{filename{}line{font-family:\00003436}}
   .logo {
     width: 350px;
   }
 
-@media -sass-debug-info{filename{}line{font-family:\00003424}}
+@media -sass-debug-info{filename{}line{font-family:\00003439}}
   .modal-dialog {
     max-width: unset;
     margin: unset;
   }
 
-@media -sass-debug-info{filename{}line{font-family:\00003429}}
+@media -sass-debug-info{filename{}line{font-family:\00003444}}
   .modal {
     top: 0 !important;
     left: 0;
@@ -429,7 +441,7 @@ body.dashboard {
   }
 }
 @media (min-width: 767.98px) {
-@media -sass-debug-info{filename{}line{font-family:\00003438}}
+@media -sass-debug-info{filename{}line{font-family:\00003453}}
   .modal {
     position: fixed;
     top: 25% !important;
@@ -441,7 +453,7 @@ body.dashboard {
   }
 }
 @media (max-width: 991.98px) {
-@media -sass-debug-info{filename{}line{font-family:\00003451}}
+@media -sass-debug-info{filename{}line{font-family:\00003466}}
   .nav-item {
     margin-top: unset;
     padding-top: unset;

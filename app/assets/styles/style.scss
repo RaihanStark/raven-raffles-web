@@ -415,6 +415,21 @@ body.dashboard {
     // background-color: rgba($color: #000, $alpha: .1);
     margin: 1em 0;
   }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .btn-tasks-icon {
+      color: $purple-color;
+    }
+  }
 }
 
 @media (min-width: 576px) {
