@@ -14,10 +14,6 @@ def index():
     return render_template('main/index.html')
 
 
-@main.route('/settings')
-@login_required
-def settings():
-    return render_template('main/settings.html')
 
 @main.route('/tasks')
 @login_required

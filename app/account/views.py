@@ -95,6 +95,11 @@ def register():
         return redirect(url_for('account.register'))
     return render_template('account/register.html', form=form)
 
+@account.route('/settings')
+@login_required
+def settings():
+    return render_template('main/settings.html')
+
 
 @account.route('/logout')
 @login_required
