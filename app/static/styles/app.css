@@ -409,7 +409,7 @@ body.dashboard {
   margin: 1em 0;
 }
 @media -sass-debug-info{filename{}line{font-family:\00003421}}
-.table-app tbody tr:nth-child(odd) {
+.table-app tbody tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.2);
 }
 @media -sass-debug-info{filename{}line{font-family:\00003424}}
