@@ -56,6 +56,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
+    last_active = db.Column(db.DateTime())
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:

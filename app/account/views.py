@@ -29,6 +29,7 @@ from app.account.forms import (
 from app.email import send_email
 from app.models import User
 
+import datetime
 account = Blueprint('account', __name__)
 
 
@@ -46,6 +47,11 @@ def login():
             login_user(user)
             # set session
             session.permanent = True
+
+            # set last active
+            user.last_active = datetime.datetime.utcnow()
+            db.session.commit()
+
             flash('You are now logged in. Welcome back!', 'success')
             return redirect(request.args.get('next') or url_for('main.index'))
         else:
