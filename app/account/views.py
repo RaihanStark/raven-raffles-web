@@ -5,7 +5,8 @@ from flask import (
     render_template,
     request,
     url_for,
-    Markup
+    Markup,
+    session
 )
 from flask_login import (
     current_user,
@@ -43,6 +44,8 @@ def login():
         if user is not None and user.password_hash is not None and \
                 user.verify_password(form.password.data):
             login_user(user)
+            # set session
+            session.permanent = True
             flash('You are now logged in. Welcome back!', 'success')
             return redirect(request.args.get('next') or url_for('main.index'))
         else:

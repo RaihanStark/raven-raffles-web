@@ -432,6 +432,15 @@ body.dashboard {
   }
 }
 
+.swal2-popup {
+  background: #321a66 !important;
+
+  .swal2-title,
+  .swal2-content {
+    color: white;
+  }
+}
+
 @media (min-width: 576px) {
   .logo {
     width: 350px;

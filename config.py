@@ -1,6 +1,6 @@
 import os
 import sys
-
+import datetime
 from raygun4py.middleware import flask as flask_raygun
 
 PYTHON_VERSION = sys.version_info[0]
@@ -66,6 +66,9 @@ class Config:
     RQ_DEFAULT_PORT = url.port
     RQ_DEFAULT_PASSWORD = url.password
     RQ_DEFAULT_DB = 0
+
+    # Cookie
+    PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=5)
 
     @staticmethod
     def init_app(app):
