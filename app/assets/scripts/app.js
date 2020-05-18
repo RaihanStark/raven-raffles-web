@@ -12,7 +12,7 @@ $(document).ready(function () {
     $("#taskModal").modal("toggle");
 
     // Append Body
-    let task_html = `<tr> <th scope="row"> <i class="far fa-square glow-checkbox" aria-hidden="true"></i> </th> <td>Bandana Box Logo Tee Black</td><td>Small</td><td>Profile 1</td><td>US Residental</td><td class="app-success-color">Successful Checkout</td><td> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button"><i class="fas fa-play fa-md btn-tasks-icon" aria-hidden="true"></i></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button"><i class="fas fa-edit fa-md btn-tasks-icon" aria-hidden="true"></i></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button"><i class="fas fa-copy fa-md btn-tasks-icon" aria-hidden="true"></i></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button"><i class="fas fa-trash fa-md btn-tasks-icon" aria-hidden="true"></i></a> </td></tr>`;
+    let task_html = `<tr> <th scope="row" class="checkboxContainer"> <input type="checkbox"/> </th> <td>Bandana Box Logo Tee Black</td><td>Small</td><td>Profile 1</td><td>US Residental</td><td class="app-success-color">Successful Checkout</td><td> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-play fa-md btn-tasks-icon"></i ></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-edit fa-md btn-tasks-icon"></i ></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-copy fa-md btn-tasks-icon"></i ></a> <a name="delete-task" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-trash fa-md btn-tasks-icon"></i ></a> </td></tr>`;
     $("#task-body").append(task_html);
 
     // send notif
@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
   });
 
-  $('a[name="delete-task"]').on("click", function () {
+  $("#task-body").on("click", 'a[name="delete-task"]', function () {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -36,9 +36,9 @@ $(document).ready(function () {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.value) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "Your task has been deleted.", "success");
+        $(this).parent().parent().remove();
       }
-      $(this).parent().parent().remove();
     });
   });
 });
