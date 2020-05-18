@@ -56,7 +56,9 @@ $(document).ready(function () {
     }).then((result) => {
       if (result.value) {
         Swal.fire("Duplicated!", "Your task has been duplicated.", "success");
-        $("#task-body").append($(this).parent().parent().parent().html());
+        $("#task-body").append(
+          `<tr> ${$(this).parent().parent().html()} </tr>`
+        );
       }
     });
   });
