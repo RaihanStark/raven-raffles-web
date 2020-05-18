@@ -13,7 +13,7 @@ from wtforms.validators import Email, EqualTo, InputRequired, Length
 from app.models import User
 
 
-from app.utils import is_license_valid
+from app.utils import is_license_valid, is_anticaptcha_valid
 
 class LoginForm(FlaskForm):
     username = StringField('Username',validators=[InputRequired()])
@@ -132,5 +132,10 @@ class SettingsForm(FlaskForm):
     webhooks = StringField('Discord Webhooks')
     anticaptcha_key = StringField('AntiCaptcha Key')
     submit = SubmitField('Save settings')
+
+    def validate_anticaptcha_key(self, anticaptcha_key):
+        if anticaptcha_key.data != "":
+            if is_anticaptcha_valid(anticaptcha_key.data)['errorId'] == True:
+                raise ValidationError('Key is not Exist. Leave it blank if you don\'t have it')
 
     

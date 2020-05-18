@@ -37,9 +37,11 @@ active_page = "Settings" %} {% include 'partials/_navbar.html' %}
                 <label class="app-label text-bold">AntiCaptcha API</label>
                 {{form.anticaptcha_key(class_="form-input
                 app-input-start",placeholder="Insert API KEY",
-                value=settings.anticaptcha_key)}}
-                {{form.submit(class_="form-submit text-bold mt-2", value="Save",
-                style="width: 100%;")}}
+                value=settings.anticaptcha_key)}} {% for error in
+                form.anticaptcha_key.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %} {{form.submit(class_="form-submit text-bold mt-2",
+                value="Save", style="width: 100%;")}}
               </form>
             </div>
           </div>

@@ -29,6 +29,13 @@ def is_license_valid(key):
     r = requests.post('https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device',json={"serialkey": key})
     return r.json()['success']
 
+def is_anticaptcha_valid(key):
+    """
+    checking anticaptcha key and returning balance
+    """
+    r = requests.post('https://api.anti-captcha.com/getBalance', json={'clientKey':key})
+
+    return r.json()
 class CustomSelectField(Field):
     widget = HiddenInput()
 
