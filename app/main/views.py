@@ -20,7 +20,10 @@ def index():
 def tasks():
     return render_template('main/tasks.html')
 
-
+@main.route('/proxies')
+@login_required
+def proxies():
+    return render_template('main/proxies.html')
 
 
 @main.route('/about')

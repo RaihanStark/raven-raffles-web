@@ -7,11 +7,12 @@ active_page = "Settings" %} {% include 'partials/_navbar.html' %}
         <div class="card-app-header d-flex justify-content-between">
           <h1 class="text-bold text-white align-self-center">Settings</h1>
         </div>
-        <div class="tasks pb-1">
+        <div class="tasks pb-1" style="margin: 0 1.5em;">
           <div class="mt-3 mb-4 d-flex flex-column">
             <div
               class="d-flex flex-column align-self-center"
               id="discord-webhooks"
+              style="width: 100%;"
             >
               <label class="app-label text-bold">Discord Webhooks</label>
               <input
@@ -23,6 +24,7 @@ active_page = "Settings" %} {% include 'partials/_navbar.html' %}
             <div
               class="d-flex mt-1 flex-column align-self-center"
               id="anticaptcha-key"
+              style="width: 100%;"
             >
               <label class="app-label text-bold">AntiCaptcha API</label>
               <input
@@ -31,10 +33,12 @@ active_page = "Settings" %} {% include 'partials/_navbar.html' %}
                 type="text"
               />
             </div>
+            {{current_user.get_settings()}}
             <input
               class="form-submit text-bold align-self-center mt-2"
               type="submit"
               value="Save"
+              style="width: 100%;"
             />
           </div>
         </div>

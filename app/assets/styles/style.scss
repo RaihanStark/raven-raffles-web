@@ -304,6 +304,7 @@ body.dashboard {
     border-top-right-radius: inherit;
     border-top-left-radius: inherit;
 
+    background-color: rgba(0, 0, 0, 0.1);
     h1 {
       font-size: 1.2rem;
       margin: 0;
@@ -341,10 +342,14 @@ body.dashboard {
   }
 
   .sidebar {
+    -webkit-box-shadow: -33px 3px 57px 0px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: -33px 3px 57px 0px rgba(0, 0, 0, 0.28);
+    box-shadow: -33px 3px 57px 0px rgba(0, 0, 0, 0.28);
+
     background-color: $purple-darker-color;
 
-    border-radius: 1em;
-
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
     .credit-card-field {
       label {
         display: block;
@@ -392,7 +397,7 @@ body.dashboard {
   width: 100%;
 
   label {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
   input {
     width: 100%;
@@ -400,8 +405,7 @@ body.dashboard {
 
   input::placeholder {
     font-size: 0.8em;
-    text-align: start;
-    padding-left: 1em;
+    text-align: center;
   }
 }
 
@@ -415,14 +419,16 @@ body.dashboard {
     // background-color: rgba($color: #000, $alpha: .1);
     margin: 1em 0;
   }
-
+  th:first-of-type {
+    text-align: center;
+  }
   tbody {
     tr {
       &:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(0, 0, 0, 0.1);
       }
       &:hover {
-        background-color: rgba(255, 255, 255, 0.4);
+        background-color: rgba(255, 255, 255, 0.1);
       }
     }
 

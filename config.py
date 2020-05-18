@@ -68,7 +68,7 @@ class Config:
     RQ_DEFAULT_DB = 0
 
     # Cookie
-    PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=5)
+    PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=10)
 
     @staticmethod
     def init_app(app):

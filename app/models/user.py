@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.utils import is_license_valid
 from .. import db, login_manager
 
-
+import json
 class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
@@ -57,6 +57,8 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
     last_active = db.Column(db.DateTime())
+    settings = db.Column(db.String())
+
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
@@ -72,6 +74,12 @@ class User(UserMixin, db.Model):
 
     def is_admin(self):
         return self.can(Permission.ADMINISTER)
+
+    def get_settings(self):
+        if self.settings is None:
+            self.settings = "No Settings"
+            db.session.commit()
+        return self.settings
 
     @property
     def password(self):
@@ -178,8 +186,11 @@ class User(UserMixin, db.Model):
             except IntegrityError:
                 db.session.rollback()
 
+    def get_username(self):
+        return '%s' % (self.username)
+
     def __repr__(self):
-        return '<User \'%s\'>' % self.full_name()
+        return '<User %s>' % self.get_username()
 
 
 class AnonymousUser(AnonymousUserMixin):
