@@ -129,8 +129,8 @@ class ChangeEmailForm(FlaskForm):
 
 
 class SettingsForm(FlaskForm):
-    discord = StringField('Discord Webhooks')
-    anticaptcha = StringField('AntiCaptcha Key')
+    webhooks = StringField('Discord Webhooks')
+    anticaptcha_key = StringField('AntiCaptcha Key')
     submit = SubmitField('Save settings')
 
     

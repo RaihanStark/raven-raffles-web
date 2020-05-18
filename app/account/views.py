@@ -25,10 +25,13 @@ from app.account.forms import (
     RegistrationForm,
     RequestResetPasswordForm,
     ResetPasswordForm,
+    SettingsForm
 )
 from app.email import send_email
 from app.models import User
 
+
+import ast
 import datetime
 account = Blueprint('account', __name__)
 
@@ -95,10 +98,22 @@ def register():
         return redirect(url_for('account.register'))
     return render_template('account/register.html', form=form)
 
-@account.route('/settings')
+@account.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
-    return render_template('main/settings.html')
+    """
+    Settings Page
+    """
+
+    form = SettingsForm()
+    if form.validate_on_submit():
+        current_user.set_settings({
+            'webhooks':form.webhooks.data,
+            'anticaptcha_key':form.anticaptcha_key.data
+        })
+        return redirect(url_for('account.settings'))
+    
+    return render_template('main/settings.html',form=form, settings=ast.literal_eval(current_user.get_settings()))
 
 
 @account.route('/logout')

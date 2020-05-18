@@ -7,6 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.utils import is_license_valid
 from .. import db, login_manager
 
+from app.models.util import Settings
+
 import json
 class Permission:
     GENERAL = 0x01
@@ -59,6 +61,7 @@ class User(UserMixin, db.Model):
     last_active = db.Column(db.DateTime())
     settings = db.Column(db.String())
 
+    account_settings = Settings()
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
@@ -67,7 +70,7 @@ class User(UserMixin, db.Model):
                     permissions=Permission.ADMINISTER).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
-
+        
     def can(self, permissions):
         return self.role is not None and \
             (self.role.permissions & permissions) == permissions
@@ -77,10 +80,16 @@ class User(UserMixin, db.Model):
 
     def get_settings(self):
         if self.settings is None:
-            self.settings = "No Settings"
+            self.settings = self.account_settings.to_json()
             db.session.commit()
         return self.settings
 
+    def set_settings(self, data_dictionary):
+        self.account_settings.set_settings(data_dictionary)
+
+        self.settings = self.account_settings.to_json()
+        db.session.commit()
+        return True
     @property
     def password(self):
         raise AttributeError('`password` is not a readable attribute')
