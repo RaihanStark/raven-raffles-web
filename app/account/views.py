@@ -111,6 +111,7 @@ def settings():
             'webhooks':form.webhooks.data,
             'anticaptcha_key':form.anticaptcha_key.data
         })
+        flash('Settings have been updated')
         return redirect(url_for('account.settings'))
     
     return render_template('main/settings.html',form=form, settings=ast.literal_eval(current_user.get_settings()))
