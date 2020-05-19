@@ -3,7 +3,7 @@ from flask_login import (
     current_user,
     login_required
 )
-from app.models import EditableHTML
+from app.models import EditableHTML, Product
 
 main = Blueprint('main', __name__)
 
@@ -11,7 +11,9 @@ main = Blueprint('main', __name__)
 @main.route('/')
 @login_required
 def index():
-    return render_template('main/index.html')
+    products = Product.query.all()
+    print(products)
+    return render_template('main/index.html',products=products)
 
 
 
