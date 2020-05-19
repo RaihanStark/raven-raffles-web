@@ -61,6 +61,7 @@ class User(UserMixin, db.Model):
     last_active = db.Column(db.DateTime())
     settings = db.Column(db.String())
 
+    # Relational
     tasks = db.relationship('Task', backref='by')
 
     account_settings = Settings()
@@ -210,12 +211,15 @@ class Task(db.Model):
     entries = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    product_id = db.Column(db.Integer)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     sizes = db.Column(db.String())
     thumbnail = db.Column(db.String())
+
+    active_task = db.relationship('Task', backref='product')
 
 
 class AnonymousUser(AnonymousUserMixin):
