@@ -43,6 +43,8 @@ def login():
         return redirect(url_for('main.index'))
 
     form = LoginForm()
+    current_next = request.args.get('next')
+    print(current_next)
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.password_hash is not None and \
@@ -54,9 +56,8 @@ def login():
             # set last active
             user.last_active = datetime.datetime.utcnow()
             db.session.commit()
-
-            flash('You are now logged in. Welcome back!', 'success')
-            return redirect(request.args.get('next') or url_for('main.index'))
+            flash('You are now logged in. Welcome back, %s!'%(current_user.username), 'success')
+            return redirect(current_next or url_for('main.index'))
         else:
             flash('Invalid username or password.', 'form-error')
     return render_template('account/login.html', form=form)

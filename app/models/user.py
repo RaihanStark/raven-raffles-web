@@ -49,7 +49,7 @@ class Role(db.Model):
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    # __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
     key = db.Column(db.String(), unique=True)
@@ -60,6 +60,8 @@ class User(UserMixin, db.Model):
 
     last_active = db.Column(db.DateTime())
     settings = db.Column(db.String())
+
+    tasks = db.relationship('Task', backref='by')
 
     account_settings = Settings()
     def __init__(self, **kwargs):
@@ -201,6 +203,13 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User %s>' % self.get_username()
 
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    size = db.Column(db.String(10))
+    status = db.Column(db.String())
+    entries = db.Column(db.Integer)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):
