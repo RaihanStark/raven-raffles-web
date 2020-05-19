@@ -3,7 +3,7 @@ from flask_login import (
     current_user,
     login_required
 )
-from app.models import EditableHTML, Product
+from app.models import EditableHTML, Product, Task
 
 main = Blueprint('main', __name__)
 
@@ -12,8 +12,8 @@ main = Blueprint('main', __name__)
 @login_required
 def index():
     products = Product.query.all()
-    print(products)
-    return render_template('main/index.html',products=products)
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+    return render_template('main/index.html',products=products, tasks=tasks)
 
 
 

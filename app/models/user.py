@@ -176,6 +176,9 @@ class User(UserMixin, db.Model):
     @staticmethod
     def generate_fake(count=100, **kwargs):
         """Generate a number of fake users for testing."""
+
+        print("Generating User Fake Data to DB")
+
         from sqlalchemy.exc import IntegrityError
         from random import seed, choice
         from faker import Faker
@@ -213,6 +216,38 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 
+    @staticmethod
+    def generate_fake(count=15, **kwargs):
+        """Generate a number of fake Tasks for testing."""
+        
+        print("Generating Task Fake Data to DB")
+
+        sizes = ["US 3","US 4","US 5","US 6","US 7","US 8","US 9"]
+
+        from sqlalchemy.exc import IntegrityError
+        from random import seed, choice
+        from faker import Faker
+
+        fake = Faker()
+        roles = Role.query.all()
+
+        seed()
+        for i in range(count):
+
+            u = User.query.get(choice([1,2,3,4,5,6,7,8,9]))
+            p = Product.query.get(choice([1,2,3,4,5,6,7,8,9]))
+            t = Task(
+                selected_size = choice(sizes),
+                entries = choice([1,2,3,4,5,6,7,8,9,10]),
+                by=u,
+                product=p,
+                **kwargs)
+            db.session.add(t)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
@@ -223,7 +258,10 @@ class Product(db.Model):
 
     @staticmethod
     def generate_fake(count=15, **kwargs):
-        """Generate a number of fake users for testing."""
+        """Generate a number of fake product for testing."""
+
+        print("Generating Product Fake Data to DB")
+
 
         shoes_names = ["Adidas",
                         "Anta",
@@ -261,13 +299,16 @@ class Product(db.Model):
             u = Product(
                 name = choice(shoes_names),
                 thumbnail = choice(thumbnails),
-                sizes = choice(sizes),
+                sizes = str(sizes),
                 **kwargs)
             db.session.add(u)
             try:
                 db.session.commit()
             except IntegrityError:
                 db.session.rollback()
+    
+    def __repr__(self):
+        return '<Product %s>' % self.name
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())

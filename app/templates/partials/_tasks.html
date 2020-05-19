@@ -137,15 +137,16 @@
             </tr>
           </thead>
           <tbody id="task-body">
+            {% for task in tasks %}
             <tr>
-              <th scope="row">
-                1
+              <th scope="col">
+                {{task.id}}
               </th>
-              <td>Bandana Box Logo Tee Black</td>
-              <td>Small</td>
-              <td>Profile 1</td>
-              <td>US Residental</td>
-              <td class="app-success-color">Successful Checkout</td>
+              <th scope="col">{{task.product.name}}</th>
+              <th scope="col">{{task.selected_size}}</th>
+              <th scope="col">1</th>
+              <th scope="col">USA</th>
+              <th scope="col">{{task.status}}</th>
               <td>
                 <a
                   name=""
@@ -181,6 +182,7 @@
                 ></a>
               </td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
