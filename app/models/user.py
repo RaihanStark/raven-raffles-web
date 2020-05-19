@@ -205,11 +205,18 @@ class User(UserMixin, db.Model):
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    size = db.Column(db.String(10))
+    selected_size = db.Column(db.String(10))
     status = db.Column(db.String())
     entries = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    product_id = db.Column(db.Integer)
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    sizes = db.Column(db.String())
+    thumbnail = db.Column(db.String())
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):
