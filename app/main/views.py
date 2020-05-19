@@ -13,7 +13,8 @@ main = Blueprint('main', __name__)
 def index():
     products = Product.query.all()
     tasks = Task.query.filter_by(user_id=current_user.id).all()
-    return render_template('main/index.html',products=products, tasks=tasks)
+    list_of_raffle = len(products)
+    return render_template('main/index.html',products=products, tasks=tasks, list_of_raffle=list_of_raffle)
 
 
 

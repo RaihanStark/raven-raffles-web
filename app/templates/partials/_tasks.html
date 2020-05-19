@@ -11,7 +11,9 @@
             </h1>
           </div>
           <div class="tasks pl-4 pb-4">
-            <h6 class="text-white mb-4">Choose a release</h6>
+            <h6 class="text-white mt-3 mb-4">
+              Choose a release (SHIFT + Scroll)
+            </h6>
             <div class="releases pb-2 d-flex">
               {% for product in products %}
               <div
@@ -72,11 +74,12 @@
                 </div>
                 <div class="pr-4">
                   <label class="text-white text-bold">Account Group</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    placeholder="Hotmails"
-                  />
+                  <select class="form-input" id="profiles">
+                    <option value="3">John Doe</option>
+                    <option value="4">John Doe</option>
+                    <option value="5">John Doe</option>
+                    <option value="6">John Doe</option>
+                  </select>
                 </div>
               </div>
             </div>

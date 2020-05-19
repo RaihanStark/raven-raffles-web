@@ -62,4 +62,11 @@ $(document).ready(function () {
       }
     });
   });
+
+  // Input Proxies Line Count
+
+  $("#input-proxies").on("input", function () {
+    line_count = $(this).val().split("\n").length;
+    $("#total-proxies-loaded").text(`${line_count} Proxy`);
+  });
 });

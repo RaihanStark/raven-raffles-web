@@ -71,65 +71,110 @@ active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
     </div>
   </div>
 </div>
+
+<div class="modal container fade" id="proxiesBulkModal">
+  <div class="modal-dialog d-flex justify-content-center">
+    <div
+      class="modal-content card-app-gradient mt-3 mt-md-0"
+      style="width: 22rem;"
+    >
+      <div class="card-app-header d-flex justify-content-between">
+        <h1 class="text-bold text-white align-self-center">Import Proxies</h1>
+      </div>
+      <div class="tasks pb-1" style="margin: 0 1.5em;">
+        <div class="mt-3 mb-4 d-flex flex-column">
+          <div
+            class="d-flex flex-column align-self-center"
+            id="proxy-address"
+            style="width: 100%;"
+          >
+            <label class="app-label text-bold">Name</label>
+            <input
+              class="form-input app-input-start"
+              placeholder="Europe Proxies"
+              type="text"
+            />
+          </div>
+          <label class="app-label text-bold">Proxy Address</label>
+          <textarea
+            class="form-textarea"
+            name=""
+            id="input-proxies"
+            cols="30"
+            rows="10"
+            placeholder="http://user:password@proxyip:port"
+          ></textarea>
+          <span
+            class="mt-2 text-white"
+            style="text-align: right;"
+            id="total-proxies-loaded"
+          ></span>
+          <input
+            class="form-submit text-bold align-self-center mt-2"
+            type="submit"
+            value="Save"
+            style="width: 100%;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container mt-5">
   <div class="row mt-3">
     <div class="col">
       <div class="card-app-gradient mt-3 mt-md-0">
         <div class="card-app-header d-flex justify-content-between">
           <h1 class="text-bold text-white align-self-center">Proxies</h1>
-          <a
-            class="btn btn-white"
-            data-toggle="modal"
-            data-target="#proxiesModal"
-            ><i class="fas fa-plus-circle fa-sm"></i> Import Proxies</a
-          >
+          <div>
+            <a
+              class="btn btn-white"
+              data-toggle="modal"
+              data-target="#proxiesBulkModal"
+              ><i class="fas fa-file-import fa-sm"></i> Import from txt
+            </a>
+            <a
+              class="btn btn-white"
+              data-toggle="modal"
+              data-target="#proxiesModal"
+              ><i class="fas fa-plus-circle fa-sm"></i> Add
+            </a>
+          </div>
         </div>
         <div class="tasks pb-1">
           <table class="table table-borderless table-app">
             <thead>
               <tr>
-                <th scope="col"><input type="checkbox" /></th>
-                <th scope="col">PROXY</th>
-                <th scope="col">PORT</th>
-                <th scope="col">USER</th>
-                <th scope="col">PASSWORD</th>
+                <th scope="col">NO</th>
+                <th scope="col">NAME</th>
+                <th scope="col">PROXIES</th>
+                <th scope="col">ACTION</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row"><input type="checkbox" /></th>
-                <td>0.0.0.0</td>
-                <td>443</td>
-                <td>Root</td>
-                <td>Localhost</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" /></th>
-                <td>0.0.0.0</td>
-                <td>443</td>
-                <td>Root</td>
-                <td>Localhost</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" /></th>
-                <td>0.0.0.0</td>
-                <td>443</td>
-                <td>Root</td>
-                <td>Localhost</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" /></th>
-                <td>0.0.0.0</td>
-                <td>443</td>
-                <td>Root</td>
-                <td>Localhost</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" /></th>
-                <td>0.0.0.0</td>
-                <td>443</td>
-                <td>Root</td>
-                <td>Localhost</td>
+                <th scope="row">1</th>
+                <td>US Residential</td>
+                <td>1.233</td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="#"
+                    role="button"
+                    ><i class="fas fa-edit fa-md btn-tasks-icon"></i
+                  ></a>
+                  <a
+                    name="delete-task"
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="#"
+                    role="button"
+                    ><i class="fas fa-trash fa-md btn-tasks-icon"></i
+                  ></a>
+                </td>
               </tr>
             </tbody>
           </table>
