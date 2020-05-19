@@ -63,6 +63,7 @@ class User(UserMixin, db.Model):
 
     # Relational
     tasks = db.relationship('Task', backref='by')
+    profiles = db.relationship('Profile', backref='owner')
 
     account_settings = Settings()
     def __init__(self, **kwargs):
@@ -185,8 +186,7 @@ class User(UserMixin, db.Model):
         seed()
         for i in range(count):
             u = User(
-                first_name=fake.first_name(),
-                last_name=fake.last_name(),
+                username=fake.first_name(),
                 email=fake.email(),
                 password='password',
                 confirmed=True,
@@ -207,7 +207,7 @@ class User(UserMixin, db.Model):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     selected_size = db.Column(db.String(10))
-    status = db.Column(db.String())
+    status = db.Column(db.String(), default='Unstarted')
     entries = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -221,7 +221,66 @@ class Product(db.Model):
 
     active_task = db.relationship('Task', backref='product')
 
+    @staticmethod
+    def generate_fake(count=15, **kwargs):
+        """Generate a number of fake users for testing."""
 
+        shoes_names = ["Adidas",
+                        "Anta",
+                        "ASICS",
+                        "Babolat",
+                        "Brooks",
+                        "Converse",
+                        "DC",
+                        "Diadora",
+                        "Dunlop",
+                        "Ethletic",
+                        "Feiyue",
+                        "Fila",
+                        "Hoka One One"
+                        ]
+
+        thumbnails = [
+            "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/371777/01/sv01/fnd/PNA/fmt/png/Rise-Women's-Sneakers",
+            "https://wwws.dior.com/couture/ecommerce/media/catalog/product/cache/1/zoom_image_2/3000x2000/17f82f742ffe127f42dca9de82fb58b1/u/j/1554385504_3SH118YJP_H069_E02_ZH.jpg",
+            "https://bobobobo-s3.dexecure.net/5dd8eac362f58.jpg",
+            "https://cdn.shopify.com/s/files/1/0238/2821/products/Womens-193-Royale-Blanco-3RMW-Product-102.jpg?v=1563992609"
+        ]
+        
+        sizes = ["US 3","US 4","US 5","US 6","US 7","US 8","US 9"]
+
+        from sqlalchemy.exc import IntegrityError
+        from random import seed, choice
+        from faker import Faker
+
+        fake = Faker()
+        roles = Role.query.all()
+
+        seed()
+        for i in range(count):
+            u = Product(
+                name = choice(shoes_names),
+                thumbnail = choice(thumbnails),
+                sizes = choice(sizes),
+                **kwargs)
+            db.session.add(u)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    
+    country = db.Column(db.String(15))
+    province = db.Column(db.String(20))
+    city = db.Column(db.String(20))
+    zipcode = db.Column(db.String(10))
+    address = db.Column(db.String())
+
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):
         return False
