@@ -143,5 +143,4 @@ class SettingsForm(FlaskForm):
 class AddBulkProxyForm(FlaskForm):
     name = StringField('Name Group', validators=[InputRequired()])
     proxies = TextAreaField('List of Proxy', validators=[InputRequired()])
-    total = HiddenField('Total of Proxies')
     submit = SubmitField('Save')
