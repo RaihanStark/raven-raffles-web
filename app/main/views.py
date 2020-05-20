@@ -40,7 +40,8 @@ def proxies_add():
     
     form = AddBulkProxyForm()
     if form.validate_on_submit():
-        current_user.add_proxies_bulk(form.name.data,form.proxies.data)
+        
+        current_user.add_proxies_bulk(form.name.data,form.proxies.data,len(form.proxies.data.split('\n')))
         return redirect(url_for('main.proxies'))
     return render_template('main/proxies.html',proxies=proxies, form=form)
 

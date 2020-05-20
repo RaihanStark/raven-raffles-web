@@ -1,5 +1,6 @@
 import time
 import unittest
+import json
 
 from app import create_app, db
 from app.models import AnonymousUser, Permission, Role, User
@@ -139,3 +140,72 @@ class UserModelTestCase(unittest.TestCase):
     def test_invalid_verify_key(self):
         u = User(key="invalid-key")
         self.assertFalse(u.verify_key())
+
+    def test_get_empty_proxies(self):
+        u = User()
+        self.assertEqual([],u.get_proxies())
+
+    def test_get_valid_proxies(self):
+        u = User()
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }],u.get_proxies())
+
+    def test_add_bulk_empty_proxies(self):
+        u = User()
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }],u.get_proxies())
+
+    def test_add_bulk_exist_proxies(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }]))
+        u.add_proxies_bulk('test2', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        },{
+            'name':'test2',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }],u.get_proxies())
+    
+    def test_add_bulk_exist_same_name_proxies(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }]))
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        },{
+            'name':'test(1)',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
+            'total':3
+        }],u.get_proxies())
+
+    def test_add_one_proxy_to_group(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443",
+            'total':2
+        }]))
+        u.add_proxies('test', '1.1.1.1:443')
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443",
+            'total':3
+        }],u.get_proxies())

@@ -75,18 +75,35 @@ class User(UserMixin, db.Model):
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
         
-    def add_proxies_bulk(self, name, proxies):
-        json_data = json.loads(self.proxies)
-        json_data.append({
-            'name':name,
-            'proxies':proxies,
-            'total':1
-        })
+    def add_proxies_bulk(self, name, proxies, total):
+        if self.proxies != None:
+            json_data = json.loads(self.proxies)
+
+            # If Same Name
+            proxies_found = [proxy for proxy in json_data if proxy['name'] == name]
+        else:
+            json_data = []
+            proxies_found = []
+
+        if len(proxies_found) >= 1:
+            json_data.append({
+                'name':name+"(%s)"%(len(proxies_found)),
+                'proxies':proxies,
+                'total':total
+            })
+        else:
+            json_data.append({
+                'name':name,
+                'proxies':proxies,
+                'total':total
+            })
 
         self.proxies = json.dumps(json_data)
         db.session.commit()
 
     def get_proxies(self):
+        if self.proxies == None:
+            return []
         return json.loads(self.proxies)
 
     def can(self, permissions):
