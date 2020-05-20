@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import (
     current_user,
     login_required
 )
-from app.models import EditableHTML, Product, Task
+
+from app.account.forms import AddBulkProxyForm
+from app.models import EditableHTML, Product, Task, User
 
 main = Blueprint('main', __name__)
 
@@ -23,11 +25,24 @@ def index():
 def tasks():
     return render_template('main/tasks.html')
 
-@main.route('/proxies')
+@main.route('/proxies',methods=['GET'])
 @login_required
 def proxies():
-    return render_template('main/proxies.html')
+    proxies = current_user.get_proxies()
+    form = AddBulkProxyForm()
 
+    return render_template('main/proxies.html',proxies=proxies, form=form)
+
+@main.route('/proxies/add',methods=['POST'])
+@login_required
+def proxies_add():
+    proxies = current_user.get_proxies()
+    
+    form = AddBulkProxyForm()
+    if form.validate_on_submit():
+        current_user.add_proxies_bulk(form.name.data,form.proxies.data)
+        return redirect(url_for('main.proxies'))
+    return render_template('main/proxies.html',proxies=proxies, form=form)
 
 @main.route('/about')
 def about():

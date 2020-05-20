@@ -6,6 +6,8 @@ from wtforms.fields import (
     PasswordField,
     StringField,
     SubmitField,
+    HiddenField,
+    TextAreaField
 )
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, EqualTo, InputRequired, Length
@@ -138,4 +140,8 @@ class SettingsForm(FlaskForm):
             if is_anticaptcha_valid(anticaptcha_key.data)['errorId'] == True:
                 raise ValidationError('Key is not Exist. Leave it blank if you don\'t have it')
 
-    
+class AddBulkProxyForm(FlaskForm):
+    name = StringField('Name Group', validators=[InputRequired()])
+    proxies = TextAreaField('List of Proxy', validators=[InputRequired()])
+    total = HiddenField('Total of Proxies')
+    submit = SubmitField('Save')

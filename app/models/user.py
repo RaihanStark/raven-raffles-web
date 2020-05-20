@@ -56,6 +56,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    proxies = db.Column(db.String)
 
     last_active = db.Column(db.DateTime())
     settings = db.Column(db.String())
@@ -74,6 +75,20 @@ class User(UserMixin, db.Model):
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
         
+    def add_proxies_bulk(self, name, proxies):
+        json_data = json.loads(self.proxies)
+        json_data.append({
+            'name':name,
+            'proxies':proxies,
+            'total':1
+        })
+
+        self.proxies = json.dumps(json_data)
+        db.session.commit()
+
+    def get_proxies(self):
+        return json.loads(self.proxies)
+
     def can(self, permissions):
         return self.role is not None and \
             (self.role.permissions & permissions) == permissions

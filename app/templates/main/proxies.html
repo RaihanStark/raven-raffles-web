@@ -83,38 +83,27 @@ active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
       </div>
       <div class="tasks pb-1" style="margin: 0 1.5em;">
         <div class="mt-3 mb-4 d-flex flex-column">
-          <div
-            class="d-flex flex-column align-self-center"
-            id="proxy-address"
-            style="width: 100%;"
-          >
+          <form action="/proxies/add" method="post">
+            {{ form.hidden_tag() }}
             <label class="app-label text-bold">Name</label>
-            <input
-              class="form-input app-input-start"
-              placeholder="Europe Proxies"
-              type="text"
-            />
-          </div>
-          <label class="app-label text-bold">Proxy Address</label>
-          <textarea
-            class="form-textarea"
-            name=""
-            id="input-proxies"
-            cols="30"
-            rows="10"
-            placeholder="http://user:password@proxyip:port"
-          ></textarea>
-          <span
-            class="mt-2 text-white"
-            style="text-align: right;"
-            id="total-proxies-loaded"
-          ></span>
-          <input
-            class="form-submit text-bold align-self-center mt-2"
-            type="submit"
-            value="Save"
-            style="width: 100%;"
-          />
+            {{form.name(class_="form-input
+            app-input-start",placeholder="Europe")}} {% for error in
+            form.name.errors %}
+            <span style="color: red;" class="mb-2">[{{ error }}]</span>
+            {% endfor %}
+            <label class="app-label text-bold">Proxy Address</label>
+            {{form.proxies(class_="form-textarea",placeholder="http://user:password@proxyip:port",id="input-proxies",cols="30",rows="10")}}
+            {% for error in form.name.errors %}
+            <span style="color: red;" class="mb-2">[{{ error }}]</span>
+            {% endfor %}
+            <span
+              class="mt-2 text-white"
+              style="text-align: right;"
+              id="total-proxies-loaded"
+            ></span>
+            {{form.submit(class_="form-submit text-bold align-self-center
+            mt-2",style="width: 100%;",value="Add Group")}}
+          </form>
         </div>
       </div>
     </div>
@@ -153,6 +142,31 @@ active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
               </tr>
             </thead>
             <tbody>
+              {% for proxy in proxies %}
+              <tr>
+                <th scope="row">[]</th>
+                <td>{{proxy.name}}</td>
+                <td>{{proxy.total}}</td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="#"
+                    role="button"
+                    ><i class="fas fa-edit fa-md btn-tasks-icon"></i
+                  ></a>
+                  <a
+                    name="delete-task"
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="#"
+                    role="button"
+                    ><i class="fas fa-trash fa-md btn-tasks-icon"></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
               <tr>
                 <th scope="row">1</th>
                 <td>US Residential</td>
