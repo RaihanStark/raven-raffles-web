@@ -123,7 +123,14 @@ class User(UserMixin, db.Model):
             self.proxies = json.dumps(json_data)
             db.session.commit()
 
+    def delete_proxy_by_name(self, name):
+        datajson = json.loads(self.proxies)
 
+        new_data = [new for new in datajson if new['name'] != name]
+        
+        # add to db
+        self.proxies = json.dumps(new_data)
+        db.session.commit()
 
     def get_proxies(self):
         if self.proxies == None:

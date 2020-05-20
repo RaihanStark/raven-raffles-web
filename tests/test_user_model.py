@@ -209,3 +209,12 @@ class UserModelTestCase(unittest.TestCase):
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443",
             'total':3
         }],u.get_proxies())
+
+    def test_delete_one_group_proxies(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443",
+            'total':2
+        }]))
+        u.delete_proxy_by_name('test')
+        self.assertEqual([],u.get_proxies())

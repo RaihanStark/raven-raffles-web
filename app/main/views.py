@@ -55,8 +55,13 @@ def proxies_add():
 
         return redirect(url_for('main.proxies'))
     
-    return render_template('main/proxies.html',proxies=proxies, form=form)
+    return redirect(url_for('main.proxies'))
 
+@main.route('/proxies/delete',methods=['DELETE'])
+@login_required
+def proxies_delete():
+    current_user.delete_proxy_by_name('USA')
+    return {'msg':'deleted'},200
 @main.route('/about')
 def about():
     editable_html_obj = EditableHTML.get_editable_html('about')
