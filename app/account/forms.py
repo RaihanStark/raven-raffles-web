@@ -7,7 +7,8 @@ from wtforms.fields import (
     StringField,
     SubmitField,
     HiddenField,
-    TextAreaField
+    TextAreaField,
+    SelectField
 )
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, EqualTo, InputRequired, Length
@@ -143,4 +144,9 @@ class SettingsForm(FlaskForm):
 class AddBulkProxyForm(FlaskForm):
     name = StringField('Name Group', validators=[InputRequired()])
     proxies = TextAreaField('List of Proxy', validators=[InputRequired()])
+    submit = SubmitField('Save')
+
+class AddProxyForm(FlaskForm):
+    name_group = SelectField('Name Group',coerce=str, validators=[InputRequired()])
+    proxies = StringField('Proxy', validators=[InputRequired()])
     submit = SubmitField('Save')

@@ -100,6 +100,30 @@ class User(UserMixin, db.Model):
 
         self.proxies = json.dumps(json_data)
         db.session.commit()
+        
+    def add_proxies(self, name, proxies):
+        if self.proxies != None:
+            json_data = json.loads(self.proxies)
+
+            # If found
+            proxies_found = [proxy for proxy in json_data if proxy['name'] == name]
+            
+            # detele old value
+            json_data.pop(json_data.index(proxies_found[0]))
+            
+            proxy_from_db = proxies_found[0]
+            
+            new_proxy_value = proxy_from_db['proxies'].split('\n')
+            new_proxy_value.append(proxies)
+            proxy_from_db['proxies'] = '\n'.join(new_proxy_value)
+            proxy_from_db['total'] += 1
+
+            json_data.append(proxy_from_db)
+            # add to db
+            self.proxies = json.dumps(json_data)
+            db.session.commit()
+
+
 
     def get_proxies(self):
         if self.proxies == None:
