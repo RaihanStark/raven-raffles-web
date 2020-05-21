@@ -56,13 +56,20 @@ def proxies_add():
     
     return redirect(url_for('main.proxies'))
 
-@main.route('/proxies/edit_proxies',methods=['GET', 'POST'])
+@main.route('/proxies/edit_proxies/<name>', methods=['GET', 'POST'])
 @login_required
-def proxies_edit():
-    form = EditProxyForm()
-    if form.validate_on_submit():
-        print('submit')
-    return render_template('main/edit_proxies.html',form=form)
+def edit_proxies(name):
+    proxies = current_user.get_proxies()
+    # Find Proxy
+    found = [found_proxy for found_proxy in proxies if found_proxy['name'] == name]
+    if len(found) >= 1:
+        form = EditProxyForm()
+        if form.validate_on_submit():
+            print('submit')
+
+        form.proxies.data = found[0]['proxies']
+        return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
+    return redirect(url_for('main.proxies'))
 
 @main.route('/proxies/delete',methods=['DELETE'])
 @login_required

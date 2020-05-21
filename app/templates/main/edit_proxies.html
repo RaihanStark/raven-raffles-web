@@ -13,8 +13,8 @@ active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
           <input type="hidden" name="type-form" value="add_bulk" />
           <label class="app-label text-bold">Name</label>
           {{form.name(class_="form-input
-          app-input-start",placeholder="Europe")}} {% for error in
-          form.name.errors %}
+          app-input-start",placeholder="Europe",value=currentproxy['name'])}} {%
+          for error in form.name.errors %}
           <span style="color: red;" class="mb-2">[{{ error }}]</span>
           {% endfor %}
           <label class="app-label text-bold">Proxy Address</label>
