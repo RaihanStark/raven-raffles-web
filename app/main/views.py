@@ -56,6 +56,12 @@ def proxies_add():
     
     return redirect(url_for('main.proxies'))
 
+@main.route('/proxies/edit_proxies',methods=['GET'])
+@login_required
+def proxies_edit():
+    form = AddBulkProxyForm()
+    return render_template('main/edit_proxies.html',form=form)
+
 @main.route('/proxies/delete',methods=['DELETE'])
 @login_required
 def proxies_delete():

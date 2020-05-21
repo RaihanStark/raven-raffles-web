@@ -1,0 +1,38 @@
+{% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
+active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
+
+<div class="container mt-5">
+  <div class="modal-content card-app-gradient mt-3 mt-md-0">
+    <div class="card-app-header d-flex justify-content-between">
+      <h1 class="text-bold text-white align-self-center">Edit Proxies</h1>
+    </div>
+    <div class="tasks pb-1" style="margin: 0 1.5em;">
+      <div class="mt-3 mb-4 d-flex flex-column">
+        <form action="/proxies/add" method="post">
+          {{ form.hidden_tag() }}
+          <input type="hidden" name="type-form" value="add_bulk" />
+          <label class="app-label text-bold">Name</label>
+          {{form.name(class_="form-input
+          app-input-start",placeholder="Europe")}} {% for error in
+          form.name.errors %}
+          <span style="color: red;" class="mb-2">[{{ error }}]</span>
+          {% endfor %}
+          <label class="app-label text-bold">Proxy Address</label>
+          {{form.proxies(class_="form-textarea",placeholder="http://user:password@proxyip:port",id="input-proxies",cols="30",rows="10")}}
+          {% for error in form.name.errors %}
+          <span style="color: red;" class="mb-2">[{{ error }}]</span>
+          {% endfor %}
+          <span
+            class="mt-2 text-white"
+            style="text-align: right;"
+            id="total-proxies-loaded"
+          ></span>
+          {{form.submit(class_="form-submit text-bold align-self-center
+          mt-2",style="width: 100%;",value="Edit Group")}}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
