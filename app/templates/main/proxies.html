@@ -114,7 +114,7 @@ active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
             </thead>
             <tbody>
               {% for proxy in proxies %}
-              <tr>
+              <tr data-name="{{proxy.name}}">
                 <th scope="row">{{loop.index}}</th>
                 <td>{{proxy.name}}</td>
                 <td>{{proxy.total}}</td>

@@ -41,7 +41,6 @@ def proxies():
 def proxies_add():
     proxies = current_user.get_proxies()
 
-    print(request.form)
     if request.form['type-form'] == 'add':
         form2 = AddProxyForm()
 
@@ -60,7 +59,8 @@ def proxies_add():
 @main.route('/proxies/delete',methods=['DELETE'])
 @login_required
 def proxies_delete():
-    current_user.delete_proxy_by_name('USA')
+    print(request.form['name'])
+    current_user.delete_proxy_by_name(request.form['name'])
     return {'msg':'deleted'},200
 @main.route('/about')
 def about():

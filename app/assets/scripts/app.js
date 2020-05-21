@@ -75,10 +75,11 @@ $(document).ready(function () {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.value) {
+        let name = $(this).parent().parent().attr("data-name");
         $.ajax({
           type: "delete",
           url: "/proxies/delete",
-          data: { name: "USA", csrf_token: $("#csrf_token").val() },
+          data: { name: name, csrf_token: $("#csrf_token").val() },
           success: function (res) {
             console.log(res);
           },
