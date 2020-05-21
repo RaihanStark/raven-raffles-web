@@ -1,18 +1,82 @@
 {% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
-active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
+active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
 
 <div class="modal container fade" id="profileModal">
   <div class="modal-dialog d-flex justify-content-center">
     <div
       class="modal-content card-app-gradient mt-3 mt-md-0"
-      style="width: 22rem;"
+      style="width: 50em;"
     >
       <div class="card-app-header d-flex justify-content-between">
         <h1 class="text-bold text-white align-self-center">Import Proxies</h1>
       </div>
       <div class="tasks pb-1" style="margin: 0 1.5em;">
         <div class="mt-3 mb-4 d-flex flex-column">
-          test
+          <div class="row">
+            <div class="col-md-4">
+              <div class="text-white mb-4">1. General Info</div>
+
+              <label class="text-white text-bold">Profile Name</label>
+              <input
+                class="form-input"
+                type="text"
+                placeholder="Profile Name"
+              />
+
+              <label class="text-white text-bold">First Name</label>
+              <input class="form-input" type="text" placeholder="First Name" />
+
+              <label class="text-white text-bold">Last Name</label>
+              <input class="form-input" type="text" placeholder="Last Name" />
+
+              <label class="text-white text-bold">Country</label>
+              <input
+                class="form-input"
+                type="text"
+                placeholder="United States"
+              />
+            </div>
+            <div class="col-md-4">
+              <div class="text-white mb-4">2. Shipping Address</div>
+
+              <label class="text-white text-bold">Province</label>
+              <input class="form-input" type="text" placeholder="Texas" />
+
+              <label class="text-white text-bold">City</label>
+              <input class="form-input" type="text" placeholder="City" />
+
+              <label class="text-white text-bold">ZIP Code</label>
+              <input class="form-input" type="text" placeholder="ZIP Code" />
+
+              <label class="text-white text-bold">Address</label>
+              <input class="form-input" type="text" placeholder="Address" />
+            </div>
+            <div class="col-md-4">
+              <div class="text-white mb-4">3. Other Information</div>
+
+              <label class="text-white text-bold">Email</label>
+              <input class="form-input" type="text" placeholder="Type Email" />
+
+              <label class="text-white text-bold">Gmail</label>
+              <input class="form-input" type="text" placeholder="Not needed" />
+
+              <label class="text-white text-bold">Select Profile</label>
+              <input class="form-input" type="text" placeholder="Saleh" />
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-end">
+          <a
+            class="btn btn-white mr-3"
+            data-toggle="modal"
+            data-target="#profileModal"
+            ><i class="fas fa-plus-circle fa-sm"></i> Load </a
+          ><a
+            class="btn btn-white"
+            data-toggle="modal"
+            data-target="#profileModal"
+            ><i class="fas fa-plus-circle fa-sm"></i> Save
+          </a>
         </div>
       </div>
     </div>
