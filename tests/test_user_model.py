@@ -222,9 +222,34 @@ class UserModelTestCase(unittest.TestCase):
     def test_filter_empty_proxies(self):
         u = User(proxies=json.dumps([]))
         u.add_proxies_bulk('USA', '0.0.0.0\r\n0.0.0.0\r\n\r\n\r\n\r\n')
-        print(u.get_proxies())
         self.assertEqual([{
             'name':'USA',
             'proxies':"0.0.0.0\n0.0.0.0",
             'total':2
+        }],u.get_proxies())
+    
+    def test_update_old_proxy(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443",
+            'total':2
+        }]))
+        u.edit_proxies('test','test',"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443")
+        self.assertEqual([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443",
+            'total':3
+        }],u.get_proxies())
+    
+    def test_update_name_old_proxy(self):
+        u = User(proxies=json.dumps([{
+            'name':'test',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443",
+            'total':2
+        }]))
+        u.edit_proxies('test','test2',"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443")
+        self.assertEqual([{
+            'name':'test2',
+            'proxies':"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443",
+            'total':3
         }],u.get_proxies())

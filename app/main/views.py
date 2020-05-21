@@ -63,10 +63,12 @@ def edit_proxies(name):
     # Find Proxy
     found = [found_proxy for found_proxy in proxies if found_proxy['name'] == name]
     if len(found) >= 1:
+
+        
         form = EditProxyForm()
         if form.validate_on_submit():
-            print('submit')
-
+            current_user.edit_proxies(found[0]['name'],form.name.data, form.proxies.data)
+            return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
         form.proxies.data = found[0]['proxies']
         return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
     return redirect(url_for('main.proxies'))

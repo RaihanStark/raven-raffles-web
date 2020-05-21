@@ -124,9 +124,30 @@ class User(UserMixin, db.Model):
             proxy_from_db['total'] += 1
 
             json_data.append(proxy_from_db)
+
             # add to db
             self.proxies = json.dumps(json_data)
             db.session.commit()
+
+    def edit_proxies(self, name, newname, proxies):
+        datajson = json.loads(self.proxies)
+        found = [found_proxy for found_proxy in datajson if found_proxy['name'] == name]
+
+        # get old proxies
+        old_proxies = datajson.pop(datajson.index(found[0]))
+
+        old_proxies['name'] = newname
+
+        filtered_proxies = self.filter_proxy(proxies)
+
+        old_proxies['proxies'] = '\n'.join(filtered_proxies)
+        old_proxies['total'] = len(filtered_proxies)
+
+        datajson.append(old_proxies)
+
+        # add to db
+        self.proxies = json.dumps(datajson)
+        db.session.commit()
 
     def filter_proxy(self, proxies):
         return [newdata.strip() for newdata in proxies.split('\n') if len(newdata) >= 2]
