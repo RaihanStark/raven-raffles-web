@@ -1,0 +1,80 @@
+{% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
+active_page = "Proxies" %} {% include 'partials/_navbar.html' %}
+
+<div class="modal container fade" id="profileModal">
+  <div class="modal-dialog d-flex justify-content-center">
+    <div
+      class="modal-content card-app-gradient mt-3 mt-md-0"
+      style="width: 22rem;"
+    >
+      <div class="card-app-header d-flex justify-content-between">
+        <h1 class="text-bold text-white align-self-center">Import Proxies</h1>
+      </div>
+      <div class="tasks pb-1" style="margin: 0 1.5em;">
+        <div class="mt-3 mb-4 d-flex flex-column">
+          test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card-app-gradient mt-3 mt-md-0">
+        <div class="card-app-header d-flex justify-content-between">
+          <h1 class="text-bold text-white align-self-center">Profiles</h1>
+          <div>
+            <a
+              class="btn btn-white"
+              data-toggle="modal"
+              data-target="#profileModal"
+              ><i class="fas fa-plus-circle fa-sm"></i> Add Profile
+            </a>
+          </div>
+        </div>
+        <div class="pb-1">
+          <table class="table table-borderless table-app" id="proxies-body">
+            <thead>
+              <tr>
+                <th scope="col">PROFILE NAME</th>
+                <th scope="col">NAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">CARD HOLDER</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">JohnDoe_first</th>
+                <td>John Doe</td>
+                <td>johndoe@gmail.com</td>
+                <td>JohnDoe</td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="/proxies/edit_proxies/"
+                    role="button"
+                    ><i class="fas fa-edit fa-md btn-tasks-icon"></i
+                  ></a>
+                  <a
+                    name="delete-proxies"
+                    id=""
+                    class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
+                    href="#"
+                    role="button"
+                    ><i class="fas fa-trash fa-md btn-tasks-icon"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

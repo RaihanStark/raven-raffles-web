@@ -25,6 +25,11 @@ def index():
 def tasks():
     return render_template('main/tasks.html')
 
+@main.route('/profiles')
+@login_required
+def profiles():
+    return render_template('main/profiles.html')
+
 @main.route('/proxies',methods=['GET'])
 @login_required
 def proxies():
@@ -79,6 +84,8 @@ def proxies_delete():
     print(request.form['name'])
     current_user.delete_proxy_by_name(request.form['name'])
     return {'msg':'deleted'},200
+
+
 @main.route('/about')
 def about():
     editable_html_obj = EditableHTML.get_editable_html('about')
