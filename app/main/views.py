@@ -4,7 +4,7 @@ from flask_login import (
     login_required
 )
 
-from app.account.forms import AddBulkProxyForm, AddProxyForm
+from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm
 from app.models import EditableHTML, Product, Task, User
 
 main = Blueprint('main', __name__)
@@ -56,10 +56,12 @@ def proxies_add():
     
     return redirect(url_for('main.proxies'))
 
-@main.route('/proxies/edit_proxies',methods=['GET'])
+@main.route('/proxies/edit_proxies',methods=['GET', 'POST'])
 @login_required
 def proxies_edit():
-    form = AddBulkProxyForm()
+    form = EditProxyForm()
+    if form.validate_on_submit():
+        print('submit')
     return render_template('main/edit_proxies.html',form=form)
 
 @main.route('/proxies/delete',methods=['DELETE'])

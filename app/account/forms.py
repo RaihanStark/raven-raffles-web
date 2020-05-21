@@ -150,3 +150,8 @@ class AddProxyForm(FlaskForm):
     name_group = SelectField('Name Group',coerce=str, validators=[InputRequired()])
     proxies = StringField('Proxy', validators=[InputRequired()])
     submit = SubmitField('Save')
+
+class EditProxyForm(FlaskForm):
+    name = StringField('Name Group', validators=[InputRequired()])
+    proxies = TextAreaField('List of Proxy', validators=[InputRequired()])
+    submit = SubmitField('Update')
