@@ -147,7 +147,7 @@ class UserModelTestCase(unittest.TestCase):
 
     def test_get_valid_proxies(self):
         u = User()
-        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443')
         self.assertEqual([{
             'name':'test',
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
@@ -156,7 +156,7 @@ class UserModelTestCase(unittest.TestCase):
 
     def test_add_bulk_empty_proxies(self):
         u = User()
-        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443')
         self.assertEqual([{
             'name':'test',
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
@@ -169,7 +169,7 @@ class UserModelTestCase(unittest.TestCase):
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
             'total':3
         }]))
-        u.add_proxies_bulk('test2', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        u.add_proxies_bulk('test2', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443')
         self.assertEqual([{
             'name':'test',
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
@@ -186,7 +186,7 @@ class UserModelTestCase(unittest.TestCase):
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
             'total':3
         }]))
-        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443', 3)
+        u.add_proxies_bulk('test', '0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443')
         self.assertEqual([{
             'name':'test',
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n0.0.0.0:443",
@@ -218,3 +218,13 @@ class UserModelTestCase(unittest.TestCase):
         }]))
         u.delete_proxy_by_name('test')
         self.assertEqual([],u.get_proxies())
+    
+    def test_filter_empty_proxies(self):
+        u = User(proxies=json.dumps([]))
+        u.add_proxies_bulk('USA', '0.0.0.0\r\n0.0.0.0\r\n\r\n\r\n\r\n')
+        print(u.get_proxies())
+        self.assertEqual([{
+            'name':'USA',
+            'proxies':"0.0.0.0\n0.0.0.0",
+            'total':2
+        }],u.get_proxies())

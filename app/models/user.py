@@ -75,33 +75,38 @@ class User(UserMixin, db.Model):
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
         
-    def add_proxies_bulk(self, name, proxies, total):
+    def add_proxies_bulk(self, name, proxies):
+        # If proxies exists
         if self.proxies != None:
             json_data = json.loads(self.proxies)
-
-            # If Same Name
+            # If found same name
             proxies_found = [proxy for proxy in json_data if proxy['name'] == name]
         else:
             json_data = []
             proxies_found = []
+        
+        # Filtering the Proxies
+        filtered_proxies = self.filter_proxy(proxies)
 
         if len(proxies_found) >= 1:
             json_data.append({
                 'name':name+"(%s)"%(len(proxies_found)),
-                'proxies':proxies,
-                'total':total
+                'proxies':'\n'.join(filtered_proxies),
+                'total':len(filtered_proxies)
             })
         else:
             json_data.append({
                 'name':name,
-                'proxies':proxies,
-                'total':total
+                'proxies':'\n'.join(filtered_proxies),
+                'total':len(filtered_proxies)
             })
 
+        # add to db
         self.proxies = json.dumps(json_data)
         db.session.commit()
         
     def add_proxies(self, name, proxies):
+        # if proxies is exists
         if self.proxies != None:
             json_data = json.loads(self.proxies)
 
@@ -122,6 +127,9 @@ class User(UserMixin, db.Model):
             # add to db
             self.proxies = json.dumps(json_data)
             db.session.commit()
+
+    def filter_proxy(self, proxies):
+        return [newdata.strip() for newdata in proxies.split('\n') if len(newdata) >= 2]
 
     def delete_proxy_by_name(self, name):
         datajson = json.loads(self.proxies)

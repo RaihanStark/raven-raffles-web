@@ -50,7 +50,7 @@ def proxies_add():
     elif request.form['type-form'] == 'add_bulk':
         form = AddBulkProxyForm()
 
-        current_user.add_proxies_bulk(form.name.data,form.proxies.data,len(form.proxies.data.split('\n')))
+        current_user.add_proxies_bulk(form.name.data,form.proxies.data)
 
         return redirect(url_for('main.proxies'))
     
