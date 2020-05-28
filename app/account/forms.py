@@ -24,6 +24,16 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 
+class AddNewProfilesForm(FlaskForm):
+    profile_name = StringField('Profile Name',validators=[InputRequired()])
+    first_name = StringField('First Name',validators=[InputRequired()])
+    last_name = StringField('Last Name',validators=[InputRequired()])
+    country = SelectField('Countries',coerce=str, validators=[InputRequired()])
+    province = SelectField('Province',coerce=str, validators=[InputRequired()])
+    city = StringField('City Name',validators=[InputRequired()])
+    zip_code = StringField('ZIP Code',validators=[InputRequired()])
+    address = StringField('Address',validators=[InputRequired()])
+
 class RegistrationForm(FlaskForm):
     username = StringField(
         'Username', validators=[InputRequired(),
