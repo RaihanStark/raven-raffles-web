@@ -110,9 +110,11 @@ p {
 }
 
 #app-form {
-  background: url("../images/bg_login_form.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background: url("../images/bg_login_form.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+
+  background-color: #3e149f;
 
   width: 21rem;
   // height: 21rem;
@@ -238,10 +240,12 @@ body.dashboard {
 }
 
 .card-gradient {
-  background-image: url("./../images/bg-checkout.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  // background-image: url("./../images/bg-checkout.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center;
+
+  background-color: #3e149f;
 
   width: auto;
 
@@ -300,10 +304,12 @@ body.dashboard {
 }
 
 .card-app-gradient {
-  background-image: url("./../images/bg-checkout.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  // background-image: url("./../images/bg-checkout.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center;
+
+  background-color: #3e149f;
 
   width: auto;
 
