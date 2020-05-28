@@ -358,6 +358,14 @@ body.dashboard {
 
   .btn-white {
     background-color: white;
+    font-size: 0.9rem;
+    color: #743ae8;
+    font-weight: 700;
+
+    &:hover {
+      color: white;
+      background-color: #743ae8;
+    }
   }
 
   .sidebar {

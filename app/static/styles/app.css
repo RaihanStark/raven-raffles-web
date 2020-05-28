@@ -343,8 +343,16 @@ body.dashboard {
 @media -sass-debug-info{filename{}line{font-family:\00003359}}
 .card-app-gradient .btn-white {
   background-color: white;
+  font-size: 0.9rem;
+  color: #743ae8;
+  font-weight: 700;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003363}}
+@media -sass-debug-info{filename{}line{font-family:\00003365}}
+.card-app-gradient .btn-white:hover {
+  color: white;
+  background-color: #743ae8;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003371}}
 .card-app-gradient .sidebar {
   -webkit-box-shadow: -33px 3px 57px 0px rgba(0, 0, 0, 0.28);
   -moz-box-shadow: -33px 3px 57px 0px rgba(0, 0, 0, 0.28);
@@ -353,114 +361,114 @@ body.dashboard {
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003373}}
+@media -sass-debug-info{filename{}line{font-family:\00003381}}
 .card-app-gradient .sidebar .credit-card-field label {
   display: block;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003376}}
+@media -sass-debug-info{filename{}line{font-family:\00003384}}
 .card-app-gradient .sidebar .credit-card-field input {
   width: 100%;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003380}}
+@media -sass-debug-info{filename{}line{font-family:\00003388}}
 .card-app-gradient .sidebar .credit-card-field input::placeholder {
   text-align: start;
   padding-left: 1em;
 }
 
-@media -sass-debug-info{filename{}line{font-family:\00003388}}
+@media -sass-debug-info{filename{}line{font-family:\00003396}}
 .releases {
   width: auto;
   overflow-x: auto;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003392}}
+@media -sass-debug-info{filename{}line{font-family:\00003400}}
 .releases .shoes img {
   width: 200px;
   height: 140px;
   object-fit: cover;
   border-radius: 0.8em;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003399}}
+@media -sass-debug-info{filename{}line{font-family:\00003407}}
 .releases .shoes a {
   background-color: #310e7b;
   width: 9em;
   cursor: pointer;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003406}}
+@media -sass-debug-info{filename{}line{font-family:\00003414}}
 .releases .shoes.selected img {
   border: 3px solid #d6344a;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003410}}
+@media -sass-debug-info{filename{}line{font-family:\00003418}}
 .releases .shoes.selected a {
   border: 2px solid #d6344a;
 }
 
-@media -sass-debug-info{filename{}line{font-family:\00003417}}
+@media -sass-debug-info{filename{}line{font-family:\00003425}}
 .action {
   width: 100%;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003420}}
+@media -sass-debug-info{filename{}line{font-family:\00003428}}
 .action label {
   font-size: 0.8em;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003423}}
+@media -sass-debug-info{filename{}line{font-family:\00003431}}
 .action input {
   width: 100%;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003427}}
+@media -sass-debug-info{filename{}line{font-family:\00003435}}
 .action input::placeholder {
   font-size: 0.8em;
   text-align: center;
 }
 
-@media -sass-debug-info{filename{}line{font-family:\00003434}}
+@media -sass-debug-info{filename{}line{font-family:\00003442}}
 .table-app th,
 .table-app tr {
   color: white;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003439}}
+@media -sass-debug-info{filename{}line{font-family:\00003447}}
 .table-app tr {
   margin: 1em 0;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003443}}
+@media -sass-debug-info{filename{}line{font-family:\00003451}}
 .table-app th:first-of-type {
   text-align: center;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003448}}
+@media -sass-debug-info{filename{}line{font-family:\00003456}}
 .table-app tbody tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.1);
 }
-@media -sass-debug-info{filename{}line{font-family:\00003451}}
+@media -sass-debug-info{filename{}line{font-family:\00003459}}
 .table-app tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
-@media -sass-debug-info{filename{}line{font-family:\00003456}}
+@media -sass-debug-info{filename{}line{font-family:\00003464}}
 .table-app tbody .btn-tasks-icon {
   color: #743AE8;
 }
 
-@media -sass-debug-info{filename{}line{font-family:\00003462}}
+@media -sass-debug-info{filename{}line{font-family:\00003470}}
 .swal2-popup {
   background: #321a66 !important;
 }
-@media -sass-debug-info{filename{}line{font-family:\00003465}}
+@media -sass-debug-info{filename{}line{font-family:\00003473}}
 .swal2-popup .swal2-title,
 .swal2-popup .swal2-content {
   color: white;
 }
 
 @media (min-width: 576px) {
-@media -sass-debug-info{filename{}line{font-family:\00003472}}
+@media -sass-debug-info{filename{}line{font-family:\00003480}}
   .logo {
     width: 350px;
   }
 
-@media -sass-debug-info{filename{}line{font-family:\00003475}}
+@media -sass-debug-info{filename{}line{font-family:\00003483}}
   .modal-dialog {
     max-width: unset;
     margin: unset;
   }
 
-@media -sass-debug-info{filename{}line{font-family:\00003480}}
+@media -sass-debug-info{filename{}line{font-family:\00003488}}
   .modal {
     top: 0 !important;
     left: 0;
@@ -468,7 +476,7 @@ body.dashboard {
   }
 }
 @media (min-width: 767.98px) {
-@media -sass-debug-info{filename{}line{font-family:\00003489}}
+@media -sass-debug-info{filename{}line{font-family:\00003497}}
   .modal {
     position: fixed;
     top: 25% !important;
@@ -480,7 +488,7 @@ body.dashboard {
   }
 }
 @media (max-width: 991.98px) {
-@media -sass-debug-info{filename{}line{font-family:\00003502}}
+@media -sass-debug-info{filename{}line{font-family:\00003510}}
   .nav-item {
     margin-top: unset;
     padding-top: unset;
