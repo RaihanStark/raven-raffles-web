@@ -5,7 +5,7 @@ from flask_login import (
 )
 
 from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm, AddNewProfilesForm
-from app.models import EditableHTML, Product, Task, User
+from app.models import EditableHTML, Product, Task, User, Profile
 
 main = Blueprint('main', __name__)
 
@@ -31,6 +31,14 @@ def profiles():
 
     form = AddNewProfilesForm()
     return render_template('main/profiles.html', form=form)
+
+@main.route('/profiles/add',methods=['POST'])
+@login_required
+def add_profiles():
+    Profile.create(name="raihan", owner=current_user)
+    # form = AddNewProfilesForm()
+    return redirect(url_for('main.profiles'))
+
 
 @main.route('/proxies',methods=['GET'])
 @login_required

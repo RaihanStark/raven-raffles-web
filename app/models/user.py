@@ -400,6 +400,7 @@ class Product(db.Model):
     
     def __repr__(self):
         return '<Product %s>' % self.name
+
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
@@ -413,6 +414,16 @@ class Profile(db.Model):
     address = db.Column(db.String())
 
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Profile %s>' % self.name
+
+    @classmethod
+    def create(cls, **kw):
+        obj = cls(**kw)
+        db.session.add(obj)
+        db.session.commit()
+
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):
         return False
