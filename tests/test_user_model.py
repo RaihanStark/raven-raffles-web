@@ -3,7 +3,7 @@ import unittest
 import json
 
 from app import create_app, db
-from app.models import AnonymousUser, Permission, Role, User
+from app.models import AnonymousUser, Permission, Role, User, Profile
 
 
 class UserModelTestCase(unittest.TestCase):
@@ -253,3 +253,24 @@ class UserModelTestCase(unittest.TestCase):
             'proxies':"0.0.0.0:443\n0.0.0.0:443\n1.1.1.1:443",
             'total':3
         }],u.get_proxies())
+
+    def test_create_new_profile_success(self):
+        u = User()
+        Profile.create(name="test1", owner=u)
+
+        self.assertEqual("test1",u.profiles[0].name)
+
+    def test_delete_profile(self):
+        u = User()
+        Profile.create(name="test1", owner=u)
+
+        u.delete_profile_by_id(1)
+        self.assertEqual(
+            0,len(u.profiles)
+        )
+    
+    def test_delete_uncreated_profile(self):
+        u = User()
+
+        self.assertFalse(u.delete_profile_by_id(99))
+        

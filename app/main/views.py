@@ -28,14 +28,16 @@ def tasks():
 @main.route('/profiles')
 @login_required
 def profiles():
-
+    print(current_user.profiles)
     form = AddNewProfilesForm()
     return render_template('main/profiles.html', form=form)
 
 @main.route('/profiles/add',methods=['POST'])
 @login_required
 def add_profiles():
-    Profile.create(name="raihan", owner=current_user)
+    # Profile.create(name="raihan", owner=current_user)
+
+    # print(current_user.profiles)
     # form = AddNewProfilesForm()
     return redirect(url_for('main.profiles'))
 

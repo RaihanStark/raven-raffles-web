@@ -161,6 +161,14 @@ class User(UserMixin, db.Model):
         self.proxies = json.dumps(new_data)
         db.session.commit()
 
+    def delete_profile_by_id(self, id):
+        q = Profile.query.filter_by(id=id).first()
+        if q != None:
+            db.session.delete(q)
+            db.session.commit()
+            return True
+        return False
+
     def get_proxies(self):
         if self.proxies == None:
             return []
@@ -423,6 +431,7 @@ class Profile(db.Model):
         obj = cls(**kw)
         db.session.add(obj)
         db.session.commit()
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):
