@@ -29,7 +29,7 @@ def tasks():
 @login_required
 def profiles():
     form = AddNewProfilesForm()
-    return render_template('main/profiles.html', form=form)
+    return render_template('main/profiles.html', form=form, profiles=current_user.profiles)
 
 @main.route('/profiles/add',methods=['POST'])
 @login_required
@@ -45,6 +45,7 @@ def add_profiles():
         city = form.city.data,
         zipcode = form.zip_code.data,
         address = form.address.data,
+        email = form.email.data,
         owner=current_user
     )
 
@@ -52,6 +53,11 @@ def add_profiles():
     # form = AddNewProfilesForm()
     return redirect(url_for('main.profiles'))
 
+@main.route('/profiles/delete',methods=['DELETE'])
+@login_required
+def profile_delete():
+    current_user.delete_profile_by_id(request.form['id'])
+    return {'msg':'deleted'},200
 
 @main.route('/proxies',methods=['GET'])
 @login_required
@@ -104,7 +110,6 @@ def edit_proxies(name):
 @main.route('/proxies/delete',methods=['DELETE'])
 @login_required
 def proxies_delete():
-    print(request.form['name'])
     current_user.delete_proxy_by_name(request.form['name'])
     return {'msg':'deleted'},200
 

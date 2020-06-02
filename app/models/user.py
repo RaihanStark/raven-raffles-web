@@ -414,13 +414,15 @@ class Profile(db.Model):
     name = db.Column(db.String())
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
-    
+
     country = db.Column(db.String(15))
     province = db.Column(db.String(20))
     city = db.Column(db.String(20))
     zipcode = db.Column(db.String(10))
     address = db.Column(db.String())
 
+    email = db.Column(db.String())
+    
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

@@ -33,6 +33,10 @@ class AddNewProfilesForm(FlaskForm):
     city = StringField('City Name',validators=[InputRequired()])
     zip_code = StringField('ZIP Code',validators=[InputRequired()])
     address = StringField('Address',validators=[InputRequired()])
+    email = EmailField(
+        'Email', validators=[InputRequired(),
+                             Length(1, 64),
+                             Email()])
     submit = SubmitField('Save')
 
 class RegistrationForm(FlaskForm):

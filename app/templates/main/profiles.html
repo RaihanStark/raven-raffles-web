@@ -85,12 +85,11 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
                 </div>
 
                 <label class="text-white text-bold">Email</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  placeholder="disabled"
-                  disabled
-                />
+                {{form.email(class_="form-input
+                app-input-start",placeholder="Email")}} {% for error in
+                form.email.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
                 <label class="text-white text-bold">Gmail</label>
                 <input
@@ -144,7 +143,7 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
           </div>
         </div>
         <div class="pb-1">
-          <table class="table table-borderless table-app" id="proxies-body">
+          <table class="table table-borderless table-app" id="profiles-body">
             <thead>
               <tr>
                 <th scope="col">PROFILE NAME</th>
@@ -155,11 +154,12 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">JohnDoe_first</th>
-                <td>John Doe</td>
-                <td>johndoe@gmail.com</td>
-                <td>JohnDoe</td>
+              {% for profile in profiles %}
+              <tr data-id="{{profile.id}}">
+                <th scope="row">{{ profile.name }}</th>
+                <td>{{ profile.first_name }} {{ profile.Last_name }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.name }}</td>
                 <td>
                   <a
                     name=""
@@ -170,7 +170,7 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
                     ><i class="fas fa-edit fa-md btn-tasks-icon"></i
                   ></a>
                   <a
-                    name="delete-proxies"
+                    name="delete-profile"
                     id=""
                     class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0"
                     href="#"
@@ -179,6 +179,7 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
                   ></a>
                 </td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
