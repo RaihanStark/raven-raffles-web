@@ -40,11 +40,11 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
                 {% endfor %}
 
                 <label class="text-white text-bold">Country</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  placeholder="United States"
-                />
+                {{form.country(class_="form-input
+                app-input-start",placeholder="Country")}} {% for error in
+                form.country.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <div class="col-md-4">
                 <div class="text-white mt-4 mt-md-0 mb-4">
@@ -52,7 +52,11 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
                 </div>
 
                 <label class="text-white text-bold">Province</label>
-                <input class="form-input" type="text" placeholder="Texas" />
+                {{form.province(class_="form-input
+                app-input-start",placeholder="Province")}} {% for error in
+                form.province.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
                 <label class="text-white text-bold">City</label>
                 {{form.city(class_="form-input
