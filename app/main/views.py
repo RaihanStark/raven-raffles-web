@@ -4,7 +4,7 @@ from flask_login import (
     login_required
 )
 
-from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm
+from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm, AddNewProfilesForm
 from app.models import EditableHTML, Product, Task, User
 
 main = Blueprint('main', __name__)
@@ -28,7 +28,9 @@ def tasks():
 @main.route('/profiles')
 @login_required
 def profiles():
-    return render_template('main/profiles.html')
+
+    form = AddNewProfilesForm()
+    return render_template('main/profiles.html', form=form)
 
 @main.route('/proxies',methods=['GET'])
 @login_required

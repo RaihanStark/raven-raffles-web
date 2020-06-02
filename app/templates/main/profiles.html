@@ -11,95 +11,114 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
         <h1 class="text-bold text-white align-self-center">Profile</h1>
       </div>
       <div class="tasks pb-1 mt-3 mb-4" style="margin: 0 2em;">
-        <div class="d-flex flex-column">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="text-white mb-4">1. General Info</div>
+        <form action="/profiles/add_profiles" method="post">
+          {{ form.hidden_tag() }}
+          <div class="d-flex flex-column">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="text-white mb-4">1. General Info</div>
 
-              <label class="text-white text-bold">Profile Name</label>
-              <input
-                class="form-input"
-                type="text"
-                placeholder="Profile Name"
-              />
+                <label class="text-white text-bold">Profile Name</label>
+                {{form.profile_name(class_="form-input
+                app-input-start",placeholder="Profile name")}} {% for error in
+                form.profile_name.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
-              <label class="text-white text-bold">First Name</label>
-              <input class="form-input" type="text" placeholder="First Name" />
+                <label class="text-white text-bold">First Name</label>
+                {{form.first_name(class_="form-input
+                app-input-start",placeholder="First name")}} {% for error in
+                form.first_name.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
-              <label class="text-white text-bold">Last Name</label>
-              <input class="form-input" type="text" placeholder="Last Name" />
+                <label class="text-white text-bold">Last Name</label>
+                {{form.last_name(class_="form-input
+                app-input-start",placeholder="Last name")}} {% for error in
+                form.last_name.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
-              <label class="text-white text-bold">Country</label>
-              <input
-                class="form-input"
-                type="text"
-                placeholder="United States"
-              />
-            </div>
-            <div class="col-md-4">
-              <div class="text-white mt-4 mt-md-0 mb-4">
-                2. Shipping Address
+                <label class="text-white text-bold">Country</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  placeholder="United States"
+                />
               </div>
+              <div class="col-md-4">
+                <div class="text-white mt-4 mt-md-0 mb-4">
+                  2. Shipping Address
+                </div>
 
-              <label class="text-white text-bold">Province</label>
-              <input class="form-input" type="text" placeholder="Texas" />
+                <label class="text-white text-bold">Province</label>
+                <input class="form-input" type="text" placeholder="Texas" />
 
-              <label class="text-white text-bold">City</label>
-              <input class="form-input" type="text" placeholder="City" />
+                <label class="text-white text-bold">City</label>
+                {{form.city(class_="form-input
+                app-input-start",placeholder="City")}} {% for error in
+                form.city.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
-              <label class="text-white text-bold">ZIP Code</label>
-              <input class="form-input" type="text" placeholder="ZIP Code" />
+                <label class="text-white text-bold">ZIP Code</label>
+                {{form.zip_code(class_="form-input
+                app-input-start",placeholder="Zip Code")}} {% for error in
+                form.zip_code.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
 
-              <label class="text-white text-bold">Address</label>
-              <input class="form-input" type="text" placeholder="Address" />
-            </div>
-            <div class="col-md-4 mb-4">
-              <div class="text-white mt-4 mt-md-0 mb-4">
-                3. Other Information
+                <label class="text-white text-bold">Address</label>
+                {{form.address(class_="form-input
+                app-input-start",placeholder="Address")}} {% for error in
+                form.address.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
               </div>
+              <div class="col-md-4 mb-4">
+                <div class="text-white mt-4 mt-md-0 mb-4">
+                  3. Other Information
+                </div>
 
-              <label class="text-white text-bold">Email</label>
-              <input
-                class="form-input"
-                type="text"
-                placeholder="disabled"
-                disabled
-              />
+                <label class="text-white text-bold">Email</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  placeholder="disabled"
+                  disabled
+                />
 
-              <label class="text-white text-bold">Gmail</label>
-              <input
-                class="form-input"
-                type="text"
-                placeholder="disabled"
-                disabled
-              />
+                <label class="text-white text-bold">Gmail</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  placeholder="disabled"
+                  disabled
+                />
 
-              <label class="text-white text-bold">Select Profile</label>
-              <input
-                class="form-input"
-                type="text"
-                placeholder="disabled"
-                disabled
-              />
+                <label class="text-white text-bold">Select Profile</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  placeholder="disabled"
+                  disabled
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          class="row d-flex justify-content-end mt-3 m-0"
-          style="width: 100%;"
-        >
-          <a
-            class="btn btn-white mr-3"
-            data-toggle="modal"
-            data-target="#profileModal"
-            ><i class="fas fa-upload fa-sm"></i> Load </a
-          ><a
-            class="btn btn-white"
-            data-toggle="modal"
-            data-target="#profileModal"
-            ><i class="fas fa-save fa-sm"></i> Save
-          </a>
-        </div>
+          <div
+            class="row d-flex justify-content-end mt-3 m-0"
+            style="width: 100%;"
+          >
+            <a
+              class="btn btn-white mr-3"
+              data-toggle="modal"
+              data-target="#profileModal"
+              ><i class="fas fa-upload fa-sm"></i> Load
+            </a>
+            {{form.submit(class_="btn btn-white",placeholder="Save")}}
+          </div>
+        </form>
       </div>
     </div>
   </div>
