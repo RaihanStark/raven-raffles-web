@@ -59,6 +59,30 @@ def profile_delete():
     current_user.delete_profile_by_id(request.form['id'])
     return {'msg':'deleted'},200
 
+@main.route('/profiles/edit_profiles/<name>', methods=['GET', 'POST'])
+@login_required
+def edit_profiles(name):
+    # proxies = current_user.get_proxies()
+    # # Find Proxy
+    # found = [found_proxy for found_proxy in proxies if found_proxy['name'] == name]
+    # if len(found) >= 1:
+
+        
+    #     form = EditProxyForm()
+    #     if form.validate_on_submit():
+    #         current_user.edit_proxies(found[0]['name'],form.name.data, form.proxies.data)
+    #         return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
+    #     form.proxies.data = found[0]['proxies']
+    #     return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
+    # return redirect(url_for('main.proxies'))
+
+    profiles = current_user.profiles
+    found = [found_profile for found_profile in profiles if found_profile.id == int(name)]
+    if len(found) >= 1:
+        form = AddNewProfilesForm()
+        return render_template('main/edit_profiles.html', form=form, current_profile=found[0])
+    return redirect(url_for('main.profiles'))
+
 @main.route('/proxies',methods=['GET'])
 @login_required
 def proxies():

@@ -1,0 +1,135 @@
+{% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
+active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div
+    class="modal-content card-app-gradient mt-3 mt-md-0"
+    style="width: 50em;"
+  >
+    <div class="card-app-header d-flex justify-content-between">
+      <h1 class="text-bold text-white align-self-center">Profile</h1>
+    </div>
+    <div class="tasks pb-1 mt-3 mb-4" style="margin: 0 2em;">
+      <form action="/profiles/add" method="post">
+        {{ form.hidden_tag() }}
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="text-white mb-4">1. General Info</div>
+
+              <label class="text-white text-bold">Profile Name</label>
+              {{form.profile_name(class_="form-input
+              app-input-start",placeholder="Profile name",
+              value=current_profile.name)}} {% for error in
+              form.profile_name.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">First Name</label>
+              {{form.first_name(class_="form-input
+              app-input-start",placeholder="First name",
+              value=current_profile.first_name)}} {% for error in
+              form.first_name.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">Last Name</label>
+              {{form.last_name(class_="form-input
+              app-input-start",placeholder="Last name",
+              value=current_profile.last_name)}} {% for error in
+              form.last_name.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">Country</label>
+              {{form.country(class_="form-input
+              app-input-start",placeholder="Country",
+              value=current_profile.country)}} {% for error in
+              form.country.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div class="col-md-4">
+              <div class="text-white mt-4 mt-md-0 mb-4">
+                2. Shipping Address
+              </div>
+
+              <label class="text-white text-bold">Province</label>
+              {{form.province(class_="form-input
+              app-input-start",placeholder="Province",
+              value=current_profile.province)}} {% for error in
+              form.province.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">City</label>
+              {{form.city(class_="form-input
+              app-input-start",placeholder="City", value=current_profile.city)}}
+              {% for error in form.city.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">ZIP Code</label>
+              {{form.zip_code(class_="form-input
+              app-input-start",placeholder="Zip Code",
+              value=current_profile.zipcode)}} {% for error in
+              form.zip_code.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">Address</label>
+              {{form.address(class_="form-input
+              app-input-start",placeholder="Address",
+              value=current_profile.address)}} {% for error in
+              form.address.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="text-white mt-4 mt-md-0 mb-4">
+                3. Other Information
+              </div>
+
+              <label class="text-white text-bold">Email</label>
+              {{form.email(class_="form-input
+              app-input-start",placeholder="Email",
+              value=current_profile.name)}} {% for error in form.email.errors %}
+              <span style="color: red;" class="mb-2">[{{ error }}]</span>
+              {% endfor %}
+
+              <label class="text-white text-bold">Gmail</label>
+              <input
+                class="form-input"
+                type="text"
+                placeholder="disabled"
+                disabled
+              />
+
+              <label class="text-white text-bold">Select Profile</label>
+              <input
+                class="form-input"
+                type="text"
+                placeholder="disabled"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="row d-flex justify-content-end mt-3 m-0"
+          style="width: 100%;"
+        >
+          <a
+            class="btn btn-white mr-3"
+            data-toggle="modal"
+            data-target="#profileModal"
+            ><i class="fas fa-upload fa-sm"></i> Load
+          </a>
+          {{form.submit(class_="btn btn-white",placeholder="Save")}}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
