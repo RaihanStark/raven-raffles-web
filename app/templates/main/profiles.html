@@ -8,9 +8,9 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
       style="width: 50em;"
     >
       <div class="card-app-header d-flex justify-content-between">
-        <h1 class="text-bold text-white align-self-center">Import Proxies</h1>
+        <h1 class="text-bold text-white align-self-center">Profile</h1>
       </div>
-      <div class="tasks pb-1 mt-3 mb-4" style="margin: 0 1.5em;">
+      <div class="tasks pb-1 mt-3 mb-4" style="margin: 0 2em;">
         <div class="d-flex flex-column">
           <div class="row">
             <div class="col-md-4">
@@ -37,7 +37,9 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
               />
             </div>
             <div class="col-md-4">
-              <div class="text-white mb-4">2. Shipping Address</div>
+              <div class="text-white mt-4 mt-md-0 mb-4">
+                2. Shipping Address
+              </div>
 
               <label class="text-white text-bold">Province</label>
               <input class="form-input" type="text" placeholder="Texas" />
@@ -51,21 +53,41 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
               <label class="text-white text-bold">Address</label>
               <input class="form-input" type="text" placeholder="Address" />
             </div>
-            <div class="col-md-4">
-              <div class="text-white mb-4">3. Other Information</div>
+            <div class="col-md-4 mb-4">
+              <div class="text-white mt-4 mt-md-0 mb-4">
+                3. Other Information
+              </div>
 
               <label class="text-white text-bold">Email</label>
-              <input class="form-input" type="text" placeholder="Type Email" />
+              <input
+                class="form-input"
+                type="text"
+                placeholder="disabled"
+                disabled
+              />
 
               <label class="text-white text-bold">Gmail</label>
-              <input class="form-input" type="text" placeholder="Not needed" />
+              <input
+                class="form-input"
+                type="text"
+                placeholder="disabled"
+                disabled
+              />
 
               <label class="text-white text-bold">Select Profile</label>
-              <input class="form-input" type="text" placeholder="Saleh" />
+              <input
+                class="form-input"
+                type="text"
+                placeholder="disabled"
+                disabled
+              />
             </div>
           </div>
         </div>
-        <div class="row d-flex justify-content-end" style="width: 100%;">
+        <div
+          class="row d-flex justify-content-end mt-3 m-0"
+          style="width: 100%;"
+        >
           <a
             class="btn btn-white mr-3"
             data-toggle="modal"
