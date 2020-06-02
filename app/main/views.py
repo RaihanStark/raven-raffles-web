@@ -28,14 +28,25 @@ def tasks():
 @main.route('/profiles')
 @login_required
 def profiles():
-    print(current_user.profiles)
     form = AddNewProfilesForm()
     return render_template('main/profiles.html', form=form)
 
 @main.route('/profiles/add',methods=['POST'])
 @login_required
 def add_profiles():
-    # Profile.create(name="raihan", owner=current_user)
+    form = AddNewProfilesForm()
+
+    Profile.create(
+        name = form.profile_name.data,
+        first_name = form.first_name.data,
+        last_name = form.last_name.data,
+        country = form.country.data,
+        province = form.province.data,
+        city = form.city.data,
+        zipcode = form.zip_code.data,
+        address = form.address.data,
+        owner=current_user
+    )
 
     # print(current_user.profiles)
     # form = AddNewProfilesForm()
