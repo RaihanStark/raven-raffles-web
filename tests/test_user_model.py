@@ -274,3 +274,8 @@ class UserModelTestCase(unittest.TestCase):
 
         self.assertFalse(u.delete_profile_by_id(99))
         
+    def test_change_profile(self):
+        u = User()
+        Profile.create(name="test1", owner=u)
+        u.profiles[0].change_data(name='test2')
+        self.assertEqual("test2",u.profiles[0].name)

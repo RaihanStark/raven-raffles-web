@@ -434,6 +434,9 @@ class Profile(db.Model):
         db.session.add(obj)
         db.session.commit()
 
+    def change_data(self, **kwargs):
+        for key, value in kwargs.items(): 
+            exec('self.%s = "%s" ' %(key,value))
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):

@@ -80,6 +80,18 @@ def edit_profiles(name):
     found = [found_profile for found_profile in profiles if found_profile.id == int(name)]
     if len(found) >= 1:
         form = AddNewProfilesForm()
+        if form.validate_on_submit():
+            found[0].change_data(
+                name = form.profile_name.data,
+                first_name = form.first_name.data,
+                last_name = form.last_name.data,
+                country = form.country.data,
+                province = form.province.data,
+                city = form.city.data,
+                zipcode = form.zip_code.data,
+                address = form.address.data,
+                email = form.email.data
+            )
         return render_template('main/edit_profiles.html', form=form, current_profile=found[0])
     return redirect(url_for('main.profiles'))
 

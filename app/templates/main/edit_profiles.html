@@ -10,7 +10,10 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
       <h1 class="text-bold text-white align-self-center">Profile</h1>
     </div>
     <div class="tasks pb-1 mt-3 mb-4" style="margin: 0 2em;">
-      <form action="/profiles/add" method="post">
+      <form
+        action="/profiles/edit_profiles/{{current_profile.id}}"
+        method="post"
+      >
         {{ form.hidden_tag() }}
         <div class="d-flex flex-column">
           <div class="row">
@@ -93,7 +96,8 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
               <label class="text-white text-bold">Email</label>
               {{form.email(class_="form-input
               app-input-start",placeholder="Email",
-              value=current_profile.name)}} {% for error in form.email.errors %}
+              value=current_profile.email)}} {% for error in form.email.errors
+              %}
               <span style="color: red;" class="mb-2">[{{ error }}]</span>
               {% endfor %}
 
@@ -119,13 +123,7 @@ active_page = "Profiles" %} {% include 'partials/_navbar.html' %}
           class="row d-flex justify-content-end mt-3 m-0"
           style="width: 100%;"
         >
-          <a
-            class="btn btn-white mr-3"
-            data-toggle="modal"
-            data-target="#profileModal"
-            ><i class="fas fa-upload fa-sm"></i> Load
-          </a>
-          {{form.submit(class_="btn btn-white",placeholder="Save")}}
+          {{form.submit(class_="btn btn-white",value="Update")}}
         </div>
       </form>
     </div>
