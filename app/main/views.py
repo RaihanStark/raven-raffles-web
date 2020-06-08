@@ -25,7 +25,7 @@ def index():
 def tasks():
     products = Product.query.all()
     tasks = Task.query.filter_by(user_id=current_user.id).all()
-    return render_template('main/tasks.html',products=products, tasks=tasks,)
+    return render_template('main/tasks.html',products=products, tasks=tasks)
 
 @main.route('/profiles')
 @login_required

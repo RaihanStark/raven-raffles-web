@@ -1,9 +1,19 @@
 $(document).ready(function () {
+  // Input Proxies Line Count
+
+  $("#input-proxies").on("input", function () {
+    line_count = $(this).val().split("\n").length;
+    $("#total-proxies-loaded").text(`${line_count} Proxy`);
+  });
+
+  // BUTTON SHOES
   $(".btn-shoes").on("click", function () {
     $(".shoes").each(function (index) {
       $(this).removeClass("selected");
     });
     $(this).parent().parent().toggleClass("selected");
+
+    console.log($(this).parent().parent().attr("data-id"));
   });
 
   //Add task
@@ -115,11 +125,5 @@ $(document).ready(function () {
         $(this).parent().parent().remove();
       }
     });
-  });
-  // Input Proxies Line Count
-
-  $("#input-proxies").on("input", function () {
-    line_count = $(this).val().split("\n").length;
-    $("#total-proxies-loaded").text(`${line_count} Proxy`);
   });
 });
