@@ -86,4 +86,7 @@ def create_app(config):
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
+    from .raffles import raffles as raffles_blueprint
+    app.register_blueprint(raffles_blueprint, url_prefix='/raffles')
+
     return app
