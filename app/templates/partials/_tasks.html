@@ -63,7 +63,7 @@
                   </div>
                   <div class="pr-4">
                     <label class="text-white text-bold">Amount of Entries</label>
-                    {{form.entries(class_="form-input app-input-start", max="10", placeholder="Amount of Entries")}}
+                    {{form.entries(class_="form-input app-input-start", max="10", placeholder="Amount of Entries", type="number")}}
                     {% for error in form.entries.errors %}
                     <span style="color: red;" class="mb-2">[{{ error }}]</span>
                     {% endfor %}

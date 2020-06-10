@@ -1,9 +1,32 @@
 $(document).ready(function () {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   // Input Proxies Line Count
 
   $("#input-proxies").on("input", function () {
     line_count = $(this).val().split("\n").length;
     $("#total-proxies-loaded").text(`${line_count} Proxy`);
+  });
+
+  // Entries max 10
+  $("#entries").on("change", function () {
+    if (parseInt($(this).val()) > 10) {
+      $(this).val(10);
+      Toast.fire({
+        icon: "error",
+        title: "Maximum 10 entries per task!",
+      });
+    }
   });
 
   // BUTTON SHOES
