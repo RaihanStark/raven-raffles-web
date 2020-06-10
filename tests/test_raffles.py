@@ -33,7 +33,8 @@ class RafflesTestCase(unittest.TestCase):
         
     def test_get_variant_product(self):
         p = Product(name="Adidas - Yeezy Boost 700")
-        print(p.get_variant())
+        self.assertEqual(p.get_variant(), "Yeezy Boost 700")
+        
 
     
 
