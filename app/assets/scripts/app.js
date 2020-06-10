@@ -173,7 +173,3 @@ $(document).ready(function () {
     blocks: [4],
   });
 });
-
-jQuery(window).load(function () {
-  alert("page is loaded");
-});
