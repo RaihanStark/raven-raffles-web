@@ -35,7 +35,7 @@
                 <div class="pr-4">
                   <label class="text-white text-bold">Raffle ID</label>
                   <input
-                    class="form-input"
+                    class="form-input app-input-start"
                     id="raffle-id"
                     type="text"
                     placeholder="Raffle ID"
@@ -46,7 +46,7 @@
                   <label class="text-white text-bold">Variant</label>
                   <input
                     id="raffle-variant"
-                    class="form-input"
+                    class="form-input app-input-start"
                     type="text"
                     placeholder="Variant"
                     disabled
@@ -56,12 +56,13 @@
               <div class="d-flex flex-column">
                 <div class="pr-4">
                   <label class="text-white text-bold">Size</label>
-                  <select class="form-input" id="size"> </select>
+                  <select class="form-input app-input-start" id="size">
+                  </select>
                 </div>
                 <div class="pr-4">
                   <label class="text-white text-bold">Amount of Entries</label>
                   <input
-                    class="form-input"
+                    class="form-input app-input-start"
                     type="text"
                     placeholder="Amount of Entries"
                   />
@@ -70,7 +71,7 @@
               <div class="d-flex flex-column">
                 <div class="pr-4">
                   <label class="text-white text-bold">Profiles</label>
-                  <select class="form-input" id="profiles">
+                  <select class="form-input app-input-start" id="profiles">
                     <option value="3">John Doe</option>
                     <option value="4">John Doe</option>
                     <option value="5">John Doe</option>
@@ -79,7 +80,7 @@
                 </div>
                 <div class="pr-4">
                   <label class="text-white text-bold">Account Group</label>
-                  <select class="form-input" id="profiles">
+                  <select class="form-input app-input-start" id="profiles">
                     <option value="3">John Doe</option>
                     <option value="4">John Doe</option>
                     <option value="5">John Doe</option>
@@ -97,15 +98,30 @@
             <label class="text-white text-bold" for="number"
               >Credit Card Number</label
             >
-            <input class="form-input" type="text" placeholder="Number" />
+            <input
+              class="form-input app-input-start"
+              type="text"
+              id="cc-number"
+              placeholder="Credit Card Number"
+            />
             <div class="row no-gutters mt-1 mb-2">
               <div class="col-md-6 pr-0 pr-md-2">
                 <label class="text-white text-bold" for="exp">Exp Date</label>
-                <input class="form-input" type="text" placeholder="MM/YY" />
+                <input
+                  class="form-input app-input-start"
+                  type="text"
+                  placeholder="MM/YY"
+                  id="cc-exp"
+                />
               </div>
               <div class="col-md-6 pr-0 pl-md-2">
                 <label class="text-white text-bold" for="cvv">CVV</label>
-                <input class="form-input" type="text" placeholder="CVV" />
+                <input
+                  class="form-input app-input-start"
+                  type="text"
+                  placeholder="CVV"
+                  id="cc-cvv"
+                />
               </div>
             </div>
 
