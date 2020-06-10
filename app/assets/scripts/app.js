@@ -154,12 +154,10 @@ $(document).ready(function () {
   new Cleave("#cc-number", {
     creditCard: true,
   });
-
   new Cleave("#cc-exp", {
     delimiters: ["/"],
     blocks: [2, 2],
   });
-
   new Cleave("#cc-cvv", {
     blocks: [4],
   });

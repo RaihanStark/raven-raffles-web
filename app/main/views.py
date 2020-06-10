@@ -5,6 +5,7 @@ from flask_login import (
 )
 
 from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm, AddNewProfilesForm
+from app.main.forms import CreateTaskForm
 from app.models import EditableHTML, Product, Task, User, Profile
 
 main = Blueprint('main', __name__)
@@ -16,7 +17,9 @@ def index():
     products = Product.query.all()
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     list_of_raffle = len(products)
-    return render_template('main/index.html',products=products, tasks=tasks, list_of_raffle=list_of_raffle)
+
+    form = CreateTaskForm()
+    return render_template('main/index.html',products=products, tasks=tasks, list_of_raffle=list_of_raffle, form=form)
 
 
 
@@ -25,7 +28,9 @@ def index():
 def tasks():
     products = Product.query.all()
     tasks = Task.query.filter_by(user_id=current_user.id).all()
-    return render_template('main/tasks.html',products=products, tasks=tasks)
+
+    form = CreateTaskForm()
+    return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
 
 @main.route('/profiles')
 @login_required
