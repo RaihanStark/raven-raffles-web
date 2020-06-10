@@ -39,14 +39,12 @@ def tasks_add():
     form = CreateTaskForm()
 
     product = Product.query.filter_by(id=form.raffle_id.data).first()
-    profile = Profile.query.filter_by(id=1).first()
-    print(form.profiles.data)
     Task.create(
         selected_size= form.size.data,
         entries = form.entries.data,
         credit_card = format_cc_to_json(form.cc_number.data,form.cc_exp.data,form.cc_cvv.data),
         product = product,
-        profile = profile,
+        profile = form.profiles.data,
         by = current_user,
     )
     flash('Task Added')
