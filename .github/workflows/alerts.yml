@@ -11,4 +11,9 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: The ${{ commit.sha }} ${{ commit.ref }} ${{ repo }} event triggered first step.
+          message: |
+          The ${{ github.event_name }} event triggered second step.
+          show the github varable ref: ${{ github.ref }}
+          show the github varable commit: ${{ github.sha }}
+          show the github varable ref: {{ commit.ref }}
+          show the github varable commit: {{ commit.sha }}
