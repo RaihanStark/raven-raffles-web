@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $(window).load(function () {
+    $(".overlay").fadeOut();
+  });
+
   const Toast = Swal.mixin({
     toast: true,
     position: "top",
