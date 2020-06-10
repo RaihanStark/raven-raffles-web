@@ -23,7 +23,17 @@ $(document).ready(function () {
         success: function (response) {
           $("#raffle-id").val(response.id);
           $("#raffle-variant").val(response.name.split(" - ")[1]);
-          console.log(response.size);
+          $("#size").empty();
+          $.each(JSON.parse(response.size), function (
+            indexInArray,
+            valueOfElement
+          ) {
+            $("#size").append(
+              `<option value="${
+                valueOfElement.split("US ")[0]
+              }">${valueOfElement}</option>`
+            );
+          });
         },
       });
     }
