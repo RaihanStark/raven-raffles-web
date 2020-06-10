@@ -108,8 +108,8 @@
                 </div>
                 <div class="col-md-6 pr-0 pl-md-2">
                   <label class="text-white text-bold" for="cvv">CVV</label>
-                  {{form.cc_exp(class_="form-input app-input-start", id="cc-cvv", placeholder="CVV")}}
-                    {% for error in form.cc_exp.errors %}
+                  {{form.cc_cvv(class_="form-input app-input-start", id="cc-cvv", placeholder="CVV")}}
+                    {% for error in form.cc_cvv.errors %}
                     <span style="color: red;" class="mb-2">[{{ error }}]</span>
                     {% endfor %}
                 </div>
@@ -152,10 +152,10 @@
             {% for task in tasks %}
             <tr>
               <th scope="col">
-                {{task.id}}
+                {{loop.index}}
               </th>
               <th scope="col">{{task.product.name}}</th>
-              <th scope="col">{{task.selected_size}}</th>
+              <th scope="col">US {{task.selected_size}}</th>
               <th scope="col">1</th>
               <th scope="col">USA</th>
               <th scope="col">{{task.status}}</th>

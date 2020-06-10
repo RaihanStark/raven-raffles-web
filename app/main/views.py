@@ -7,7 +7,8 @@ from flask_login import (
 from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm, AddNewProfilesForm
 from app.main.forms import CreateTaskForm
 from app.models import EditableHTML, Product, Task, User, Profile
-
+from app.utils import format_cc_to_json
+import json
 main = Blueprint('main', __name__)
 
 
@@ -36,10 +37,13 @@ def tasks():
 @login_required
 def tasks_add():
     form = CreateTaskForm()
+
     p = Product.query.filter_by(id=form.raffle_id.data).first()
+
     Task.create(
         selected_size= form.size.data,
         entries = form.entries.data,
+        credit_card = format_cc_to_json(form.cc_number.data,form.cc_exp.data,form.cc_cvv.data),
         product = p,
         by = current_user
     )

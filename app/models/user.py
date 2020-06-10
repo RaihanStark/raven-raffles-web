@@ -312,6 +312,8 @@ class Task(db.Model):
     status = db.Column(db.String(), default='Unstarted')
     entries = db.Column(db.Integer)
 
+    credit_card = db.Column(db.String())
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 

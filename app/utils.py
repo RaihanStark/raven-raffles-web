@@ -2,7 +2,7 @@ from flask import url_for
 from wtforms.fields import Field
 from wtforms.widgets import HiddenInput
 from wtforms.compat import text_type
-import requests
+import requests, json
 
 def register_template_utils(app):
     """Register Jinja 2 helpers (called from __init__.py)."""
@@ -36,6 +36,15 @@ def is_anticaptcha_valid(key):
     r = requests.post('https://api.anti-captcha.com/getBalance', json={'clientKey':key})
 
     return r.json()
+
+def format_cc_to_json(number,exp,cvv):
+    credit_card = {
+        'number':number.replace(' ',''),
+        'exp_year':exp.split('/')[1],
+        'exp_month':exp.split('/')[0],
+        'cvv':cvv
+    }
+    return json.dumps(credit_card)
 class CustomSelectField(Field):
     widget = HiddenInput()
 
