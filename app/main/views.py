@@ -36,6 +36,13 @@ def tasks():
 @login_required
 def tasks_add():
     form = CreateTaskForm()
+    p = Product.query.filter_by(id=form.raffle_id.data).first()
+    Task.create(
+        selected_size= form.size.data,
+        entries = form.entries.data,
+        product = p,
+        by = current_user
+    )
     flash('Task Added')
     return redirect(url_for('main.tasks'))
 

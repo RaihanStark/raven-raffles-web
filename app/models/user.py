@@ -347,6 +347,11 @@ class Task(db.Model):
             except IntegrityError:
                 db.session.rollback()
 
+    @classmethod
+    def create(cls, **kw):
+        obj = cls(**kw)
+        db.session.add(obj)
+        db.session.commit()
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
@@ -413,6 +418,8 @@ class Product(db.Model):
             except IntegrityError:
                 db.session.rollback()
     
+    
+
     def get_variant(self):
         return self.name.split(' - ')[1]
 

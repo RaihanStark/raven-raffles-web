@@ -25,7 +25,7 @@ from app import db
 from app.models import Profile
 
 class CreateTaskForm(FlaskForm):
-    raffle_id = IntegerField('raffle id',validators=[InputRequired()])
+    raffle_id = StringField('raffle id',validators=[InputRequired()])
     size = SelectField('size', validators=[InputRequired()],coerce=str,choices=[("default","Select Size")])
     entries = IntegerField('entries',validators=[InputRequired()])
     profiles = QuerySelectField(

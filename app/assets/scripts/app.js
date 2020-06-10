@@ -22,6 +22,8 @@ $(document).ready(function () {
         dataType: "json",
         success: function (response) {
           $("#raffle-id").val(response.id);
+          $("#raffle-id").attr("value", response.id);
+          console.log("change");
           $("#raffle-variant").val(response.name.split(" - ")[1]);
           $("#size").empty();
           $.each(JSON.parse(response.size), function (
