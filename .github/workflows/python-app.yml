@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: Python Testing
 
 on:
   push:
@@ -25,6 +25,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Set up the Application
+      run: |
+        python manage.py recreate_db
+        python manage.py setup_dev
+        python manage.py add_fake_data -n 15
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
