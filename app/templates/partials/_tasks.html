@@ -23,7 +23,9 @@
               >
                 <img class="lazy" data-src="{{product.thumbnail}}" alt="" />
                 <div class="d-flex justify-content-center">
-                  <a class="btn btn-shoes text-white mt-n3">{{product.name}}</a>
+                  <a class="btn btn-shoes text-white mt-n3"
+                    >{{product.get_brand()}}</a
+                  >
                 </div>
               </div>
               {% endfor %}

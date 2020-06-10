@@ -416,6 +416,8 @@ class Product(db.Model):
     def get_variant(self):
         return self.name.split(' - ')[1]
 
+    def get_brand(self):
+        return self.name.split(' - ')[0]
     def __repr__(self):
         return '<Product %s>' % self.name
 
