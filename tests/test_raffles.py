@@ -2,7 +2,7 @@ import unittest
 
 from app import create_app, db
 from flask import current_app
-from app.models import Role, User, Product, Task
+from app.models import Role, User, Product, Task, Profile
 import json
 class RafflesTestCase(unittest.TestCase):
     def setUp(self):
@@ -34,3 +34,9 @@ class RafflesTestCase(unittest.TestCase):
     def test_get_variant_product(self):
         p = Product(name="Adidas - Yeezy Boost 700")
         print(p.get_variant())
+
+    
+
+        
+        
+

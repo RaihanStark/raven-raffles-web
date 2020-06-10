@@ -3,7 +3,7 @@ import unittest
 import json
 
 from app import create_app, db
-from app.models import AnonymousUser, Permission, Role, User, Profile
+from app.models import AnonymousUser, Permission, Role, User, Profile, Task, Product
 
 
 class UserModelTestCase(unittest.TestCase):
@@ -279,3 +279,13 @@ class UserModelTestCase(unittest.TestCase):
         Profile.create(name="test1", owner=u)
         u.profiles[0].change_data(name='test2')
         self.assertEqual("test2",u.profiles[0].name)
+    
+    def test_add_task(self):
+        u = User()
+        p = Product(name="Adidas - Yeezy Boost 700")
+
+        Task.create(
+            product = p,
+            by = u
+        )
+        self.assertEqual(u.tasks[0].id, 1)
