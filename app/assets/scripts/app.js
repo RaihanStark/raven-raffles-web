@@ -13,7 +13,18 @@ $(document).ready(function () {
     });
     $(this).parent().parent().toggleClass("selected");
 
-    console.log($(this).parent().parent().attr("data-id"));
+    let id = $(this).parent().parent().attr("data-id");
+
+    if ($("#raffle-id").val() != id) {
+      $.ajax({
+        type: "GET",
+        url: "/raffles/products/" + id,
+        success: function (response) {
+          $("#raffle-id").val(response.id);
+          response.size;
+        },
+      });
+    }
   });
 
   //Add task

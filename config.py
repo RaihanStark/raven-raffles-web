@@ -92,7 +92,7 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL',
         'sqlite:///' + os.path.join(basedir, 'data-test.sqlite'))
     WTF_CSRF_ENABLED = False
-
+    LOGIN_DISABLED = True
     @classmethod
     def init_app(cls, app):
         print('THIS APP IS IN TESTING MODE.  \

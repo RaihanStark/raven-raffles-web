@@ -377,6 +377,14 @@ class Product(db.Model):
                         "Hoka One One"
                         ]
 
+        variants = [
+            'blue',
+            'red',
+            'white',
+            'green',
+            'yellow'
+        ]
+
         thumbnails = [
             "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/371777/01/sv01/fnd/PNA/fmt/png/Rise-Women's-Sneakers",
             "https://wwws.dior.com/couture/ecommerce/media/catalog/product/cache/1/zoom_image_2/3000x2000/17f82f742ffe127f42dca9de82fb58b1/u/j/1554385504_3SH118YJP_H069_E02_ZH.jpg",
@@ -396,7 +404,7 @@ class Product(db.Model):
         seed()
         for i in range(count):
             u = Product(
-                name = choice(shoes_names),
+                name = "%s - %s" %(choice(shoes_names),choice(variants)),
                 thumbnail = choice(thumbnails),
                 sizes = str(sizes),
                 **kwargs)

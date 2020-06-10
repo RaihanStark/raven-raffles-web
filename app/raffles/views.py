@@ -13,6 +13,7 @@ from app.models import Product, Task
 raffles = Blueprint('raffles', __name__)
 
 @raffles.route('/products/<int:id>', methods=['GET'])
+@login_required
 def index(id):
     try:
         selected_product = Product.query.filter_by(id=id).first()
