@@ -35,6 +35,6 @@ class CreateTaskForm(FlaskForm):
         query_factory=lambda: db.session.query(Profile).filter_by(owner_id=current_user.id).all()
         )
     cc_number = StringField('Credit Card Number',validators=[InputRequired()])
-    cc_exp = StringField('Credit Card Number',validators=[InputRequired()])
-    cc_cvv = StringField('Credit Card Number',validators=[InputRequired()])
+    cc_exp = StringField('Credit Card Expired Date',validators=[InputRequired()])
+    cc_cvv = StringField('Credit Card CVV',validators=[InputRequired()])
     submit = SubmitField('Proceed')

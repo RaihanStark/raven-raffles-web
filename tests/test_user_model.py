@@ -283,9 +283,21 @@ class UserModelTestCase(unittest.TestCase):
     def test_add_task(self):
         u = User()
         p = Product(name="Adidas - Yeezy Boost 700")
+        Profile.create(name="test", owner=u)
+
+        profile = Profile.query.filter_by(name="test").first()
 
         Task.create(
             product = p,
-            by = u
+            by = u,
+            profile = profile
         )
+
+        # Check Task Exist
         self.assertEqual(u.tasks[0].id, 1)
+
+        # Check Profile Exist
+        self.assertEqual(u.tasks[0].profile.name, 'test')
+
+        # Check Product Exist
+        self.assertEqual(u.tasks[0].product.name, "Adidas - Yeezy Boost 700")

@@ -314,8 +314,10 @@ class Task(db.Model):
 
     credit_card = db.Column(db.String())
 
+    # Relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
 
     @staticmethod
     def generate_fake(count=15, **kwargs):
@@ -445,6 +447,7 @@ class Profile(db.Model):
     email = db.Column(db.String())
     
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    active_task = db.relationship('Task', backref='profile')
 
     def __repr__(self):
         return '<Profile %s>' % self.name
