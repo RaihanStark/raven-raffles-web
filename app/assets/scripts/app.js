@@ -20,7 +20,16 @@ $(document).ready(function () {
         type: "GET",
         url: "/raffles/products/" + id,
         dataType: "json",
+        beforeSend: function () {
+          $.LoadingOverlay("show", {
+            background: "rgba(0, 0, 0, 0.5)",
+            image: "",
+            fontawesomeColor: "#FF60F4",
+            fontawesome: "fa fa-cog fa-spin",
+          });
+        },
         success: function (response) {
+          $.LoadingOverlay("hide");
           $("#raffle-id").val(response.id);
           $("#raffle-id").attr("value", response.id);
           console.log("change");
@@ -163,4 +172,8 @@ $(document).ready(function () {
   new Cleave("#cc-cvv", {
     blocks: [4],
   });
+});
+
+jQuery(window).load(function () {
+  alert("page is loaded");
 });
