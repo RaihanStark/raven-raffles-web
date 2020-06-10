@@ -1,126 +1,125 @@
 <div class="modal container fade" id="taskModal" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content card-app-gradient mt-3 mt-md-0">
-      <div class="row no-gutters">
-        {{ form.hidden_tag() }}
-        <div class="col-md-8">
-          <div
-            class="card-app-header no-header-color d-flex justify-content-between"
-          >
-            <h1 class="text-bold text-white align-self-center">
-              Create Task
-            </h1>
+      <form action="/tasks/add" method="post">
+        <div class="row no-gutters">
+          {{ form.hidden_tag() }}
+          <div class="col-md-8">
+            <div
+              class="card-app-header no-header-color d-flex justify-content-between"
+            >
+              <h1 class="text-bold text-white align-self-center">
+                Create Task
+              </h1>
+            </div>
+            <div class="tasks pl-4 pb-4">
+              <h6 class="text-white mt-3 mb-4">
+                Choose a release (SHIFT + Scroll)
+              </h6>
+              <div class="releases pb-2 d-flex">
+                {% for product in products %}
+                <div
+                  class="shoes mr-3 d-flex flex-column"
+                  data-name="{{product.name}}"
+                  data-id="{{product.id}}"
+                >
+                  <img class="lazy" data-src="{{product.thumbnail}}" alt="" />
+                  <div class="d-flex justify-content-center">
+                    <a class="btn btn-shoes text-white mt-n3"
+                      >{{product.get_brand()}}</a
+                    >
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="action pt-4 d-md-flex">
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Raffle ID</label>
+                    {{form.raffle_id(class_="form-input
+                    app-input-start",id="raffle-id",placeholder="Product ID",disabled=True)}} {% for error in form.raffle_id.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Variant</label>
+                    <input
+                      id="raffle-variant"
+                      class="form-input app-input-start"
+                      type="text"
+                      placeholder="Variant"
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Size</label>
+                    </select>
+                    {{form.size(class_="form-input app-input-start", id="size")}}
+                    {% for error in form.size.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Amount of Entries</label>
+                    {{form.entries(class_="form-input app-input-start", max="10", placeholder="Amount of Entries")}}
+                    {% for error in form.entries.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Profiles</label>
+                    {{form.profiles(class_="form-input app-input-start", id="profiles")}}
+                    {% for error in form.profiles.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+                  </div>
+                  <div class="pr-4">
+                    <label class="text-white text-bold">Account Group</label>
+                    <select class="form-input app-input-start" id="profiles" disabled>
+                      <option value="default">Disabled</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tasks pl-4 pb-4">
-            <h6 class="text-white mt-3 mb-4">
-              Choose a release (SHIFT + Scroll)
-            </h6>
-            <div class="releases pb-2 d-flex">
-              {% for product in products %}
-              <div
-                class="shoes mr-3 d-flex flex-column"
-                data-name="{{product.name}}"
-                data-id="{{product.id}}"
+          <div class="col-md-4 sidebar">
+            <div class="credit-card-field d-flex flex-column p-4 mt-4">
+              <p class="text-white text-bold">Credit Card</p>
+
+              <label class="text-white text-bold" for="number"
+                >Credit Card Number</label
               >
-                <img class="lazy" data-src="{{product.thumbnail}}" alt="" />
-                <div class="d-flex justify-content-center">
-                  <a class="btn btn-shoes text-white mt-n3"
-                    >{{product.get_brand()}}</a
-                  >
+              {{form.cc_number(class_="form-input app-input-start", id="cc-number", placeholder="Credit Card Number")}}
+                    {% for error in form.cc_number.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+              <div class="row no-gutters mt-1 mb-2">
+                <div class="col-md-6 pr-0 pr-md-2">
+                  <label class="text-white text-bold" for="exp">Exp Date</label>
+                  {{form.cc_exp(class_="form-input app-input-start", id="cc-exp", placeholder="MM/YY")}}
+                    {% for error in form.cc_exp.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 pr-0 pl-md-2">
+                  <label class="text-white text-bold" for="cvv">CVV</label>
+                  {{form.cc_exp(class_="form-input app-input-start", id="cc-cvv", placeholder="CVV")}}
+                    {% for error in form.cc_exp.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
                 </div>
               </div>
-              {% endfor %}
-            </div>
-            <div class="action pt-4 d-md-flex">
-              <div class="d-flex flex-column">
-                <div class="pr-4">
-                  <label class="text-white text-bold">Raffle ID</label>
-                  {{form.raffle_id(class_="form-input
-                  app-input-start",id="raffle-id",placeholder="Product ID",disabled=True)}} {% for error in form.raffle_id.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-                </div>
-                <div class="pr-4">
-                  <label class="text-white text-bold">Variant</label>
-                  <input
-                    id="raffle-variant"
-                    class="form-input app-input-start"
-                    type="text"
-                    placeholder="Variant"
-                    disabled
-                  />
-                </div>
-              </div>
-              <div class="d-flex flex-column">
-                <div class="pr-4">
-                  <label class="text-white text-bold">Size</label>
-                  </select>
-                  {{form.size(class_="form-input app-input-start", id="size")}}
-                  {% for error in form.size.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-                </div>
-                <div class="pr-4">
-                  <label class="text-white text-bold">Amount of Entries</label>
-                  {{form.entries(class_="form-input app-input-start", max="10", placeholder="Amount of Entries")}}
-                  {% for error in form.entries.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-                </div>
-              </div>
-              <div class="d-flex flex-column">
-                <div class="pr-4">
-                  <label class="text-white text-bold">Profiles</label>
-                  {{form.profiles(class_="form-input app-input-start", id="profiles")}}
-                  {% for error in form.profiles.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-                </div>
-                <div class="pr-4">
-                  <label class="text-white text-bold">Account Group</label>
-                  <select class="form-input app-input-start" id="profiles" disabled>
-                    <option value="default">Disabled</option>
-                  </select>
-                </div>
-              </div>
+              {{form.submit(class_="btn btn-white text-purple text-bold", id="add-task")}}
+              <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4 sidebar">
-          <div class="credit-card-field d-flex flex-column p-4 mt-4">
-            <p class="text-white text-bold">Credit Card</p>
-
-            <label class="text-white text-bold" for="number"
-              >Credit Card Number</label
-            >
-            {{form.cc_number(class_="form-input app-input-start", id="cc-number", placeholder="Credit Card Number")}}
-                  {% for error in form.cc_number.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-            <div class="row no-gutters mt-1 mb-2">
-              <div class="col-md-6 pr-0 pr-md-2">
-                <label class="text-white text-bold" for="exp">Exp Date</label>
-                {{form.cc_exp(class_="form-input app-input-start", id="cc-exp", placeholder="MM/YY")}}
-                  {% for error in form.cc_exp.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-              </div>
-              <div class="col-md-6 pr-0 pl-md-2">
-                <label class="text-white text-bold" for="cvv">CVV</label>
-                {{form.cc_exp(class_="form-input app-input-start", id="cc-cvv", placeholder="CVV")}}
-                  {% for error in form.cc_exp.errors %}
-                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
-                  {% endfor %}
-              </div>
-            </div>
-
-            <a class="btn btn-white text-purple text-bold" id="add-task"
-              >Proceed</a
-            >
-            <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

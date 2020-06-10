@@ -37,3 +37,4 @@ class CreateTaskForm(FlaskForm):
     cc_number = IntegerField('Credit Card Number',validators=[InputRequired()])
     cc_exp = StringField('Credit Card Number',validators=[InputRequired()])
     cc_ccv = StringField('Credit Card Number',validators=[InputRequired()])
+    submit = SubmitField('Proceed')

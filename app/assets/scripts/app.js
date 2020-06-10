@@ -30,7 +30,7 @@ $(document).ready(function () {
           ) {
             $("#size").append(
               `<option value="${
-                valueOfElement.split("US ")[0]
+                valueOfElement.split("US ")[1]
               }">${valueOfElement}</option>`
             );
           });
@@ -39,24 +39,24 @@ $(document).ready(function () {
     }
   });
 
-  //Add task
-  $("#add-task").on("click", function () {
-    // Close Modal
-    $("#taskModal").modal("toggle");
+  // //Add task
+  // $("#add-task").on("click", function () {
+  //   // Close Modal
+  //   $("#taskModal").modal("toggle");
 
-    // Append Body
-    let task_html = `<tr> <th scope="row" class="checkboxContainer"> <input type="checkbox"/> </th> <td>Bandana Box Logo Tee Black</td><td>Small</td><td>Profile 1</td><td>US Residental</td><td class="app-success-color">Successful Checkout</td><td> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-play fa-md btn-tasks-icon"></i ></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-edit fa-md btn-tasks-icon"></i ></a> <a name="duplicate-task" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-copy fa-md btn-tasks-icon"></i ></a> <a name="delete-task" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-trash fa-md btn-tasks-icon"></i ></a> </td></tr>`;
-    $("#task-body").append(task_html);
+  //   // Append Body
+  //   let task_html = `<tr> <th scope="row" class="checkboxContainer"> <input type="checkbox"/> </th> <td>Bandana Box Logo Tee Black</td><td>Small</td><td>Profile 1</td><td>US Residental</td><td class="app-success-color">Successful Checkout</td><td> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-play fa-md btn-tasks-icon"></i ></a> <a name="" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-edit fa-md btn-tasks-icon"></i ></a> <a name="duplicate-task" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-copy fa-md btn-tasks-icon"></i ></a> <a name="delete-task" id="" class="btn btn-sm btn-light mr-0 mt-2 mr-md-1 mt-lg-0" href="#" role="button" ><i class="fas fa-trash fa-md btn-tasks-icon"></i ></a> </td></tr>`;
+  //   $("#task-body").append(task_html);
 
-    // send notif
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Tasks Added",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  });
+  //   // send notif
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: "Tasks Added",
+  //     showConfirmButton: false,
+  //     timer: 1500,
+  //   });
+  // });
 
   // Delete Task
   $("#task-body").on("click", 'a[name="delete-task"]', function () {

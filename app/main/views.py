@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import (
     current_user,
     login_required
@@ -31,6 +31,13 @@ def tasks():
 
     form = CreateTaskForm()
     return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
+
+@main.route('/tasks/add', methods=['POST'])
+@login_required
+def tasks_add():
+    form = CreateTaskForm()
+    flash('Task Added')
+    return redirect(url_for('main.tasks'))
 
 @main.route('/profiles')
 @login_required
