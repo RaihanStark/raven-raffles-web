@@ -30,3 +30,7 @@ class RafflesTestCase(unittest.TestCase):
         res = self.app_test.get('/raffles/products/999',content_type='application/json')
         data = json.loads(res.get_data())
         self.assertEqual(True, data['error'])
+        
+    def test_get_variant_product(self):
+        p = Product(name="Adidas - Yeezy Boost 700")
+        print(p.get_variant())

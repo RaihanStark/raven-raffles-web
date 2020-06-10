@@ -367,7 +367,6 @@ class Product(db.Model):
                         "ASICS",
                         "Babolat",
                         "Brooks",
-                        "Converse",
                         "DC",
                         "Diadora",
                         "Dunlop",
@@ -414,6 +413,9 @@ class Product(db.Model):
             except IntegrityError:
                 db.session.rollback()
     
+    def get_variant(self):
+        return self.name.split(' - ')[1]
+
     def __repr__(self):
         return '<Product %s>' % self.name
 
