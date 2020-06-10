@@ -19,9 +19,11 @@ $(document).ready(function () {
       $.ajax({
         type: "GET",
         url: "/raffles/products/" + id,
+        dataType: "json",
         success: function (response) {
           $("#raffle-id").val(response.id);
-          response.size;
+          $("#raffle-variant").val(response.name.split(" - ")[1]);
+          console.log(response.size);
         },
       });
     }

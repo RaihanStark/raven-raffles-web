@@ -405,7 +405,7 @@ class Product(db.Model):
             u = Product(
                 name = "%s - %s" %(choice(shoes_names),choice(variants)),
                 thumbnail = choice(thumbnails),
-                sizes = str(sizes),
+                sizes = json.dumps(sizes),
                 **kwargs)
             db.session.add(u)
             try:
