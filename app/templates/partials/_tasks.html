@@ -78,10 +78,11 @@
                     {% endfor %}
                   </div>
                   <div class="pr-4">
-                    <label class="text-white text-bold">Account Group</label>
-                    <select class="form-input app-input-start" id="profiles" disabled>
-                      <option value="default">Disabled</option>
-                    </select>
+                    <label class="text-white text-bold">Proxies</label>
+                    {{form.proxies(class_="form-input app-input-start", id="proxies")}}
+                    {% for error in form.proxies.errors %}
+                    <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                    {% endfor %}
                   </div>
                 </div>
               </div>

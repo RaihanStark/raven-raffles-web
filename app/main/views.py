@@ -20,6 +20,7 @@ def index():
     list_of_raffle = len(products)
 
     form = CreateTaskForm()
+    form.proxies.choices = [(x['name'].lower(),x['name']) for x in current_user.get_proxies()]
     return render_template('main/index.html',products=products, tasks=tasks, list_of_raffle=list_of_raffle, form=form)
 
 
@@ -31,6 +32,7 @@ def tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
 
     form = CreateTaskForm()
+    form.proxies.choices = [(x['name'].lower(),x['name']) for x in current_user.get_proxies()]
     return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
 
 @main.route('/tasks/add', methods=['POST'])

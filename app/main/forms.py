@@ -17,12 +17,11 @@ from wtforms.validators import (
 )
 
 from flask_login import (
-    current_user,
-    login_required
+    current_user
 )
 
 from app import db
-from app.models import Profile
+from app.models import Profile, User
 
 class CreateTaskForm(FlaskForm):
     raffle_id = StringField('raffle id',validators=[InputRequired()])
@@ -33,6 +32,12 @@ class CreateTaskForm(FlaskForm):
         validators=[InputRequired()],
         get_label='name',
         query_factory=lambda: db.session.query(Profile).filter_by(owner_id=current_user.id).all()
+        )
+        
+    proxies = SelectField(
+        'Proxies', 
+        validators = [InputRequired()],
+        coerce = str,
         )
     cc_number = StringField('Credit Card Number',validators=[InputRequired()])
     cc_exp = StringField('Credit Card Expired Date',validators=[InputRequired()])
