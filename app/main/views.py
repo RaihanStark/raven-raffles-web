@@ -35,6 +35,16 @@ def tasks():
     form.proxies.choices = [(x['name'],x['name']) for x in current_user.get_proxies()]
     return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
 
+@main.route('/edit_tasks/<int:id>')
+@login_required
+def edit_tasks(id):
+    products = Product.query.all()
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+
+    form = CreateTaskForm()
+    form.proxies.choices = [(x['name'],x['name']) for x in current_user.get_proxies()]
+    return render_template('main/edit_tasks.html',products=products, tasks=tasks, form=form)
+
 @main.route('/tasks/add', methods=['POST'])
 @login_required
 def tasks_add():

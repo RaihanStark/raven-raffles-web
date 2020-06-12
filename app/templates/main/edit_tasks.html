@@ -1,0 +1,6 @@
+{% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
+active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
+<div class="container">
+  {% include 'partials/_msg.html' %} {% include 'partials/_tasks.html' %}
+</div>
+{% endblock %}
