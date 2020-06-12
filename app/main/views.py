@@ -7,7 +7,7 @@ from flask_login import (
 from app.account.forms import AddBulkProxyForm, AddProxyForm, EditProxyForm, AddNewProfilesForm
 from app.main.forms import CreateTaskForm
 from app.models import EditableHTML, Product, Task, User, Profile
-from app.utils import format_cc_to_json
+from app.utils import format_cc_to_json, get_proxy_by_name
 import json
 main = Blueprint('main', __name__)
 
@@ -41,13 +41,14 @@ def tasks_add():
     form = CreateTaskForm()
 
     product = Product.query.filter_by(id=form.raffle_id.data).first()
-    print(form.proxies.data)
+    selected_proxy = get_proxy_by_name(form.proxies.data)
     Task.create(
         selected_size= form.size.data,
         entries = form.entries.data,
         credit_card = format_cc_to_json(form.cc_number.data,form.cc_exp.data,form.cc_cvv.data),
         product = product,
         profile = form.profiles.data,
+        proxy = json.dumps(selected_proxy[0]),
         by = current_user,
     )
     flash('Task Added')

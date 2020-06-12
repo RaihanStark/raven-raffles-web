@@ -2,6 +2,10 @@ from flask import url_for
 from wtforms.fields import Field
 from wtforms.widgets import HiddenInput
 from wtforms.compat import text_type
+from flask_login import (
+    current_user,
+    login_required
+)
 import requests, json
 
 def register_template_utils(app):
@@ -45,6 +49,9 @@ def format_cc_to_json(number,exp,cvv):
         'cvv':cvv
     }
     return json.dumps(credit_card)
+
+def get_proxy_by_name(name):
+    return [i for i in current_user.get_proxies() if i['name'] == name]
 class CustomSelectField(Field):
     widget = HiddenInput()
 
