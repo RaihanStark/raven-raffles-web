@@ -12,7 +12,7 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
             class="card-app-header no-header-color d-flex justify-content-between"
           >
             <h1 class="text-bold text-white align-self-center">
-              Create Task
+              Edit Task
             </h1>
           </div>
           <div class="tasks pl-4 pb-4">
@@ -134,9 +134,8 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
             </div>
             {{form.submit(class_="btn btn-white text-purple text-bold",
             id="add-task")}}
-            <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
 
-            <span style="color: red;" class="mb-2"
+            <span style="color: red;" class="mt-2 mb-2"
               >You cannot change product, proxies, and profiles</span
             >
           </div>
