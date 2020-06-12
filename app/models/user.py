@@ -360,7 +360,8 @@ class Task(db.Model):
 
     def change_data(self, **kwargs):
         for key, value in kwargs.items(): 
-            exec('self.%s = "%s" ' %(key,value))
+            exec('self.%s = \'%s\' ' %(key,value))
+            
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())

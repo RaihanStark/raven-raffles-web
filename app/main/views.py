@@ -43,9 +43,17 @@ def edit_tasks(id):
     if len(found) >= 1:
         products = Product.query.all()
         tasks = Task.query.filter_by(user_id=current_user.id).all()
+
         form = CreateTaskForm()
-        if form.validate_on_submit():
-            pass
+        if request.method == 'POST':
+            cc = format_cc_to_json(form.cc_number.data,form.cc_exp.data,form.cc_cvv.data)
+            found[0].change_data(
+                entries = request.form['entries'],
+                selected_size = request.form['size'],
+                credit_card = cc,
+            )
+            print('success')
+            return render_template('main/edit_tasks.html',products=products, form=form, current_task = found[0], cc = json.loads(cc))
         return render_template('main/edit_tasks.html',products=products, form=form, current_task = found[0], cc = json.loads(found[0].credit_card))
     return redirect(url_for('main.tasks'))
 

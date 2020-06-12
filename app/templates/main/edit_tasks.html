@@ -4,7 +4,7 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
   {% include 'partials/_msg.html' %}
 
   <div class="modal-content card-app-gradient mt-3 mt-md-0">
-    <form action="/tasks/add" method="post">
+    <form action="/edit_tasks/{{current_task.id}}" method="post">
       <div class="row no-gutters">
         {{ form.hidden_tag() }}
         <div class="col-md-8">
@@ -28,7 +28,7 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
               >
                 <img class="lazy" data-src="{{product.thumbnail}}" alt="" />
                 <div class="d-flex justify-content-center">
-                  <a class="btn btn-shoes text-white mt-n3"
+                  <a class="btn btn-shoes_edit text-white mt-n3"
                     >{{product.get_brand()}}</a
                   >
                 </div>
@@ -40,8 +40,8 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
                 <div class="pr-4">
                   <label class="text-white text-bold">Raffle ID</label>
                   {{form.raffle_id(class_="form-input
-                  app-input-start",id="raffle-id",placeholder="Product ID")}} {%
-                  for error in form.raffle_id.errors %}
+                  app-input-start",id="raffle-id",placeholder="Product ID",
+                  disabled=true)}} {% for error in form.raffle_id.errors %}
                   <span style="color: red;" class="mb-2">[{{ error }}]</span>
                   {% endfor %}
                 </div>
@@ -135,6 +135,10 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
             {{form.submit(class_="btn btn-white text-purple text-bold",
             id="add-task")}}
             <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
+
+            <span style="color: red;" class="mb-2"
+              >You cannot change product, proxies, and profiles</span
+            >
           </div>
         </div>
       </div>
@@ -165,6 +169,7 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
         $("#raffle-id").attr("value", response.id);
 
         $("#raffle-variant").val(response.name.split(" - ")[1]);
+
         $("#size").empty();
         $.each(JSON.parse(response.size), function (
           indexInArray,
@@ -172,8 +177,7 @@ active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
         ) {
           let selected_id = parseInt($("#size").attr("data-id"));
           let current_id = valueOfElement.split("US ")[1];
-          console.log(selected_id);
-          console.log(current_id);
+
           if (selected_id == parseInt(current_id)) {
             $("#size").append(
               `<option value="${
