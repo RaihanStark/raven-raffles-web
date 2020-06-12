@@ -1,0 +1,1 @@
+honcho start -e config.env -f Local
