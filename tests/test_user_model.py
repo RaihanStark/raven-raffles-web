@@ -321,3 +321,21 @@ class UserModelTestCase(unittest.TestCase):
         )
 
         self.assertEqual(u.tasks[0].selected_size, '6')
+
+    def test_delete_task(self):
+        u = User()
+        p = Product(name="Adidas - Yeezy Boost 700")
+        Profile.create(name="test", owner=u)
+
+        profile = Profile.query.filter_by(name="test").first()
+
+        Task.create(
+            selected_size = 5,
+            product = p,
+            by = u,
+            profile = profile
+        )
+
+        u.delete_task_by_id(1)
+
+        self.assertEqual(len(u.tasks), 0)
