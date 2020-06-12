@@ -168,6 +168,14 @@ class User(UserMixin, db.Model):
             db.session.commit()
             return True
         return False
+    
+    def delete_task_by_id(self, id):
+        q = Task.query.filter_by(id=id).first()
+        if q != None:
+            db.session.delete(q)
+            db.session.commit()
+            return True
+        return False
 
     def get_proxies(self):
         if self.proxies == None:

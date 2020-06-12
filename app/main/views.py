@@ -76,6 +76,12 @@ def tasks_add():
     flash('Task Added')
     return redirect(url_for('main.tasks'))
 
+@main.route('/task/delete',methods=['DELETE'])
+@login_required
+def task_delete():
+    current_user.delete_task_by_id(request.form['id'])
+    return {'msg':'deleted'},200
+
 @main.route('/profiles')
 @login_required
 def profiles():

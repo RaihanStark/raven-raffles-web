@@ -107,6 +107,16 @@ $(document).ready(function () {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.value) {
+        let id = $(this).parent().parent().attr("data-id");
+        $.ajax({
+          type: "delete",
+          url: "/task/delete",
+          data: { id: id, csrf_token: $("#csrf_token").val() },
+          success: function (res) {
+            console.log(res);
+          },
+        });
+
         Swal.fire("Deleted!", "Your task has been deleted.", "success");
         $(this).parent().parent().remove();
       }
