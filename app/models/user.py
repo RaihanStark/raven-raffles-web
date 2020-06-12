@@ -369,6 +369,9 @@ class Task(db.Model):
     def change_data(self, **kwargs):
         for key, value in kwargs.items(): 
             exec('self.%s = \'%s\' ' %(key,value))
+
+    def get_proxy_name(self):
+        return json.loads(self.proxy)['name']
             
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)

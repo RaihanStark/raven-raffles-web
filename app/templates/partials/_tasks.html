@@ -33,7 +33,7 @@
               <td scope="col">{{task.product.name}}</td>
               <td scope="col">US {{task.selected_size}}</td>
               <td scope="col">{{ task.profile.name }}</td>
-              <td scope="col">None</th>
+              <td scope="col">{{ task.get_proxy_name()}}</th>
               <td scope="col">{{task.status}}</td>
               <td>
                 <a
