@@ -301,3 +301,23 @@ class UserModelTestCase(unittest.TestCase):
 
         # Check Product Exist
         self.assertEqual(u.tasks[0].product.name, "Adidas - Yeezy Boost 700")
+
+    def test_change_task(self):
+        u = User()
+        p = Product(name="Adidas - Yeezy Boost 700")
+        Profile.create(name="test", owner=u)
+
+        profile = Profile.query.filter_by(name="test").first()
+
+        Task.create(
+            selected_size = 5,
+            product = p,
+            by = u,
+            profile = profile
+        )
+
+        u.tasks[0].change_data(
+            selected_size = 6,
+        )
+
+        self.assertEqual(u.tasks[0].selected_size, '6')
