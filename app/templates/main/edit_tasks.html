@@ -1,6 +1,195 @@
 {% extends 'layouts/base_dashboard.html' %} {% block content %} {% set
 active_page = "Tasks" %} {% include 'partials/_navbar.html' %}
-<div class="container">
-  {% include 'partials/_msg.html' %} {% include 'partials/_tasks.html' %}
+<div class="container mt-5">
+  {% include 'partials/_msg.html' %}
+
+  <div class="modal-content card-app-gradient mt-3 mt-md-0">
+    <form action="/tasks/add" method="post">
+      <div class="row no-gutters">
+        {{ form.hidden_tag() }}
+        <div class="col-md-8">
+          <div
+            class="card-app-header no-header-color d-flex justify-content-between"
+          >
+            <h1 class="text-bold text-white align-self-center">
+              Create Task
+            </h1>
+          </div>
+          <div class="tasks pl-4 pb-4">
+            <h6 class="text-white mt-3 mb-4">
+              Choose a release (SHIFT + Scroll)
+            </h6>
+            <div class="releases pb-2 d-flex">
+              {% for product in products %}
+              <div
+                class="shoes mr-3 d-flex flex-column"
+                data-name="{{product.name}}"
+                data-id="{{product.id}}"
+              >
+                <img class="lazy" data-src="{{product.thumbnail}}" alt="" />
+                <div class="d-flex justify-content-center">
+                  <a class="btn btn-shoes text-white mt-n3"
+                    >{{product.get_brand()}}</a
+                  >
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="action pt-4 d-md-flex">
+              <div class="d-flex flex-column">
+                <div class="pr-4">
+                  <label class="text-white text-bold">Raffle ID</label>
+                  {{form.raffle_id(class_="form-input
+                  app-input-start",id="raffle-id",placeholder="Product ID")}} {%
+                  for error in form.raffle_id.errors %}
+                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                  {% endfor %}
+                </div>
+                <div class="pr-4">
+                  <label class="text-white text-bold">Variant</label>
+                  <input
+                    id="raffle-variant"
+                    class="form-input app-input-start"
+                    type="text"
+                    placeholder="Variant"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <div class="pr-4">
+                  <label class="text-white text-bold">Size</label>
+                  {{form.size(class_="form-input app-input-start", id="size",
+                  **{'data-id': current_task.selected_size})}} {% for error in
+                  form.size.errors %}
+                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                  {% endfor %}
+                </div>
+                <div class="pr-4">
+                  <label class="text-white text-bold">Amount of Entries</label>
+                  {{form.entries(class_="form-input app-input-start", max="10",
+                  placeholder="Amount of Entries", type="number",
+                  value=current_task.entries)}} {% for error in
+                  form.entries.errors %}
+                  <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <div class="pr-4">
+                  <label class="text-white text-bold">Profiles</label>
+                  <select
+                    name="profiles"
+                    id="profiles"
+                    class="form-input app-input-start"
+                    disabled
+                  >
+                    <option value="0">disabled</option>
+                  </select>
+                </div>
+                <div class="pr-4">
+                  <label class="text-white text-bold">Proxies</label>
+                  <select
+                    name="proxies"
+                    id="proxies"
+                    class="form-input app-input-start"
+                    disabled
+                  >
+                    <option value="0">disabled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 sidebar">
+          <div class="credit-card-field d-flex flex-column p-4 mt-4">
+            <p class="text-white text-bold">Credit Card</p>
+
+            <label class="text-white text-bold" for="number"
+              >Credit Card Number</label
+            >
+            {{form.cc_number(class_="form-input app-input-start",
+            id="cc-number", placeholder="Credit Card Number",
+            value=cc['number'])}} {% for error in form.cc_number.errors %}
+            <span style="color: red;" class="mb-2">[{{ error }}]</span>
+            {% endfor %}
+            <div class="row no-gutters mt-1 mb-2">
+              <div class="col-md-6 pr-0 pr-md-2">
+                <label class="text-white text-bold" for="exp">Exp Date</label>
+                {{form.cc_exp(class_="form-input app-input-start", id="cc-exp",
+                placeholder="MM/YY",value=cc['exp_month']+'/'+cc['exp_year'])}}
+                {% for error in form.cc_exp.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col-md-6 pr-0 pl-md-2">
+                <label class="text-white text-bold" for="cvv">CVV</label>
+                {{form.cc_cvv(class_="form-input app-input-start", id="cc-cvv",
+                placeholder="CVV",value=cc['cvv'])}} {% for error in
+                form.cc_cvv.errors %}
+                <span style="color: red;" class="mb-2">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+            </div>
+            {{form.submit(class_="btn btn-white text-purple text-bold",
+            id="add-task")}}
+            <a class="btn text-red-soft mt-2" data-dismiss="modal">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    let id = window.location.pathname.split("/")[2];
+    $(`.shoes[data-id="${id}"]`).addClass("selected");
+
+    $.ajax({
+      type: "GET",
+      url: "/raffles/products/" + id,
+      dataType: "json",
+      beforeSend: function () {
+        $.LoadingOverlay("show", {
+          background: "rgba(0, 0, 0, 0.5)",
+          image: "",
+          fontawesomeColor: "#FF60F4",
+          fontawesome: "fa fa-cog fa-spin",
+        });
+      },
+      success: function (response) {
+        $.LoadingOverlay("hide");
+        $("#raffle-id").val(response.id);
+        $("#raffle-id").attr("value", response.id);
+
+        $("#raffle-variant").val(response.name.split(" - ")[1]);
+        $("#size").empty();
+        $.each(JSON.parse(response.size), function (
+          indexInArray,
+          valueOfElement
+        ) {
+          let selected_id = parseInt($("#size").attr("data-id"));
+          let current_id = valueOfElement.split("US ")[1];
+          console.log(selected_id);
+          console.log(current_id);
+          if (selected_id == parseInt(current_id)) {
+            $("#size").append(
+              `<option value="${
+                valueOfElement.split("US ")[1]
+              }" selected>${valueOfElement}</option>`
+            );
+          } else {
+            $("#size").append(
+              `<option value="${
+                valueOfElement.split("US ")[1]
+              }">${valueOfElement}</option>`
+            );
+          }
+        });
+      },
+    });
+  });
+</script>
 {% endblock %}

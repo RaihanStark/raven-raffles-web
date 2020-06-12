@@ -35,15 +35,19 @@ def tasks():
     form.proxies.choices = [(x['name'],x['name']) for x in current_user.get_proxies()]
     return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
 
-@main.route('/edit_tasks/<int:id>')
+@main.route('/edit_tasks/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_tasks(id):
-    products = Product.query.all()
-    tasks = Task.query.filter_by(user_id=current_user.id).all()
-
-    form = CreateTaskForm()
-    form.proxies.choices = [(x['name'],x['name']) for x in current_user.get_proxies()]
-    return render_template('main/edit_tasks.html',products=products, tasks=tasks, form=form)
+    found = [found_profile for found_profile in current_user.tasks if found_profile.id == int(id)]
+    
+    if len(found) >= 1:
+        products = Product.query.all()
+        tasks = Task.query.filter_by(user_id=current_user.id).all()
+        form = CreateTaskForm()
+        if form.validate_on_submit():
+            pass
+        return render_template('main/edit_tasks.html',products=products, form=form, current_task = found[0], cc = json.loads(found[0].credit_card))
+    return redirect(url_for('main.tasks'))
 
 @main.route('/tasks/add', methods=['POST'])
 @login_required
@@ -101,20 +105,6 @@ def profile_delete():
 @main.route('/profiles/edit_profiles/<name>', methods=['GET', 'POST'])
 @login_required
 def edit_profiles(name):
-    # proxies = current_user.get_proxies()
-    # # Find Proxy
-    # found = [found_proxy for found_proxy in proxies if found_proxy['name'] == name]
-    # if len(found) >= 1:
-
-        
-    #     form = EditProxyForm()
-    #     if form.validate_on_submit():
-    #         current_user.edit_proxies(found[0]['name'],form.name.data, form.proxies.data)
-    #         return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
-    #     form.proxies.data = found[0]['proxies']
-    #     return render_template('main/edit_proxies.html',form=form, currentproxy=found[0])  
-    # return redirect(url_for('main.proxies'))
-
     profiles = current_user.profiles
     found = [found_profile for found_profile in profiles if found_profile.id == int(name)]
     if len(found) >= 1:
