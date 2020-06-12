@@ -32,7 +32,7 @@ def tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
 
     form = CreateTaskForm()
-    form.proxies.choices = [(x['name'].lower(),x['name']) for x in current_user.get_proxies()]
+    form.proxies.choices = [(x['name'],x['name']) for x in current_user.get_proxies()]
     return render_template('main/tasks.html',products=products, tasks=tasks, form=form)
 
 @main.route('/tasks/add', methods=['POST'])
@@ -41,6 +41,7 @@ def tasks_add():
     form = CreateTaskForm()
 
     product = Product.query.filter_by(id=form.raffle_id.data).first()
+    print(form.proxies.data)
     Task.create(
         selected_size= form.size.data,
         entries = form.entries.data,

@@ -313,6 +313,7 @@ class Task(db.Model):
     entries = db.Column(db.Integer)
 
     credit_card = db.Column(db.String())
+    proxy = db.Column(db.String)
 
     # Relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
