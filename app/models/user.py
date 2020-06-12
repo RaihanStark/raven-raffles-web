@@ -4,7 +4,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app.utils import is_license_valid
+from app.utils import is_license_valid, is_anticaptcha_valid
 from .. import db, login_manager
 
 from app.models.util import Settings
@@ -194,6 +194,9 @@ class User(UserMixin, db.Model):
             self.settings = self.account_settings.to_json()
             db.session.commit()
         return self.settings
+    
+    def get_anticaptcha_balance(self):
+        return is_anticaptcha_valid(json.loads(self.settings)['anticaptcha_key'])
 
     def set_settings(self, data_dictionary):
         self.account_settings.set_settings(data_dictionary)

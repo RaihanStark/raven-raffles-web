@@ -17,11 +17,27 @@ main = Blueprint('main', __name__)
 def index():
     products = Product.query.all()
     tasks = Task.query.filter_by(user_id=current_user.id).all()
+    proxies = current_user.get_proxies()
+    try:
+        balance = int(current_user.get_anticaptcha_balance()['balance'])
+    except:
+        balance = 0
+
     list_of_raffle = len(products)
 
+    
     form = CreateTaskForm()
     form.proxies.choices = [(x['name'].lower(),x['name']) for x in current_user.get_proxies()]
-    return render_template('main/index.html',products=products, tasks=tasks, list_of_raffle=list_of_raffle, form=form)
+    return render_template(
+        'main/index.html',
+        products=products, 
+        tasks=tasks, 
+        list_of_raffle=list_of_raffle, 
+        list_of_profiles = len(current_user.profiles),
+        list_of_proxies = len(proxies),
+        form=form,
+        balance = balance
+        )
 
 
 
