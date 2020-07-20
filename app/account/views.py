@@ -44,19 +44,22 @@ def login():
 
     form = LoginForm()
     current_next = request.args.get('next')
-    print(current_next)
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.password_hash is not None and \
                 user.verify_password(form.password.data):
             login_user(user)
+
             # set session
             session.permanent = True
 
             # set last active
             user.last_active = datetime.datetime.utcnow()
             db.session.commit()
-            flash('You are now logged in. Welcome back, %s!'%(current_user.username), 'success')
+
+            flash('You are now logged in. Welcome back, %s!' %
+                  (current_user.username), 'success')
             return redirect(current_next or url_for('main.index'))
         else:
             flash('Invalid username or password.', 'form-error')
@@ -80,7 +83,7 @@ def register():
             password=form.password.data,
             confirmed=True)
         # Confirmed is True as default
-    
+
         db.session.add(user)
         db.session.commit()
         # Email Confirmation
@@ -95,9 +98,11 @@ def register():
         #     confirm_link=confirm_link)
         # flash('A confirmation link has been sent to {}.'.format(user.email),
         #       'warning')
-        flash(Markup('Registration Completed<br> Please sign in by clicking <a href="'+url_for('account.login')+'">here</a>'))
+        flash(Markup('Registration Completed<br> Please sign in by clicking <a href="' +
+                     url_for('account.login')+'">here</a>'))
         return redirect(url_for('account.register'))
     return render_template('account/register.html', form=form)
+
 
 @account.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -109,13 +114,13 @@ def settings():
     form = SettingsForm()
     if form.validate_on_submit():
         current_user.set_settings({
-            'webhooks':form.webhooks.data,
-            'anticaptcha_key':form.anticaptcha_key.data
+            'webhooks': form.webhooks.data,
+            'anticaptcha_key': form.anticaptcha_key.data
         })
         flash('Settings have been updated')
         return redirect(url_for('account.settings'))
-    
-    return render_template('main/settings.html',form=form, settings=ast.literal_eval(current_user.get_settings()))
+
+    return render_template('main/settings.html', form=form, settings=ast.literal_eval(current_user.get_settings()))
 
 
 @account.route('/logout')
@@ -139,6 +144,7 @@ def reset_password_request():
     """Respond to existing user's request to reset their password."""
     if not current_user.is_anonymous:
         return redirect(url_for('main.index'))
+
     form = RequestResetPasswordForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -154,9 +160,12 @@ def reset_password_request():
                 user=user,
                 reset_link=reset_link,
                 next=request.args.get('next'))
+
         flash('A password reset link has been sent to {}.'.format(
             form.email.data), 'warning')
+
         return redirect(url_for('account.login'))
+
     return render_template('account/reset_password.html', form=form)
 
 
@@ -269,8 +278,7 @@ def confirm(token):
     return redirect(url_for('main.index'))
 
 
-@account.route(
-    '/join-from-invite/<int:user_id>/<token>', methods=['GET', 'POST'])
+@account.route('/join-from-invite/<int:user_id>/<token>', methods=['GET', 'POST'])
 def join_from_invite(user_id, token):
     """
     Confirm new user's account with provided token and prompt them to set

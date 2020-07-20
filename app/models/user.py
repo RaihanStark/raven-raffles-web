@@ -10,6 +10,8 @@ from .. import db, login_manager
 from app.models.util import Settings
 
 import json
+
+
 class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
@@ -47,6 +49,7 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role \'%s\'>' % self.name
 
+
 class User(UserMixin, db.Model):
     # __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -66,6 +69,7 @@ class User(UserMixin, db.Model):
     profiles = db.relationship('Profile', backref='owner')
 
     account_settings = Settings()
+
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
@@ -74,50 +78,52 @@ class User(UserMixin, db.Model):
                     permissions=Permission.ADMINISTER).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
-        
+
     def add_proxies_bulk(self, name, proxies):
         # If proxies exists
         if self.proxies != None:
             json_data = json.loads(self.proxies)
             # If found same name
-            proxies_found = [proxy for proxy in json_data if proxy['name'] == name]
+            proxies_found = [
+                proxy for proxy in json_data if proxy['name'] == name]
         else:
             json_data = []
             proxies_found = []
-        
+
         # Filtering the Proxies
         filtered_proxies = self.filter_proxy(proxies)
 
         if len(proxies_found) >= 1:
             json_data.append({
-                'name':name+"(%s)"%(len(proxies_found)),
-                'proxies':'\n'.join(filtered_proxies),
-                'total':len(filtered_proxies)
+                'name': name+"(%s)" % (len(proxies_found)),
+                'proxies': '\n'.join(filtered_proxies),
+                'total': len(filtered_proxies)
             })
         else:
             json_data.append({
-                'name':name,
-                'proxies':'\n'.join(filtered_proxies),
-                'total':len(filtered_proxies)
+                'name': name,
+                'proxies': '\n'.join(filtered_proxies),
+                'total': len(filtered_proxies)
             })
 
         # add to db
         self.proxies = json.dumps(json_data)
         db.session.commit()
-        
+
     def add_proxies(self, name, proxies):
         # if proxies is exists
         if self.proxies != None:
             json_data = json.loads(self.proxies)
 
             # If found
-            proxies_found = [proxy for proxy in json_data if proxy['name'] == name]
-            
+            proxies_found = [
+                proxy for proxy in json_data if proxy['name'] == name]
+
             # detele old value
             json_data.pop(json_data.index(proxies_found[0]))
-            
+
             proxy_from_db = proxies_found[0]
-            
+
             new_proxy_value = proxy_from_db['proxies'].split('\n')
             new_proxy_value.append(proxies)
             proxy_from_db['proxies'] = '\n'.join(new_proxy_value)
@@ -131,7 +137,8 @@ class User(UserMixin, db.Model):
 
     def edit_proxies(self, name, newname, proxies):
         datajson = json.loads(self.proxies)
-        found = [found_proxy for found_proxy in datajson if found_proxy['name'] == name]
+        found = [
+            found_proxy for found_proxy in datajson if found_proxy['name'] == name]
 
         # get old proxies
         old_proxies = datajson.pop(datajson.index(found[0]))
@@ -156,7 +163,7 @@ class User(UserMixin, db.Model):
         datajson = json.loads(self.proxies)
 
         new_data = [new for new in datajson if new['name'] != name]
-        
+
         # add to db
         self.proxies = json.dumps(new_data)
         db.session.commit()
@@ -168,7 +175,7 @@ class User(UserMixin, db.Model):
             db.session.commit()
             return True
         return False
-    
+
     def delete_task_by_id(self, id):
         q = Task.query.filter_by(id=id).first()
         if q != None:
@@ -194,7 +201,7 @@ class User(UserMixin, db.Model):
             self.settings = self.account_settings.to_json()
             db.session.commit()
         return self.settings
-    
+
     def get_anticaptcha_balance(self):
         return is_anticaptcha_valid(json.loads(self.settings)['anticaptcha_key'])
 
@@ -204,6 +211,7 @@ class User(UserMixin, db.Model):
         self.settings = self.account_settings.to_json()
         db.session.commit()
         return True
+
     @property
     def password(self):
         raise AttributeError('`password` is not a readable attribute')
@@ -317,6 +325,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User %s>' % self.get_username()
 
+
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     selected_size = db.Column(db.String(10))
@@ -334,10 +343,10 @@ class Task(db.Model):
     @staticmethod
     def generate_fake(count=15, **kwargs):
         """Generate a number of fake Tasks for testing."""
-        
+
         print("Generating Task Fake Data to DB")
 
-        sizes = ["US 3","US 4","US 5","US 6","US 7","US 8","US 9"]
+        sizes = ["US 3", "US 4", "US 5", "US 6", "US 7", "US 8", "US 9"]
 
         from sqlalchemy.exc import IntegrityError
         from random import seed, choice
@@ -349,11 +358,11 @@ class Task(db.Model):
         seed()
         for i in range(count):
 
-            u = User.query.get(choice([1,2,3,4,5,6,7,8,9]))
-            p = Product.query.get(choice([1,2,3,4,5,6,7,8,9]))
+            u = User.query.get(choice([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+            p = Product.query.get(choice([1, 2, 3, 4, 5, 6, 7, 8, 9]))
             t = Task(
-                selected_size = choice(sizes),
-                entries = choice([1,2,3,4,5,6,7,8,9,10]),
+                selected_size=choice(sizes),
+                entries=choice([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
                 by=u,
                 product=p,
                 **kwargs)
@@ -370,12 +379,13 @@ class Task(db.Model):
         db.session.commit()
 
     def change_data(self, **kwargs):
-        for key, value in kwargs.items(): 
-            exec('self.%s = \'%s\' ' %(key,value))
+        for key, value in kwargs.items():
+            exec('self.%s = \'%s\' ' % (key, value))
 
     def get_proxy_name(self):
         return json.loads(self.proxy)['name']
-            
+
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
@@ -390,20 +400,19 @@ class Product(db.Model):
 
         print("Generating Product Fake Data to DB")
 
-
         shoes_names = ["Adidas",
-                        "Anta",
-                        "ASICS",
-                        "Babolat",
-                        "Brooks",
-                        "DC",
-                        "Diadora",
-                        "Dunlop",
-                        "Ethletic",
-                        "Feiyue",
-                        "Fila",
-                        "Hoka One One"
-                        ]
+                       "Anta",
+                       "ASICS",
+                       "Babolat",
+                       "Brooks",
+                       "DC",
+                       "Diadora",
+                       "Dunlop",
+                       "Ethletic",
+                       "Feiyue",
+                       "Fila",
+                       "Hoka One One"
+                       ]
 
         variants = [
             'blue',
@@ -419,8 +428,8 @@ class Product(db.Model):
             "https://bobobobo-s3.dexecure.net/5dd8eac362f58.jpg",
             "https://cdn.shopify.com/s/files/1/0238/2821/products/Womens-193-Royale-Blanco-3RMW-Product-102.jpg?v=1563992609"
         ]
-        
-        sizes = ["US 3","US 4","US 5","US 6","US 7","US 8","US 9"]
+
+        sizes = ["US 3", "US 4", "US 5", "US 6", "US 7", "US 8", "US 9"]
 
         from sqlalchemy.exc import IntegrityError
         from random import seed, choice
@@ -432,25 +441,25 @@ class Product(db.Model):
         seed()
         for i in range(count):
             u = Product(
-                name = "%s - %s" %(choice(shoes_names),choice(variants)),
-                thumbnail = choice(thumbnails),
-                sizes = json.dumps(sizes),
+                name="%s - %s" % (choice(shoes_names), choice(variants)),
+                thumbnail=choice(thumbnails),
+                sizes=json.dumps(sizes),
                 **kwargs)
             db.session.add(u)
             try:
                 db.session.commit()
             except IntegrityError:
                 db.session.rollback()
-    
-    
 
     def get_variant(self):
         return self.name.split(' - ')[1]
 
     def get_brand(self):
         return self.name.split(' - ')[0]
+
     def __repr__(self):
         return '<Product %s>' % self.name
+
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -465,7 +474,7 @@ class Profile(db.Model):
     address = db.Column(db.String())
 
     email = db.Column(db.String())
-    
+
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     active_task = db.relationship('Task', backref='profile')
 
@@ -479,8 +488,9 @@ class Profile(db.Model):
         db.session.commit()
 
     def change_data(self, **kwargs):
-        for key, value in kwargs.items(): 
-            exec('self.%s = "%s" ' %(key,value))
+        for key, value in kwargs.items():
+            exec('self.%s = "%s" ' % (key, value))
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):

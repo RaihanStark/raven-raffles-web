@@ -27,21 +27,49 @@ def index_for_role(role):
     return url_for(role.index)
 
 def is_license_valid(key):
-    """
-    Checking License Key from External API
+    """Checking License Key from External API
+
+    Args:
+        key (str): Serial Key for Raven Restocks
+
+    Returns:
+        bool: If the key is valid
     """
     r = requests.post('https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device',json={"serialkey": key})
     return r.json()['success']
 
 def is_anticaptcha_valid(key):
-    """
-    checking anticaptcha key and returning balance
+    """Getting anticaptcha balance
+
+    Args:
+        key (str): Client key for Anti-Captcha
+
+    Returns:
+        dict: Anticaptcha balance with status_code
     """
     r = requests.post('https://api.anti-captcha.com/getBalance', json={'clientKey':key})
 
     return r.json()
 
 def format_cc_to_json(number,exp,cvv):
+    """Formatting seperate cc information into one json value
+
+    Args:
+        number (str): Credit Card Number
+        exp (str): Expiration Date (MM/YYYY)
+        cvv (str): CVV
+
+    Returns:
+        json: Returns formatted cc information.
+            for example:
+                credit_card = {
+                    'number':"4444444444",
+                    'exp_year':"2024",
+                    'exp_month':"03",
+                    'cvv':"123"
+                }
+
+    """
     credit_card = {
         'number':number.replace(' ',''),
         'exp_year':exp.split('/')[1],
@@ -51,6 +79,7 @@ def format_cc_to_json(number,exp,cvv):
     return json.dumps(credit_card)
 
 def get_proxy_by_name(name):
+    """Get current user's selected proxy"""
     return [i for i in current_user.get_proxies() if i['name'] == name]
 class CustomSelectField(Field):
     widget = HiddenInput()
