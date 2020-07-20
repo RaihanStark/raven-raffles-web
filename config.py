@@ -38,6 +38,14 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
 
+    # DISCORD WEBHOOKS
+    WEBHOOK_HEADER_TITLE = ":loudspeaker: Bot Notification"
+    WEBHOOK_AUTHOR_NAME = "Raven Raffles"
+    WEBHOOK_AUTHOR_URL = "https://github.com/"
+    WEBHOOK_AUTHOR_ICON_URL = "https://avatars0.githubusercontent.com/u/14542790"
+    WEBHOOK_FOOTER_TEXT = "Raven Raffles"
+
+    WEBHOOK_TEST_URL = "https://discord.com/api/webhooks/734786576575365130/gNXSdzwkmBOK7uJ0oFlMfFelLMWJVr2LIl4lYvaw0i0v0NMZ68qrx2YiHeMlk5DR-kJJ"
     # Analytics
     GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', '')
     SEGMENT_API_KEY = os.environ.get('SEGMENT_API_KEY', '')
@@ -79,7 +87,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     ASSETS_DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL',
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite'))
+                                             'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite'))
 
     @classmethod
     def init_app(cls, app):
@@ -90,9 +98,10 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL',
-        'sqlite:///' + os.path.join(basedir, 'data-test.sqlite'))
+                                             'sqlite:///' + os.path.join(basedir, 'data-test.sqlite'))
     WTF_CSRF_ENABLED = False
     LOGIN_DISABLED = True
+
     @classmethod
     def init_app(cls, app):
         print('THIS APP IS IN TESTING MODE.  \
@@ -103,7 +112,7 @@ class ProductionConfig(Config):
     DEBUG = False
     USE_RELOADER = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite'))
+                                             'sqlite:///' + os.path.join(basedir, 'data.sqlite'))
     SSL_DISABLE = (os.environ.get('SSL_DISABLE', 'True') == 'True')
 
     @classmethod
