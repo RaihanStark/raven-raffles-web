@@ -6,7 +6,12 @@ from flask_login import (
     current_user,
     login_required
 )
-import requests, json
+from config import Config
+import requests
+import json
+
+from discord_webhook import DiscordWebhook,  DiscordEmbed
+
 
 def register_template_utils(app):
     """Register Jinja 2 helpers (called from __init__.py)."""
@@ -26,6 +31,7 @@ def register_template_utils(app):
 def index_for_role(role):
     return url_for(role.index)
 
+
 def is_license_valid(key):
     """Checking License Key from External API
 
@@ -35,8 +41,10 @@ def is_license_valid(key):
     Returns:
         bool: If the key is valid
     """
-    r = requests.post('https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device',json={"serialkey": key})
+    r = requests.post(
+        'https://xserver.boxmarshall.com/api/v2/authorize/validate/no-device', json={"serialkey": key})
     return r.json()['success']
+
 
 def is_anticaptcha_valid(key):
     """Getting anticaptcha balance
@@ -47,11 +55,57 @@ def is_anticaptcha_valid(key):
     Returns:
         dict: Anticaptcha balance with status_code
     """
-    r = requests.post('https://api.anti-captcha.com/getBalance', json={'clientKey':key})
+    r = requests.post('https://api.anti-captcha.com/getBalance',
+                      json={'clientKey': key})
 
     return r.json()
 
-def format_cc_to_json(number,exp,cvv):
+
+def send_to_webhooks(url, data):
+    """Send nontification to webhooks
+
+    Args:
+        url (str): Webhooks url
+        data (dict): A dictionary of the products
+            for example:
+                data = {
+                    'name': 'Yeezy Boost',
+                    'size': 'US 10',
+                    'profiles': 'Private Account',
+                    'proxies': 'USA',
+                    'entries': 10,
+                    'status': 'Success'
+                }
+
+    Returns:
+        bool: If message sucessfully sent
+    """
+
+    webhook = DiscordWebhook(url)
+
+    embed = DiscordEmbed(title=Config.WEBHOOK_HEADER_TITLE,
+                         description=':athletic_shoe: {}'.format(data['name']), color=0xC462DB)
+    embed.set_author(name=Config.WEBHOOK_AUTHOR_NAME, url=Config.WEBHOOK_AUTHOR_URL,
+                     icon_url=Config.WEBHOOK_AUTHOR_ICON_URL)
+    embed.set_footer(text=Config.WEBHOOK_FOOTER_TEXT)
+    embed.set_timestamp()
+    embed.add_embed_field(name='Size', value=data['size'])
+    embed.add_embed_field(name='Profiles', value=data['profiles'])
+    embed.add_embed_field(name='Proxies ', value=data['proxies'])
+    embed.add_embed_field(name='Entries', value=data['entries'])
+    embed.add_embed_field(
+        name='Status', value=':zap: {}'.format(data['status']))
+    embed.set_thumbnail(
+        url='https://avatars0.githubusercontent.com/u/14542790')
+    embed.set_image(url='https://avatars0.githubusercontent.com/u/14542790')
+    webhook.add_embed(embed)
+    response = webhook.execute()
+    if response.status_code == 401:
+        return False
+    return True
+
+
+def format_cc_to_json(number, exp, cvv):
     """Formatting seperate cc information into one json value
 
     Args:
@@ -71,16 +125,19 @@ def format_cc_to_json(number,exp,cvv):
 
     """
     credit_card = {
-        'number':number.replace(' ',''),
-        'exp_year':exp.split('/')[1],
-        'exp_month':exp.split('/')[0],
-        'cvv':cvv
+        'number': number.replace(' ', ''),
+        'exp_year': exp.split('/')[1],
+        'exp_month': exp.split('/')[0],
+        'cvv': cvv
     }
     return json.dumps(credit_card)
+
 
 def get_proxy_by_name(name):
     """Get current user's selected proxy"""
     return [i for i in current_user.get_proxies() if i['name'] == name]
+
+
 class CustomSelectField(Field):
     widget = HiddenInput()
 

@@ -44,3 +44,4 @@ webassets==0.12.1
 Werkzeug==0.15.5
 WTForms==2.2.1
 sentry-sdk[flask]==0.14.4
+discord-webhook
